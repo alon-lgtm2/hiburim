@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חיבורים — 10 קונספטים לעיצוב האתר</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #0f0f14;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            padding: 60px 20px 20px;
+        }
+        .header h1 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f0c040, #c4694a, #7b4b94);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        .header p {
+            font-size: 1.1rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .section-label {
+            text-align: center;
+            padding: 40px 20px 10px;
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.1rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-label span {
+            display: inline-block;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #333;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 24px;
+        }
+        .card {
+            background: #1a1a24;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #2a2a3a;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+        .card.favorite { border-color: #f0c040; }
+        .card.favorite::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, #f0c040, #c4694a);
+        }
+        .card-preview {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-preview .label {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .c1 .card-preview { background: linear-gradient(135deg, #1a6b6a, #c4694a); }
+        .c2 .card-preview { background: linear-gradient(135deg, #1a2744, #4a9eed); }
+        .c3 .card-preview { background: linear-gradient(135deg, #7d9b8a, #c9a0a0); }
+        .c4 .card-preview { background: linear-gradient(135deg, #5c7a4a, #b5634b); }
+        .c5 .card-preview { background: linear-gradient(135deg, #3d1c47, #f0c040); }
+        .c6 .card-preview { background: linear-gradient(135deg, #2a8a7e, #deb3a0); }
+        .c7 .card-preview { background: linear-gradient(135deg, #1b5e5a, #d4a35a); }
+        .c8 .card-preview { background: linear-gradient(135deg, #4a6741, #b8785a); }
+        .c9 .card-preview { background: linear-gradient(135deg, #5a9e97, #e6b8a2); }
+        .c10 .card-preview { background: linear-gradient(135deg, #c1694f, #4a5a3a); }
+        .card-body {
+            padding: 22px;
+        }
+        .card-body h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+        .card-body .subtitle {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        .card-body .blend-info {
+            font-size: 0.78rem;
+            color: #f0c040;
+            margin-bottom: 12px;
+        }
+        .card-body p {
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .tag {
+            font-size: 0.72rem;
+            padding: 3px 9px;
+            border-radius: 20px;
+            border: 1px solid #3a3a4a;
+            color: #aaa;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .c1 .btn { background: #1a6b6a; color: white; }
+        .c1 .btn:hover { background: #c4694a; }
+        .c2 .btn { background: #1a2744; color: white; }
+        .c2 .btn:hover { background: #4a9eed; }
+        .c3 .btn { background: #7d9b8a; color: white; }
+        .c3 .btn:hover { background: #c9a0a0; }
+        .c4 .btn { background: #5c7a4a; color: white; }
+        .c4 .btn:hover { background: #b5634b; }
+        .c5 .btn { background: #3d1c47; color: white; }
+        .c5 .btn:hover { background: #f0c040; color: #3d1c47; }
+        .c6 .btn { background: #2a8a7e; color: white; }
+        .c6 .btn:hover { background: #deb3a0; color: #2d2d2d; }
+        .c7 .btn { background: #1b5e5a; color: white; }
+        .c7 .btn:hover { background: #d4a35a; color: #2d2d2d; }
+        .c8 .btn { background: #4a6741; color: white; }
+        .c8 .btn:hover { background: #b8785a; }
+        .c9 .btn { background: #5a9e97; color: white; }
+        .c9 .btn:hover { background: #e6b8a2; color: #2d2d2d; }
+        .c10 .btn { background: #c1694f; color: white; }
+        .c10 .btn:hover { background: #c5a55a; color: #2d2d2d; }
+        .divider {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 24px;
+        }
+        .divider hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+        }
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #555;
+            font-size: 0.85rem;
+            border-top: 1px solid #2a2a3a;
+            max-width: 1200px;
+            margin: 20px auto 0;
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>חיבורים — 10 קונספטים לעיצוב</h1>
+        <p>10 כיוונים עיצוביים לאתר קהילת המטפלים. סבב ראשון (5 קונספטים) + סבב שני (5 קונספטים מבוססי מועדפים). לחצו לצפייה.</p>
+    </div>
+
+    <!-- ===== ROUND 1 ===== -->
+    <div class="section-label"><span>סבב ראשון — 5 כיוונים ראשוניים</span></div>
+
+    <div class="grid">
+        <div class="card c1 favorite">
+            <div class="card-preview"><span class="label">01</span></div>
+            <div class="card-body">
+                <h2>Warm Community Hub</h2>
+                <div class="subtitle">בית קהילתי חם</div>
+                <p>צבעי טורקיז וקורל, כרטיסים עגולים, אקורדיון FAQ, תחושת "בית" מקצועי.</p>
+                <div class="tags">
+                    <span class="tag">חם</span><span class="tag">קהילתי</span><span class="tag">מזמין</span>
+                </div>
+                <a href="concept1-warm-community.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c2">
+            <div class="card-preview"><span class="label">02</span></div>
+            <div class="card-body">
+                <h2>Professional Network</h2>
+                <div class="subtitle">רשת מקצועית</div>
+                <p>פלטפורמה מקצועית עם חיפוש, תגיות, Glassmorphism. כחול כהה וכתום-זהב.</p>
+                <div class="tags">
+                    <span class="tag">מקצועי</span><span class="tag">אמין</span><span class="tag">חיפוש</span>
+                </div>
+                <a href="concept2-professional-network.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c3 favorite">
+            <div class="card-preview"><span class="label">03</span></div>
+            <div class="card-body">
+                <h2>Modern Minimalist</h2>
+                <div class="subtitle">מינימליזם מודרני</div>
+                <p>מרחב לבן, טיפוגרפיה סריפית, ירוק מרווה וורוד מאובק. תחושת מגזין.</p>
+                <div class="tags">
+                    <span class="tag">אלגנטי</span><span class="tag">מינימלי</span><span class="tag">עריכתי</span>
+                </div>
+                <a href="concept3-modern-minimal.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c4 favorite">
+            <div class="card-preview"><span class="label">04</span></div>
+            <div class="card-body">
+                <h2>Organic & Nature</h2>
+                <div class="subtitle">אורגני וטבעי</div>
+                <p>צורות אורגניות, גווני אדמה, עלים, blob shapes, מפרידי גלים. תחושת צמיחה.</p>
+                <div class="tags">
+                    <span class="tag">אורגני</span><span class="tag">טבעי</span><span class="tag">צמיחה</span>
+                </div>
+                <a href="concept4-organic-nature.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c5">
+            <div class="card-preview"><span class="label">05</span></div>
+            <div class="card-body">
+                <h2>Bold & Distinctive</h2>
+                <div class="subtitle">נועז וייחודי</div>
+                <p>סגול עמוק, זהב, טיפוגרפיה ענקית בכתב יד. שובר מוסכמות, בלתי נשכח.</p>
+                <div class="tags">
+                    <span class="tag">נועז</span><span class="tag">אמנותי</span><span class="tag">ייחודי</span>
+                </div>
+                <a href="concept5-bold-distinctive.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"><hr></div>
+
+    <!-- ===== ROUND 2 ===== -->
+    <div class="section-label"><span>סבב שני — מבוסס מועדפים (01 + 03 + 04)</span></div>
+
+    <div class="grid">
+        <div class="card c6">
+            <div class="card-preview"><span class="label">06</span></div>
+            <div class="card-body">
+                <h2>Warm Minimal</h2>
+                <div class="subtitle">חם ומינימלי</div>
+                <div class="blend-info">שילוב: 01 Warm Community + 03 Minimalist</div>
+                <p>חום קהילתי של 01 עם האלגנטיות והמרחב של 03. סריף חם, טורקיז רך ובלאש, כרטיסים נקיים.</p>
+                <div class="tags">
+                    <span class="tag">אלגנטי</span><span class="tag">חם</span><span class="tag">מאוזן</span>
+                </div>
+                <a href="concept6-warm-minimal.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c7">
+            <div class="card-preview"><span class="label">07</span></div>
+            <div class="card-body">
+                <h2>Nature Community</h2>
+                <div class="subtitle">קהילת טבע</div>
+                <div class="blend-info">שילוב: 01 Warm Community + 04 Organic Nature</div>
+                <p>הקהילתיות של 01 עם הטבע של 04. ירוק יער, דבש זהוב, גלים אורגניים, עלים, עץ צומח.</p>
+                <div class="tags">
+                    <span class="tag">טבעי</span><span class="tag">קהילתי</span><span class="tag">דבש</span>
+                </div>
+                <a href="concept7-nature-community.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c8">
+            <div class="card-preview"><span class="label">08</span></div>
+            <div class="card-body">
+                <h2>Elegant Earth</h2>
+                <div class="subtitle">אדמה אלגנטית</div>
+                <div class="blend-info">שילוב: 03 Minimalist + 04 Organic Nature</div>
+                <p>אלגנטיות עריכתית של 03 עם גווני אדמה של 04. סריף מעודן, חימר ואזוב, מגזין Kinfolk.</p>
+                <div class="tags">
+                    <span class="tag">עריכתי</span><span class="tag">אדמתי</span><span class="tag">מעודן</span>
+                </div>
+                <a href="concept8-elegant-earth.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c9">
+            <div class="card-preview"><span class="label">09</span></div>
+            <div class="card-body">
+                <h2>Serene Haven</h2>
+                <div class="subtitle">מפלט שליו</div>
+                <div class="blend-info">סינתזה: 01 + 03 + 04 — כל שלושת המועדפים</div>
+                <p>האיזון המושלם: חום של 01, אלגנטיות של 03, טבע של 04. ניווט כפתור צף, קשתות עדינות, אפרסק.</p>
+                <div class="tags">
+                    <span class="tag">שליו</span><span class="tag">מאוזן</span><span class="tag">מעוגל</span>
+                </div>
+                <a href="concept9-serene-haven.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+
+        <div class="card c10">
+            <div class="card-preview"><span class="label">10</span></div>
+            <div class="card-body">
+                <h2>Mediterranean Warmth</h2>
+                <div class="subtitle">חום ים-תיכוני</div>
+                <div class="blend-info">כיוון חדש בהשראת 01 + 03 + 04 — זהות ישראלית</div>
+                <p>אסתטיקה ים-תיכונית ייחודית: טרקוטה, אבן חמה, זית, קשתות אדריכליות, שעת זהב. בית רחוק מהבית.</p>
+                <div class="tags">
+                    <span class="tag">ים-תיכוני</span><span class="tag">ישראלי</span><span class="tag">קשתות</span>
+                </div>
+                <a href="concept10-mediterranean.html" class="btn">צפייה &larr;</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        חיבורים — קהילת מטפלים אונליין | 10 קונספטים לעיצוב | 2026
+    </div>
+</body>
+</html>

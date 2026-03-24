@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חיבורים — קהילת מטפלים ישראלים בחו"ל</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS Custom Properties ===== */
+        :root {
+            --color-primary: #1a6b6a;
+            --color-primary-light: #238584;
+            --color-primary-dark: #145453;
+            --color-primary-faded: rgba(26, 107, 106, 0.08);
+            --color-accent: #c4694a;
+            --color-accent-light: #d4805f;
+            --color-accent-dark: #a8553a;
+            --color-bg: #faf6f0;
+            --color-bg-warm: #f5ede3;
+            --color-bg-card: #ffffff;
+            --color-text: #3d3d3d;
+            --color-text-light: #6b6b6b;
+            --color-text-inverse: #ffffff;
+            --color-border: #e8e0d6;
+            --color-shadow: rgba(26, 107, 106, 0.1);
+            --color-gold: #d4a853;
+            --font-heading: 'Assistant', 'Heebo', sans-serif;
+            --font-body: 'Heebo', 'Assistant', sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 50%;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+            --shadow-card: 0 2px 16px rgba(26, 107, 106, 0.07);
+            --transition-fast: 0.2s ease;
+            --transition-med: 0.35s ease;
+            --transition-slow: 0.5s ease;
+            --max-width: 1200px;
+            --nav-height: 72px;
+        }
+
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
+        input, textarea { font-family: inherit; }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            line-height: 1.3;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== Animated Elements (scroll reveal) ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.35s; }
+        .reveal-delay-5 { transition-delay: 0.4s; }
+
+        /* ===== Section Titles ===== */
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            margin-bottom: 48px;
+            max-width: 560px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .section-header .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+
+        /* ===== Primary Button ===== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+            color: var(--color-text-inverse);
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-med);
+            box-shadow: 0 4px 15px rgba(196, 105, 74, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
+            opacity: 0;
+            transition: opacity var(--transition-med);
+            border-radius: inherit;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(196, 105, 74, 0.4);
+        }
+        .btn-primary:hover::before { opacity: 1; }
+        .btn-primary span { position: relative; z-index: 1; }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-med);
+        }
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: var(--color-text-inverse);
+            transform: translateY(-2px);
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: var(--nav-height);
+            background: rgba(250, 246, 240, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid transparent;
+            transition: all var(--transition-med);
+        }
+        .navbar.scrolled {
+            border-bottom-color: var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links a {
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-text);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-faded);
+        }
+        .nav-links a.active {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        .nav-cta {
+            padding: 10px 24px !important;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark)) !important;
+            color: var(--color-text-inverse) !important;
+            font-weight: 700 !important;
+            border-radius: var(--radius-xl) !important;
+            margin-right: 8px;
+            box-shadow: 0 2px 10px rgba(196, 105, 74, 0.25);
+            transition: all var(--transition-med) !important;
+        }
+        .nav-cta:hover {
+            background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent)) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(196, 105, 74, 0.35) !important;
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 8px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2.5px;
+            background: var(--color-text);
+            border-radius: 2px;
+            transition: all var(--transition-med);
+            transform-origin: center;
+        }
+        .nav-hamburger.active span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-hamburger.active span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        /* Mobile Nav */
+        .nav-mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity var(--transition-med);
+        }
+        .nav-mobile-overlay.active {
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 280px;
+                height: 100vh;
+                background: var(--color-bg);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 100px 24px 40px;
+                gap: 4px;
+                z-index: 999;
+                box-shadow: var(--shadow-lg);
+                transition: right var(--transition-med);
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .nav-links a {
+                padding: 14px 16px;
+                font-size: 1.05rem;
+                border-radius: var(--radius-md);
+            }
+            .nav-cta {
+                margin-right: 0;
+                margin-top: 12px;
+                text-align: center;
+                justify-content: center;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            .nav-mobile-overlay {
+                display: block;
+                pointer-events: none;
+            }
+            .nav-mobile-overlay.active {
+                pointer-events: auto;
+            }
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--nav-height);
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .hero-shape {
+            position: absolute;
+            border-radius: var(--radius-full);
+            opacity: 0.5;
+        }
+        .hero-shape-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(26, 107, 106, 0.12), transparent 70%);
+            top: -100px;
+            left: -100px;
+        }
+        .hero-shape-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(196, 105, 74, 0.1), transparent 70%);
+            bottom: -50px;
+            right: -80px;
+        }
+        .hero-shape-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.12), transparent 70%);
+            top: 30%;
+            left: 60%;
+        }
+        .hero-shape-4 {
+            width: 120px;
+            height: 120px;
+            border: 3px solid rgba(26, 107, 106, 0.1);
+            top: 20%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-shape-5 {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(196, 105, 74, 0.12);
+            bottom: 25%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        .hero-content {
+            max-width: 560px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: var(--color-primary-faded);
+            border: 1px solid rgba(26, 107, 106, 0.15);
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-primary);
+            margin-bottom: 24px;
+        }
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-primary);
+            border-radius: var(--radius-full);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-title .accent {
+            color: var(--color-accent);
+            position: relative;
+        }
+        .hero-title .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 0;
+            left: 0;
+            height: 8px;
+            background: rgba(196, 105, 74, 0.15);
+            border-radius: 4px;
+            z-index: -1;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--color-text-light);
+            line-height: 1.8;
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        .hero-stat-value {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+        .hero-stat-label {
+            font-size: 0.88rem;
+            color: var(--color-text-light);
+            margin-top: 2px;
+        }
+
+        /* Hero Visual — community photo grid */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 12px;
+            width: 400px;
+            height: 400px;
+            transform: rotate(-3deg);
+        }
+        .hero-grid-item {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: transform var(--transition-med);
+        }
+        .hero-grid-item:hover {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+        .hero-grid-item .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .hero-grid-item:nth-child(1) { grid-row: 1 / 3; grid-column: 1; }
+        .hero-grid-item:nth-child(2) { grid-row: 1; grid-column: 2; }
+        .hero-grid-item:nth-child(3) { grid-row: 1; grid-column: 3; }
+        .hero-grid-item:nth-child(4) { grid-row: 2; grid-column: 2 / 4; }
+        .hero-grid-item:nth-child(5) { grid-row: 3; grid-column: 1 / 3; }
+        .hero-grid-item:nth-child(6) { grid-row: 3; grid-column: 3; }
+
+        /* Placeholder images via gradients */
+        .placeholder-img {
+            background: linear-gradient(135deg, var(--color-primary-faded), rgba(26,107,106,0.15));
+            min-height: 100px;
+        }
+        .placeholder-img.warm-1 {
+            background: linear-gradient(135deg, #e8d5c4, #d4b896);
+        }
+        .placeholder-img.warm-2 {
+            background: linear-gradient(135deg, #c5d8d7, #9abfbe);
+        }
+        .placeholder-img.warm-3 {
+            background: linear-gradient(135deg, #dcc5b7, #c4a48e);
+        }
+        .placeholder-img.warm-4 {
+            background: linear-gradient(135deg, #b8cece, #8fb5b4);
+        }
+        .placeholder-img.warm-5 {
+            background: linear-gradient(135deg, #e0cfc2, #cbb19e);
+        }
+        .placeholder-img.warm-6 {
+            background: linear-gradient(135deg, #c9dada, #a1c2c1);
+        }
+
+        .hero-grid-accent {
+            position: absolute;
+            width: 460px;
+            height: 460px;
+            border: 2px dashed rgba(26, 107, 106, 0.12);
+            border-radius: var(--radius-lg);
+            transform: rotate(3deg);
+            z-index: -1;
+        }
+
+        @media (max-width: 900px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content { max-width: 100%; }
+            .hero-subtitle { max-width: 100%; margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { margin-top: 24px; }
+            .hero-grid { width: 300px; height: 300px; }
+            .hero-grid-accent { width: 340px; height: 340px; }
+        }
+        @media (max-width: 600px) {
+            .hero-grid { width: 260px; height: 260px; gap: 8px; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about {
+            padding: 100px 0;
+            background: var(--color-bg-warm);
+            position: relative;
+            overflow: hidden;
+        }
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(196, 105, 74, 0.06), transparent 70%);
+            border-radius: var(--radius-full);
+        }
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-illustration {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .about-circle-outer {
+            width: 340px;
+            height: 340px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, rgba(26, 107, 106, 0.08), rgba(196, 105, 74, 0.08));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .about-circle-inner {
+            width: 240px;
+            height: 240px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--color-primary-faded), rgba(26, 107, 106, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-icon-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .about-icon-item {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: transform var(--transition-med);
+        }
+        .about-icon-item:hover { transform: scale(1.1); }
+        .about-icon-item:nth-child(1) { background: rgba(26, 107, 106, 0.15); }
+        .about-icon-item:nth-child(2) { background: rgba(196, 105, 74, 0.15); }
+        .about-icon-item:nth-child(3) { background: rgba(212, 168, 83, 0.15); }
+        .about-icon-item:nth-child(4) { background: rgba(26, 107, 106, 0.1); }
+
+        .about-floating-badge {
+            position: absolute;
+            padding: 10px 18px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            animation: float 5s ease-in-out infinite;
+        }
+        .about-floating-badge.top-left {
+            top: 10px;
+            right: -20px;
+        }
+        .about-floating-badge.bottom-right {
+            bottom: 10px;
+            left: -20px;
+            animation-delay: -2.5s;
+            color: var(--color-accent);
+        }
+
+        .about-content .section-title {
+            text-align: right;
+        }
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--color-text-light);
+            margin-bottom: 24px;
+        }
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-med);
+        }
+        .about-feature:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+        .about-feature-icon {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .about-feature:nth-child(1) .about-feature-icon { background: rgba(26, 107, 106, 0.1); }
+        .about-feature:nth-child(2) .about-feature-icon { background: rgba(196, 105, 74, 0.1); }
+        .about-feature:nth-child(3) .about-feature-icon { background: rgba(212, 168, 83, 0.1); }
+        .about-feature-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .about .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-content .section-title { text-align: center; }
+            .about-illustration { order: -1; }
+            .about-circle-outer { width: 280px; height: 280px; }
+            .about-circle-inner { width: 200px; height: 200px; }
+            .about-feature { justify-content: center; }
+        }
+
+        /* ===== THERAPISTS SECTION ===== */
+        .therapists {
+            padding: 100px 0;
+            background: var(--color-bg);
+        }
+        .therapists-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .therapist-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: 36px 24px 28px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-med);
+            position: relative;
+            overflow: hidden;
+        }
+        .therapist-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            opacity: 0;
+            transition: opacity var(--transition-med);
+        }
+        .therapist-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+        .therapist-card:hover::before {
+            opacity: 1;
+        }
+        .therapist-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-full);
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--color-bg);
+            box-shadow: 0 0 0 3px var(--color-primary-faded), var(--shadow-sm);
+        }
+        .therapist-avatar .placeholder-img {
+            width: 100%;
+            height: 100%;
+        }
+        .therapist-name {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+        .therapist-title {
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        .therapist-specialization {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            min-height: 44px;
+        }
+        .therapist-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: var(--color-primary-faded);
+            border-radius: var(--radius-xl);
+            font-size: 0.82rem;
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .therapist-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            transition: all var(--transition-fast);
+            padding: 8px 0;
+        }
+        .therapist-link:hover {
+            color: var(--color-accent-dark);
+            gap: 10px;
+        }
+        .therapist-link .arrow {
+            display: inline-block;
+            transition: transform var(--transition-fast);
+        }
+        .therapist-link:hover .arrow {
+            transform: translateX(-4px);
+        }
+
+        @media (max-width: 900px) {
+            .therapists-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .therapists-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+        }
+
+        /* ===== ARTICLES SECTION ===== */
+        .articles {
+            padding: 100px 0;
+            background: var(--color-bg-warm);
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .article-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-med);
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .article-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .article-image .placeholder-img {
+            width: 100%;
+            height: 100%;
+            transition: transform var(--transition-slow);
+        }
+        .article-card:hover .article-image .placeholder-img {
+            transform: scale(1.05);
+        }
+        .article-category {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 5px 14px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(6px);
+            border-radius: var(--radius-xl);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+        .article-body {
+            padding: 24px;
+        }
+        .article-date {
+            font-size: 0.82rem;
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+        }
+        .article-title {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 10px;
+            line-height: 1.4;
+            transition: color var(--transition-fast);
+        }
+        .article-card:hover .article-title {
+            color: var(--color-primary);
+        }
+        .article-excerpt {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .article-read-more {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap var(--transition-fast);
+        }
+        .article-read-more:hover {
+            gap: 10px;
+        }
+
+        @media (max-width: 900px) {
+            .articles-grid { grid-template-columns: 1fr 1fr; }
+            .articles-grid .article-card:last-child { grid-column: span 2; }
+        }
+        @media (max-width: 600px) {
+            .articles-grid { grid-template-columns: 1fr; }
+            .articles-grid .article-card:last-child { grid-column: span 1; }
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq {
+            padding: 100px 0;
+            background: var(--color-bg);
+        }
+        .faq-list {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+            transition: all var(--transition-med);
+        }
+        .faq-item:hover {
+            border-color: rgba(26, 107, 106, 0.2);
+        }
+        .faq-item.active {
+            border-color: var(--color-primary);
+            box-shadow: 0 2px 12px rgba(26, 107, 106, 0.08);
+        }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-align: right;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+        .faq-item.active .faq-question {
+            color: var(--color-primary);
+        }
+        .faq-toggle {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: var(--radius-full);
+            background: var(--color-primary-faded);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-med);
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-right: auto;
+            margin-left: 16px;
+        }
+        .faq-item.active .faq-toggle {
+            background: var(--color-primary);
+            color: var(--color-text-inverse);
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            line-height: 1.8;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact {
+            padding: 100px 0;
+            background: var(--color-bg-warm);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(26, 107, 106, 0.06), transparent 70%);
+            border-radius: var(--radius-full);
+        }
+        .contact .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .contact-form-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+        .contact-form-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: 8px;
+        }
+        .contact-form-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            margin-bottom: 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            color: var(--color-text);
+            background: var(--color-bg);
+            transition: all var(--transition-fast);
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-faded);
+            background: var(--color-bg-card);
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.05rem;
+        }
+
+        .contact-visual {
+            text-align: center;
+        }
+        .contact-illustration {
+            position: relative;
+            display: inline-block;
+        }
+        .contact-big-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, rgba(26, 107, 106, 0.1), rgba(196, 105, 74, 0.08));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .contact-inner-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, rgba(26, 107, 106, 0.15), rgba(196, 105, 74, 0.12));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+        }
+        .contact-info {
+            margin-top: 32px;
+        }
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 1rem;
+            color: var(--color-text-light);
+        }
+        .contact-info-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: var(--radius-full);
+            background: var(--color-primary-faded);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .contact .container {
+                grid-template-columns: 1fr;
+            }
+            .contact-visual { order: -1; }
+            .contact-big-circle { width: 240px; height: 240px; }
+            .contact-inner-circle { width: 140px; height: 140px; font-size: 2.8rem; }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--color-primary-dark);
+            color: var(--color-text-inverse);
+            padding: 60px 0 0;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-brand-text {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.8;
+            margin-top: 16px;
+            max-width: 300px;
+        }
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .footer-col h4::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 2px;
+            background: var(--color-accent);
+            margin-top: 8px;
+            border-radius: 1px;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            padding: 6px 0;
+            transition: all var(--transition-fast);
+        }
+        .footer-col a:hover {
+            color: rgba(255,255,255,0.95);
+            padding-right: 6px;
+        }
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .footer-social {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.65);
+            transition: all var(--transition-med);
+        }
+        .footer-social:hover {
+            background: var(--color-accent);
+            color: var(--color-text-inverse);
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-brand-text { max-width: 100%; margin: 16px auto 0; }
+            .footer-col h4::after { margin: 8px auto 0; }
+            .footer-socials { justify-content: center; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+        }
+
+        /* ===== Scrollbar ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--color-primary-light); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">ח</div>
+                חיבורים
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#hero" class="active">ראשי</a>
+                <a href="#about">אודות</a>
+                <a href="#therapists">המטפלים שלנו</a>
+                <a href="#articles">מאמרים</a>
+                <a href="#faq">שאלות ותשובות</a>
+                <a href="#contact">צור קשר</a>
+                <a href="#therapists" class="nav-cta">מצא/י מטפל/ת</a>
+            </div>
+            <button class="nav-hamburger" id="navHamburger" aria-label="תפריט">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="nav-mobile-overlay" id="navOverlay"></div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+            <div class="hero-shape hero-shape-4"></div>
+            <div class="hero-shape hero-shape-5"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    קהילה מקצועית של מטפלים ישראלים
+                </div>
+                <h1 class="hero-title">
+                    קהילת מטפלים<br>
+                    ישראלים <span class="accent">בחו"ל</span>
+                </h1>
+                <p class="hero-subtitle">
+                    אנחנו קבוצה של מטפלים ומטפלות ישראלים החיים ברחבי העולם ומציעים טיפול מקוון בעברית. כאן תמצאו את המטפל/ת שמתאימ/ה לכם.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#therapists" class="btn-primary"><span>מצא/י מטפל/ת</span></a>
+                    <a href="#about" class="btn-secondary">קראו עוד עלינו</a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-value">10+</div>
+                        <div class="hero-stat-label">מטפלים מוסמכים</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">6</div>
+                        <div class="hero-stat-label">מדינות שונות</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">100%</div>
+                        <div class="hero-stat-label">טיפול בעברית</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-grid-accent"></div>
+                <div class="hero-grid">
+                    <div class="hero-grid-item"><div class="placeholder-img warm-1"></div></div>
+                    <div class="hero-grid-item"><div class="placeholder-img warm-2"></div></div>
+                    <div class="hero-grid-item"><div class="placeholder-img warm-3"></div></div>
+                    <div class="hero-grid-item"><div class="placeholder-img warm-4"></div></div>
+                    <div class="hero-grid-item"><div class="placeholder-img warm-5"></div></div>
+                    <div class="hero-grid-item"><div class="placeholder-img warm-6"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-illustration reveal">
+                <div class="about-floating-badge top-left">&#x1F30D; 6 מדינות</div>
+                <div class="about-circle-outer">
+                    <div class="about-circle-inner">
+                        <div class="about-icon-grid">
+                            <div class="about-icon-item">&#x1F91D;</div>
+                            <div class="about-icon-item">&#x1F4AC;</div>
+                            <div class="about-icon-item">&#x2764;&#xFE0F;</div>
+                            <div class="about-icon-item">&#x1F3E0;</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-floating-badge bottom-right">&#x2705; מוסמכים ומנוסים</div>
+            </div>
+            <div class="about-content">
+                <div class="section-divider reveal" style="margin: 0 0 20px auto;"></div>
+                <h2 class="section-title reveal">מי אנחנו?</h2>
+                <p class="about-text reveal reveal-delay-1">
+                    "חיבורים" היא קהילה מקצועית של מטפלים ומטפלות ישראלים שבחרו לחיות בחו"ל ולהמשיך להעניק טיפול נפשי איכותי בשפה העברית. אנחנו מאמינים שהשפה והתרבות הם חלק בלתי נפרד מתהליך טיפולי משמעותי.
+                </p>
+                <p class="about-text reveal reveal-delay-2">
+                    הקהילה שלנו מורכבת ממטפלים בעלי הכשרה מקצועית מגוונת, המתמחים בגישות טיפוליות שונות ועובדים עם מגוון רחב של אוכלוסיות.
+                </p>
+                <div class="about-features reveal reveal-delay-3">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">&#x1F393;</div>
+                        <span class="about-feature-text">מטפלים מוסמכים עם ניסיון עשיר</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">&#x1F4F1;</div>
+                        <span class="about-feature-text">טיפול מקוון נגיש מכל מקום בעולם</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">&#x1F5E3;&#xFE0F;</div>
+                        <span class="about-feature-text">טיפול בעברית — השפה שבה אתם חושבים ומרגישים</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THERAPISTS SECTION ===== -->
+    <section class="therapists" id="therapists">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-divider"></div>
+                <h2 class="section-title">המטפלים שלנו</h2>
+                <p class="section-subtitle">הכירו את הצוות המקצועי שלנו — מטפלים ומטפלות ישראלים מוסמכים ברחבי העולם</p>
+            </div>
+            <div class="therapists-grid">
+                <!-- Card 1 -->
+                <div class="therapist-card reveal reveal-delay-1">
+                    <div class="therapist-avatar">
+                        <div class="placeholder-img warm-1"></div>
+                    </div>
+                    <h3 class="therapist-name">ד"ר מיכל לוי</h3>
+                    <p class="therapist-title">פסיכולוגית קלינית</p>
+                    <p class="therapist-specialization">טיפול CBT, חרדות ודיכאון, הסתגלות תרבותית</p>
+                    <div class="therapist-location">&#x1F4CD; ברלין, גרמניה</div><br>
+                    <a href="#" class="therapist-link">לפרופיל המלא <span class="arrow">&larr;</span></a>
+                </div>
+                <!-- Card 2 -->
+                <div class="therapist-card reveal reveal-delay-2">
+                    <div class="therapist-avatar">
+                        <div class="placeholder-img warm-2"></div>
+                    </div>
+                    <h3 class="therapist-name">יונתן כהן</h3>
+                    <p class="therapist-title">מטפל רגשי</p>
+                    <p class="therapist-specialization">טיפול פסיכודינמי, זוגיות, משברי חיים</p>
+                    <div class="therapist-location">&#x1F4CD; לונדון, אנגליה</div><br>
+                    <a href="#" class="therapist-link">לפרופיל המלא <span class="arrow">&larr;</span></a>
+                </div>
+                <!-- Card 3 -->
+                <div class="therapist-card reveal reveal-delay-3">
+                    <div class="therapist-avatar">
+                        <div class="placeholder-img warm-3"></div>
+                    </div>
+                    <h3 class="therapist-name">ד"ר שירה אברהם</h3>
+                    <p class="therapist-title">פסיכולוגית ילדים ונוער</p>
+                    <p class="therapist-specialization">טיפול בילדים, ADHD, קשיי הסתגלות</p>
+                    <div class="therapist-location">&#x1F4CD; אמסטרדם, הולנד</div><br>
+                    <a href="#" class="therapist-link">לפרופיל המלא <span class="arrow">&larr;</span></a>
+                </div>
+                <!-- Card 4 -->
+                <div class="therapist-card reveal reveal-delay-1">
+                    <div class="therapist-avatar">
+                        <div class="placeholder-img warm-4"></div>
+                    </div>
+                    <h3 class="therapist-name">נועה גולדשטיין</h3>
+                    <p class="therapist-title">עובדת סוציאלית קלינית</p>
+                    <p class="therapist-specialization">טיפול משפחתי, הורות, מעברי חיים</p>
+                    <div class="therapist-location">&#x1F4CD; ניו יורק, ארה"ב</div><br>
+                    <a href="#" class="therapist-link">לפרופיל המלא <span class="arrow">&larr;</span></a>
+                </div>
+                <!-- Card 5 -->
+                <div class="therapist-card reveal reveal-delay-2">
+                    <div class="therapist-avatar">
+                        <div class="placeholder-img warm-5"></div>
+                    </div>
+                    <h3 class="therapist-name">עומר בן-דוד</h3>
+                    <p class="therapist-title">פסיכולוג שיקומי</p>
+                    <p class="therapist-specialization">חוסן נפשי, טראומה, PTSD</p>
+                    <div class="therapist-location">&#x1F4CD; טורונטו, קנדה</div><br>
+                    <a href="#" class="therapist-link">לפרופיל המלא <span class="arrow">&larr;</span></a>
+                </div>
+                <!-- Card 6 -->
+                <div class="therapist-card reveal reveal-delay-3">
+                    <div class="therapist-avatar">
+                        <div class="placeholder-img warm-6"></div>
+                    </div>
+                    <h3 class="therapist-name">ד"ר רונית שפירא</h3>
+                    <p class="therapist-title">פסיכולוגית קלינית</p>
+                    <p class="therapist-specialization">זהות תרבותית, גלובליזציה, רילוקיישן</p>
+                    <div class="therapist-location">&#x1F4CD; מלבורן, אוסטרליה</div><br>
+                    <a href="#" class="therapist-link">לפרופיל המלא <span class="arrow">&larr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ARTICLES SECTION ===== -->
+    <section class="articles" id="articles">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-divider"></div>
+                <h2 class="section-title">מאמרים ותוכן</h2>
+                <p class="section-subtitle">מאמרים מקצועיים, טיפים ותובנות מצוות המטפלים שלנו</p>
+            </div>
+            <div class="articles-grid">
+                <!-- Article 1 -->
+                <article class="article-card reveal reveal-delay-1">
+                    <div class="article-image">
+                        <div class="placeholder-img warm-2" style="height:100%;"></div>
+                        <span class="article-category">הסתגלות</span>
+                    </div>
+                    <div class="article-body">
+                        <div class="article-date">15 במרץ, 2026</div>
+                        <h3 class="article-title">איך להתמודד עם געגועים הרחק מהבית</h3>
+                        <p class="article-excerpt">חיים בחו"ל מביאים איתם אתגרים רגשיים ייחודיים. הנה כמה כלים מעשיים להתמודדות עם הגעגועים...</p>
+                        <a href="#" class="article-read-more">קראו עוד <span>&larr;</span></a>
+                    </div>
+                </article>
+                <!-- Article 2 -->
+                <article class="article-card reveal reveal-delay-2">
+                    <div class="article-image">
+                        <div class="placeholder-img warm-4" style="height:100%;"></div>
+                        <span class="article-category">טיפול מקוון</span>
+                    </div>
+                    <div class="article-body">
+                        <div class="article-date">8 במרץ, 2026</div>
+                        <h3 class="article-title">טיפול מקוון: מה שחשוב לדעת לפני שמתחילים</h3>
+                        <p class="article-excerpt">טיפול מקוון הפך לנגיש ויעיל יותר מאי פעם. מה היתרונות, מה האתגרים, ואיך בוחרים מטפל...</p>
+                        <a href="#" class="article-read-more">קראו עוד <span>&larr;</span></a>
+                    </div>
+                </article>
+                <!-- Article 3 -->
+                <article class="article-card reveal reveal-delay-3">
+                    <div class="article-image">
+                        <div class="placeholder-img warm-1" style="height:100%;"></div>
+                        <span class="article-category">הורות</span>
+                    </div>
+                    <div class="article-body">
+                        <div class="article-date">1 במרץ, 2026</div>
+                        <h3 class="article-title">גידול ילדים דו-לשוניים: האתגרים וההזדמנויות</h3>
+                        <p class="article-excerpt">משפחות ישראליות בחו"ל מתמודדות עם אתגר ייחודי — שימור השפה והתרבות העברית לצד השתלבות...</p>
+                        <a href="#" class="article-read-more">קראו עוד <span>&larr;</span></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-divider"></div>
+                <h2 class="section-title">שאלות ותשובות</h2>
+                <p class="section-subtitle">תשובות לשאלות הנפוצות ביותר על הקהילה ועל טיפול מקוון</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item reveal reveal-delay-1">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>איך הטיפול המקוון עובד?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            הטיפול המקוון מתבצע באמצעות שיחות וידאו בפלטפורמות מאובטחות ומוצפנות. הפגישות נמשכות בדרך כלל 50 דקות, בדיוק כמו טיפול פנים-אל-פנים. כל שנדרש הוא חיבור אינטרנט יציב, מחשב או טלפון עם מצלמה, ומקום שקט ופרטי. המטפלים שלנו מנוסים בטיפול מקוון ומקפידים על סביבה טיפולית מקצועית ובטוחה.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal reveal-delay-2">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>האם הטיפול מתאים גם למי שגר בישראל?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            בהחלט! הטיפול המקוון שלנו פתוח לכל דובר עברית בכל מקום בעולם, כולל ישראל. הקהילה שלנו פונה בעיקר לישראלים בחו"ל, אך אנו שמחים לקבל פניות מכל מקום. היתרון של טיפול מקוון הוא הגמישות — אין צורך בנסיעות ואפשר להתאים את הזמנים בצורה נוחה.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal reveal-delay-3">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>איך בוחרים את המטפל/ת המתאימ/ה?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            אנחנו ממליצים לקרוא את הפרופילים של המטפלים שלנו באתר ולבחור מטפל/ת שההתמחות שלו/ה מתאימה לצרכים שלכם. אפשר גם ליצור איתנו קשר ואנחנו נשמח לעזור לכם להתאים מטפל/ת בהתאם לנושא הטיפול, זמינות, ואזור הזמן שלכם. רוב המטפלים מציעים פגישת היכרות קצרה ללא עלות.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal reveal-delay-4">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>מה העלות של הטיפול ואיך משלמים?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            עלות הטיפול משתנה בין המטפלים ותלויה בניסיון, בהתמחות ובמדינה. מחירים נעים בדרך כלל בין 80 ל-150 דולר לפגישה. התשלום מתבצע בדרך כלל באמצעות העברה בנקאית או PayPal. חלק מהמטפלים מציעים מחירים מותאמים — מומלץ לבדוק ישירות מול המטפל/ת. במקרים מסוימים, ניתן לקבל החזר מביטוח בריאות מקומי.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-form-card reveal">
+                <h3>צרו איתנו קשר</h3>
+                <p>יש לכם שאלה? רוצים שנעזור לכם למצוא מטפל/ת? נשמח לשמוע מכם.</p>
+                <form id="contactForm" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="name">שם מלא</label>
+                        <input type="text" id="name" placeholder="הכניסו את שמכם" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">אימייל</label>
+                        <input type="email" id="email" placeholder="your@email.com" dir="ltr" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">הודעה</label>
+                        <textarea id="message" placeholder="ספרו לנו איך נוכל לעזור..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary form-submit"><span>שליחה</span></button>
+                </form>
+            </div>
+            <div class="contact-visual reveal reveal-delay-2">
+                <div class="contact-illustration">
+                    <div class="contact-big-circle">
+                        <div class="contact-inner-circle">&#x2709;&#xFE0F;</div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <span class="contact-info-icon">&#x2709;&#xFE0F;</span>
+                        <span>hello@chiburim.com</span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-info-icon">&#x1F4F1;</span>
+                        <span>WhatsApp: +1-234-567-890</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <a href="#" class="nav-logo" style="color: white; margin-bottom: 4px;">
+                        <div class="nav-logo-icon">ח</div>
+                        חיבורים
+                    </a>
+                    <p class="footer-brand-text">
+                        קהילת מטפלים ומטפלות ישראלים בחו"ל. טיפול מקוון בעברית, מכל מקום בעולם.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social" aria-label="Facebook">f</a>
+                        <a href="#" class="footer-social" aria-label="Instagram">in</a>
+                        <a href="#" class="footer-social" aria-label="LinkedIn">Li</a>
+                        <a href="#" class="footer-social" aria-label="WhatsApp">W</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>ניווט</h4>
+                    <a href="#hero">ראשי</a>
+                    <a href="#about">אודות</a>
+                    <a href="#therapists">המטפלים שלנו</a>
+                    <a href="#articles">מאמרים</a>
+                </div>
+                <div class="footer-col">
+                    <h4>מידע</h4>
+                    <a href="#faq">שאלות ותשובות</a>
+                    <a href="#">תנאי שימוש</a>
+                    <a href="#">מדיניות פרטיות</a>
+                    <a href="#contact">צור קשר</a>
+                </div>
+                <div class="footer-col">
+                    <h4>צרו קשר</h4>
+                    <a href="mailto:hello@chiburim.com">hello@chiburim.com</a>
+                    <a href="#">WhatsApp</a>
+                    <a href="#">Facebook</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 חיבורים. כל הזכויות שמורות.</span>
+                <span>עוצב באהבה &#x2764;&#xFE0F; עבור הקהילה הישראלית בחו"ל</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== Mobile Menu Toggle =====
+        const hamburger = document.getElementById('navHamburger');
+        const navLinks = document.getElementById('navLinks');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('open')) toggleMenu();
+            });
+        });
+
+        // ===== Navbar Scroll Effect =====
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // ===== Active Nav Link Highlight =====
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 100;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = navLinks.querySelector(`a[href="#${id}"]`);
+                if (link) {
+                    if (scrollY >= top && scrollY < top + height) {
+                        navLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                        link.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // ===== Scroll Reveal (IntersectionObserver) =====
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ===== FAQ Accordion =====
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const answerInner = item.querySelector('.faq-answer-inner');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all
+                faqItems.forEach(other => {
+                    other.classList.remove('active');
+                    other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    other.querySelector('.faq-answer').style.maxHeight = '0';
+                });
+
+                // Open clicked (if it was closed)
+                if (!isActive) {
+                    item.classList.add('active');
+                    question.setAttribute('aria-expanded', 'true');
+                    answer.style.maxHeight = answerInner.scrollHeight + 24 + 'px';
+                }
+            });
+        });
+
+        // ===== Contact Form (visual feedback) =====
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.form-submit');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<span>&#x2705; ההודעה נשלחה!</span>';
+            btn.style.background = 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))';
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.style.background = '';
+                this.reset();
+            }, 2500);
+        });
+    </script>
+
+</body>
+</html>

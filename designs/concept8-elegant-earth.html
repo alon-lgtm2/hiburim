@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חיבורים — Concept 8: Elegant Earth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           DESIGN CONCEPT 8: ELEGANT EARTH
+           Blend of Minimalist + Organic Nature
+           ======================================== */
+
+        :root {
+            --moss: #4a6741;
+            --moss-light: #dce8d6;
+            --clay: #b8785a;
+            --clay-light: #c4978a;
+            --parchment: #f4efe7;
+            --earth: #2e261f;
+            --earth-brown: #3d332a;
+            --white: #faf8f4;
+            --font-serif: 'Frank Ruhl Libre', 'Georgia', serif;
+            --font-sans: 'Heebo', 'Arial', sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-slow: 0.6s var(--ease-out);
+        }
+
+        /* ── Reset & Base ── */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--parchment);
+            color: var(--earth);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ── Fade-in Animations ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ── Navigation ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background-color: rgba(244, 239, 231, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 3rem;
+            box-shadow: 0 1px 0 rgba(46, 38, 31, 0.08);
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--earth);
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--earth);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 0;
+            height: 1.5px;
+            background-color: var(--clay);
+            transition: width 0.3s var(--ease-out);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--clay);
+        }
+
+        /* Mobile hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--earth);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 5px);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -5px);
+        }
+
+        /* Mobile menu overlay */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--parchment);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transition: right 0.4s var(--ease-out);
+            box-shadow: -8px 0 32px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--earth);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--clay);
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(46, 38, 31, 0.3);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+        }
+
+        /* ── Hero Section ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-shape {
+            position: absolute;
+            width: 55vw;
+            height: 65vh;
+            background: var(--moss-light);
+            border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+            opacity: 0.45;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: shapeFloat 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes shapeFloat {
+            0% { border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%; }
+            50% { border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
+            100% { border-radius: 45% 55% 60% 40% / 55% 45% 45% 55%; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.3;
+            color: var(--earth);
+            letter-spacing: 0.03em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-rule {
+            width: 80px;
+            height: 1.5px;
+            background: var(--clay);
+            margin: 0 auto 2rem;
+            border: none;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--earth);
+            opacity: 0.7;
+            max-width: 460px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--clay);
+            opacity: 0.6;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--clay), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.2); }
+        }
+
+        /* ── Statement Section ── */
+        .statement {
+            background: var(--moss);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .statement-inner {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .statement blockquote {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 300;
+            color: var(--parchment);
+            line-height: 1.6;
+            letter-spacing: 0.01em;
+        }
+
+        .statement blockquote::before {
+            content: '״';
+            display: block;
+            font-size: 4rem;
+            color: var(--moss-light);
+            opacity: 0.4;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        /* ── About Section ── */
+        .about {
+            padding: 8rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-art {
+            position: relative;
+            height: 420px;
+        }
+
+        .about-art-rect {
+            width: 200px;
+            height: 340px;
+            background: var(--clay);
+            border-radius: 4px 4px 80px 4px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.85;
+        }
+
+        .about-art-circle {
+            width: 110px;
+            height: 110px;
+            background: var(--moss);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 40px;
+            right: 140px;
+            opacity: 0.7;
+        }
+
+        .about-text {
+            padding-top: 1rem;
+        }
+
+        .about-text h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: var(--earth);
+        }
+
+        .about-paragraph {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--earth);
+            opacity: 0.85;
+            max-width: 560px;
+        }
+
+        .about-paragraph .drop-cap {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            float: right;
+            line-height: 0.8;
+            padding-left: 0.6rem;
+            padding-bottom: 0.2rem;
+            color: var(--moss);
+            font-weight: 700;
+        }
+
+        .about-paragraph + .about-paragraph {
+            margin-top: 1.5rem;
+        }
+
+        /* ── Therapists Section ── */
+        .therapists {
+            padding: 6rem 3rem 8rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .therapists-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .therapists-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--earth);
+            letter-spacing: 0.02em;
+        }
+
+        .therapists-header .sub-rule {
+            width: 50px;
+            height: 1.5px;
+            background: var(--clay);
+            margin: 1.5rem auto 0;
+            border: none;
+        }
+
+        .therapists-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .therapist-card {
+            background: var(--white);
+            border-top: 2px solid var(--moss-light);
+            padding: 2rem 1.8rem 2.2rem;
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+        }
+
+        .therapist-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(46, 38, 31, 0.08);
+        }
+
+        .therapist-card:nth-child(even) {
+            margin-top: 3rem;
+        }
+
+        .therapist-photo {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .therapist-card:nth-child(1) .therapist-photo {
+            background: linear-gradient(135deg, #c4978a 0%, #b8785a 60%, #8b5e3c 100%);
+        }
+        .therapist-card:nth-child(2) .therapist-photo {
+            background: linear-gradient(135deg, #dce8d6 0%, #4a6741 60%, #2e3d28 100%);
+        }
+        .therapist-card:nth-child(3) .therapist-photo {
+            background: linear-gradient(135deg, #b8785a 0%, #c4978a 50%, #dce8d6 100%);
+        }
+        .therapist-card:nth-child(4) .therapist-photo {
+            background: linear-gradient(135deg, #4a6741 0%, #dce8d6 60%, #b8785a 100%);
+        }
+        .therapist-card:nth-child(5) .therapist-photo {
+            background: linear-gradient(135deg, #c4978a 0%, #4a6741 60%, #2e261f 100%);
+        }
+        .therapist-card:nth-child(6) .therapist-photo {
+            background: linear-gradient(135deg, #2e261f 0%, #b8785a 50%, #dce8d6 100%);
+        }
+
+        .therapist-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='24' r='10' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='1.2'/%3E%3Cpath d='M14 52c0-10 7-18 16-18s16 8 16 18' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='1.2'/%3E%3C/svg%3E") center 45% no-repeat;
+            background-size: 56px;
+        }
+
+        .therapist-name {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--earth);
+            margin-bottom: 0.4rem;
+        }
+
+        .therapist-spec {
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: var(--earth);
+            opacity: 0.6;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .therapist-divider {
+            width: 30px;
+            height: 1px;
+            background: var(--moss-light);
+            margin-bottom: 1rem;
+        }
+
+        .therapist-link {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--clay);
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .therapist-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ── Interlude ── */
+        .interlude {
+            padding: 5rem 2rem;
+            background: var(--parchment);
+            overflow: hidden;
+        }
+
+        .interlude-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+        }
+
+        .interlude-word {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--earth);
+            letter-spacing: 0.04em;
+            padding: 0 2rem;
+        }
+
+        .interlude-sep {
+            width: 1px;
+            height: 50px;
+            background: var(--clay);
+            opacity: 0.4;
+            flex-shrink: 0;
+        }
+
+        /* ── Articles Section ── */
+        .articles {
+            padding: 6rem 3rem 8rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .articles-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .articles-header h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--earth);
+        }
+
+        .articles-header .sub-rule {
+            width: 50px;
+            height: 1.5px;
+            background: var(--clay);
+            margin: 1.5rem auto 0;
+            border: none;
+        }
+
+        .articles-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .article-card {
+            background: var(--white);
+            overflow: hidden;
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(46, 38, 31, 0.08);
+        }
+
+        .article-image {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            position: relative;
+        }
+
+        .article-card.featured .article-image {
+            background: linear-gradient(135deg, var(--moss-light) 0%, var(--moss) 50%, var(--earth-brown) 100%);
+        }
+
+        .article-card.side .article-image {
+            background: linear-gradient(135deg, var(--clay-light) 0%, var(--clay) 60%, var(--earth-brown) 100%);
+            aspect-ratio: 16 / 12;
+        }
+
+        .article-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect x='8' y='6' width='24' height='18' rx='1' fill='none' stroke='rgba(255,255,255,0.25)' stroke-width='1'/%3E%3Cline x1='8' y1='28' x2='32' y2='28' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3Cline x1='8' y1='32' x2='24' y2='32' stroke='rgba(255,255,255,0.15)' stroke-width='1'/%3E%3C/svg%3E") center no-repeat;
+            background-size: 48px;
+        }
+
+        .article-body {
+            padding: 1.8rem 2rem 2rem;
+        }
+
+        .article-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: var(--clay);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .article-title {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--earth);
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+
+        .article-card.featured .article-title {
+            font-size: 1.5rem;
+        }
+
+        .article-card.side .article-title {
+            font-size: 1.15rem;
+        }
+
+        .article-excerpt {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--earth);
+            opacity: 0.65;
+        }
+
+        .article-full {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            background: var(--white);
+            overflow: hidden;
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+        }
+
+        .article-full:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(46, 38, 31, 0.08);
+        }
+
+        .article-full .article-image {
+            aspect-ratio: auto;
+            min-height: 220px;
+            background: linear-gradient(135deg, var(--moss) 0%, var(--clay-light) 50%, var(--parchment) 100%);
+        }
+
+        .article-full .article-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .article-full .article-title {
+            font-size: 1.3rem;
+        }
+
+        /* ── Contact Section ── */
+        .contact {
+            background: var(--moss-light);
+            padding: 6rem 2rem 7rem;
+        }
+
+        .contact-inner {
+            max-width: 520px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 300;
+            color: var(--earth);
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-subtitle {
+            font-size: 0.95rem;
+            color: var(--earth);
+            opacity: 0.6;
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(46, 38, 31, 0.12);
+            border-radius: 6px;
+            background: var(--white);
+            color: var(--earth);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            direction: rtl;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--earth);
+            opacity: 0.35;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--moss);
+            box-shadow: 0 0 0 3px rgba(74, 103, 65, 0.08);
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-submit {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 1rem 2.5rem;
+            background: var(--clay);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: center;
+            margin-top: 0.5rem;
+        }
+
+        .contact-submit:hover {
+            background: #a66a4e;
+            transform: translateY(-1px);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--earth-brown);
+            padding: 3.5rem 3rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--parchment);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            color: var(--parchment);
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--parchment);
+            opacity: 0.35;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .nav { padding: 1.2rem 1.5rem; }
+            .nav.scrolled { padding: 0.8rem 1.5rem; }
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .mobile-menu { display: flex; }
+
+            .hero { padding: 5rem 1.5rem 3rem; }
+            .hero-shape { width: 80vw; height: 50vh; }
+
+            .about { padding: 5rem 1.5rem; }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .about-art {
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                order: -1;
+            }
+            .about-art-rect {
+                width: 140px;
+                height: 180px;
+                position: relative;
+                right: auto;
+                top: auto;
+            }
+            .about-art-circle {
+                width: 80px;
+                height: 80px;
+                position: absolute;
+                bottom: 10px;
+                right: calc(50% + 30px);
+            }
+
+            .therapists { padding: 4rem 1.5rem 6rem; }
+            .therapists-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .therapist-card:nth-child(even) { margin-top: 0; }
+
+            .interlude-inner {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .interlude-sep {
+                width: 40px;
+                height: 1px;
+            }
+
+            .articles { padding: 4rem 1.5rem 6rem; }
+            .articles-top {
+                grid-template-columns: 1fr;
+            }
+            .article-full {
+                grid-template-columns: 1fr;
+            }
+            .article-full .article-image {
+                aspect-ratio: 16 / 8;
+            }
+
+            .footer { padding: 3rem 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .statement {
+                padding: 4rem 1.5rem;
+            }
+
+            .interlude-word {
+                font-size: 1.5rem;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <a href="#" class="nav-logo">חיבורים</a>
+        <div class="nav-links">
+            <a href="#about">אודות</a>
+            <a href="#therapists">המטפלים</a>
+            <a href="#articles">מאמרים</a>
+            <a href="#contact">צרו קשר</a>
+        </div>
+        <div class="nav-hamburger" id="hamburger" aria-label="תפריט">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about">אודות</a>
+        <a href="#therapists">המטפלים</a>
+        <a href="#articles">מאמרים</a>
+        <a href="#contact">צרו קשר</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-shape"></div>
+        <div class="hero-content fade-in">
+            <h1>טיפול מהלב.<br>בעברית.<br>מכל מקום בעולם.</h1>
+            <hr class="hero-rule">
+            <p class="hero-subtitle">קהילת מטפלים ישראלים מלווה אתכם בדרך — בשפה שלכם, עם הלב שלנו</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>גללו</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Statement Section -->
+    <section class="statement">
+        <div class="statement-inner fade-in">
+            <blockquote>
+                הקשר הטיפולי הוא מפגש בין שתי נפשות. כשהוא מתנהל בשפת האם, הוא נוגע בשכבות הכי עמוקות של הנפש — שם שהריפוי באמת מתחיל.
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-art fade-in-right">
+                <div class="about-art-rect"></div>
+                <div class="about-art-circle"></div>
+            </div>
+            <div class="about-text fade-in-left">
+                <h2>על הקהילה</h2>
+                <p class="about-paragraph">
+                    <span class="drop-cap">א</span>נחנו קבוצה של עשרה מטפלים ומטפלות ישראלים, החיים במדינות שונות ברחבי העולם. מה שמחבר אותנו הוא האמונה העמוקה שטיפול נפשי בשפת האם הוא לא רק נוחות — הוא צורך. השפה העברית נושאת בתוכה שכבות של משמעות, זיכרון ורגש שלא ניתן לתרגם.
+                </p>
+                <p class="about-paragraph">
+                    כל אחד ואחת מאיתנו מביא איתו ניסיון קליני עשיר, התמחות ייחודית וגישה אישית. יחד אנחנו יוצרים רשת של תמיכה מקצועית — עבורכם ועבור זה את זו. הטיפול מתקיים אונליין, כך שלא משנה איפה אתם נמצאים, יש לכם מקום בטוח לחזור אליו.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Therapists Section -->
+    <section class="therapists" id="therapists">
+        <div class="therapists-header fade-in">
+            <h2>הצוות שלנו</h2>
+            <hr class="sub-rule">
+        </div>
+        <div class="therapists-grid">
+            <div class="therapist-card fade-in">
+                <div class="therapist-photo"></div>
+                <div class="therapist-name">ד״ר רונית שלום</div>
+                <div class="therapist-spec">פסיכולוגיה קלינית · חרדות ודיכאון</div>
+                <div class="therapist-divider"></div>
+                <a href="#" class="therapist-link">לפרופיל ←</a>
+            </div>
+            <div class="therapist-card fade-in">
+                <div class="therapist-photo"></div>
+                <div class="therapist-name">אורי כהן</div>
+                <div class="therapist-spec">טיפול זוגי ומשפחתי</div>
+                <div class="therapist-divider"></div>
+                <a href="#" class="therapist-link">לפרופיל ←</a>
+            </div>
+            <div class="therapist-card fade-in">
+                <div class="therapist-photo"></div>
+                <div class="therapist-name">ד״ר מיכל אברהם</div>
+                <div class="therapist-spec">CBT · הפרעות אכילה</div>
+                <div class="therapist-divider"></div>
+                <a href="#" class="therapist-link">לפרופיל ←</a>
+            </div>
+            <div class="therapist-card fade-in">
+                <div class="therapist-photo"></div>
+                <div class="therapist-name">יונתן ברק</div>
+                <div class="therapist-spec">פסיכותרפיה דינמית</div>
+                <div class="therapist-divider"></div>
+                <a href="#" class="therapist-link">לפרופיל ←</a>
+            </div>
+            <div class="therapist-card fade-in">
+                <div class="therapist-photo"></div>
+                <div class="therapist-name">נועה לוי</div>
+                <div class="therapist-spec">טראומה · EMDR</div>
+                <div class="therapist-divider"></div>
+                <a href="#" class="therapist-link">לפרופיל ←</a>
+            </div>
+            <div class="therapist-card fade-in">
+                <div class="therapist-photo"></div>
+                <div class="therapist-name">עמית רוזן</div>
+                <div class="therapist-spec">מתבגרים וצעירים</div>
+                <div class="therapist-divider"></div>
+                <a href="#" class="therapist-link">לפרופיל ←</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interlude -->
+    <section class="interlude">
+        <div class="interlude-inner fade-in">
+            <span class="interlude-word">צמיחה</span>
+            <div class="interlude-sep"></div>
+            <span class="interlude-word">חיבור</span>
+            <div class="interlude-sep"></div>
+            <span class="interlude-word">מקצועיות</span>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="articles" id="articles">
+        <div class="articles-header fade-in">
+            <h2>מאמרים ותובנות</h2>
+            <hr class="sub-rule">
+        </div>
+        <div class="articles-top">
+            <div class="article-card featured fade-in">
+                <div class="article-image"></div>
+                <div class="article-body">
+                    <span class="article-tag">טיפול מרחוק</span>
+                    <h3 class="article-title">למה טיפול בשפת האם משנה את הכל — גם כשאתם רחוקים מהבית</h3>
+                    <p class="article-excerpt">מחקרים חדשים מראים כי חוויות רגשיות מעובדות אחרת בשפת האם. מה המשמעות עבור ישראלים בחו״ל?</p>
+                </div>
+            </div>
+            <div class="article-card side fade-in">
+                <div class="article-image"></div>
+                <div class="article-body">
+                    <span class="article-tag">הגירה וזהות</span>
+                    <h3 class="article-title">בין שתי מולדות: על הכאב והצמיחה שבחיים בין תרבויות</h3>
+                    <p class="article-excerpt">איך מנווטים בין שני עולמות מבלי לאבד את עצמנו?</p>
+                </div>
+            </div>
+        </div>
+        <div class="article-full fade-in">
+            <div class="article-image"></div>
+            <div class="article-body">
+                <span class="article-tag">בריאות נפשית</span>
+                <h3 class="article-title">חמישה סימנים שאולי הגיע הזמן לפנות למטפל</h3>
+                <p class="article-excerpt">לפעמים הגוף והנפש שולחים לנו אותות שקשה להתעלם מהם. הנה כמה מהסימנים המוכרים ביותר.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-inner fade-in">
+            <h2>נשמח לשמוע מכם</h2>
+            <p class="contact-subtitle">שאלות, התעניינות או סתם לומר שלום</p>
+            <form class="contact-form" onsubmit="return false;">
+                <input type="email" placeholder="כתובת אימייל" required>
+                <textarea placeholder="ההודעה שלכם" required></textarea>
+                <button type="submit" class="contact-submit">שליחה</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">חיבורים</div>
+            <div class="footer-links">
+                <a href="#about">אודות</a>
+                <a href="#therapists">המטפלים</a>
+                <a href="#articles">מאמרים</a>
+                <a href="#contact">צרו קשר</a>
+                <a href="#">מדיניות פרטיות</a>
+            </div>
+            <div class="footer-copy">© 2026 חיבורים — קהילת מטפלים ישראלים בעולם. כל הזכויות שמורות.</div>
+        </div>
+    </footer>
+
+    <script>
+        /* ── Navbar scroll ── */
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        /* ── Mobile menu ── */
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMobile() {
+            const isOpen = mobileMenu.classList.contains('open');
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            mobileOverlay.classList.toggle('open');
+            if (!isOpen) {
+                mobileOverlay.style.display = 'block';
+                requestAnimationFrame(() => mobileOverlay.classList.add('open'));
+            } else {
+                mobileOverlay.classList.remove('open');
+                setTimeout(() => { mobileOverlay.style.display = 'none'; }, 400);
+            }
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        }
+
+        hamburger.addEventListener('click', toggleMobile);
+        mobileOverlay.addEventListener('click', toggleMobile);
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('open')) toggleMobile();
+            });
+        });
+
+        /* ── Intersection Observer for fade-in ── */
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        /* ── Smooth scroll for anchor links ── */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
