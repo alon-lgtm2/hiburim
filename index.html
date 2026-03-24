@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חיבורים — בחירת עיצוב לאתר</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Custom Properties ===== */
+        :root {
+            --bg: #0c0c11;
+            --bg-card: #15151e;
+            --bg-card-hover: #1c1c2a;
+            --bg-modal: rgba(8, 8, 14, 0.92);
+            --border: #252535;
+            --border-hover: #3a3a50;
+            --text: #e8e8ec;
+            --text-muted: #8888a0;
+            --text-dim: #555568;
+            --accent: #e8a44a;
+            --accent-hover: #f0b85e;
+            --accent-glow: rgba(232, 164, 74, 0.15);
+            --teal: #3aad9e;
+            --teal-glow: rgba(58, 173, 158, 0.12);
+            --rose: #c47878;
+            --font-heading: 'Rubik', sans-serif;
+            --font-body: 'Heebo', sans-serif;
+            --radius: 14px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== Reset ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        body.modal-open { overflow: hidden; }
+
+        /* ===== Subtle BG Pattern ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 20% 0%, rgba(58, 173, 158, 0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 100%, rgba(232, 164, 74, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 80px 24px 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--teal);
+            background: var(--teal-glow);
+            border: 1px solid rgba(58, 173, 158, 0.2);
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 24px;
+        }
+        .header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .header-actions button {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 24px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .header-actions button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+        .header-actions button.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        /* ===== Section Labels ===== */
+        .section-label {
+            position: relative;
+            z-index: 1;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 32px 16px;
+        }
+        .section-label-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .section-label h2 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .section-label .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+        .section-label .round-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+
+        /* ===== Card Grid ===== */
+        .grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 32px 32px;
+        }
+
+        /* ===== Cards ===== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+        .card.favorite::after {
+            content: '★';
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 1.1rem;
+            color: var(--accent);
+            z-index: 2;
+            text-shadow: 0 2px 8px rgba(232, 164, 74, 0.4);
+        }
+        .card-swatch {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-swatch .number {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card-swatch .view-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .card-swatch .view-overlay span {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            padding: 10px 28px;
+            border: 2px solid rgba(255,255,255,0.6);
+            border-radius: 10px;
+        }
+        .card:hover .view-overlay { opacity: 1; }
+
+        .card-info {
+            padding: 22px 24px;
+        }
+        .card-info h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .card-info .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .card-info .blend {
+            font-size: 0.78rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        .card-info .desc {
+            font-size: 0.84rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .card-tags span {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            transition: var(--transition);
+        }
+        .card:hover .card-tags span {
+            border-color: var(--border-hover);
+            color: var(--text-muted);
+        }
+
+        /* Swatch gradients */
+        .s1 { background: linear-gradient(135deg, #1a6b6a 0%, #238584 40%, #c4694a 100%); }
+        .s2 { background: linear-gradient(135deg, #0f1d3a 0%, #1a2744 40%, #4a9eed 100%); }
+        .s3 { background: linear-gradient(135deg, #5f7d6e 0%, #7d9b8a 40%, #c9a0a0 100%); }
+        .s4 { background: linear-gradient(135deg, #3a5230 0%, #5c7a4a 40%, #b5634b 100%); }
+        .s5 { background: linear-gradient(135deg, #2a1235 0%, #3d1c47 40%, #f0c040 100%); }
+        .s6 { background: linear-gradient(135deg, #1b7a70 0%, #2a8a7e 40%, #deb3a0 100%); }
+        .s7 { background: linear-gradient(135deg, #134845 0%, #1b5e5a 40%, #d4a35a 100%); }
+        .s8 { background: linear-gradient(135deg, #384f32 0%, #4a6741 40%, #b8785a 100%); }
+        .s9 { background: linear-gradient(135deg, #3d8880 0%, #5a9e97 40%, #e6b8a2 100%); }
+        .s10 { background: linear-gradient(135deg, #a05540 0%, #c1694f 40%, #4a5a3a 100%); }
+
+        /* ===== Compare Selection ===== */
+        .compare-bar {
+            position: fixed;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            border-radius: 16px;
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 100;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+            transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .compare-bar.visible { bottom: 28px; }
+        .compare-bar .info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .compare-bar .info strong {
+            color: var(--accent);
+        }
+        .compare-bar button {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 22px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .compare-bar .btn-compare {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        .compare-bar .btn-compare:hover { background: var(--accent-hover); }
+        .compare-bar .btn-cancel {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        .compare-bar .btn-cancel:hover {
+            border-color: var(--rose);
+            color: var(--rose);
+        }
+
+        .card.compare-selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow), inset 0 0 0 1px var(--accent);
+        }
+        .card.compare-selected::before {
+            content: '✓';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 3;
+        }
+
+        /* ===== Preview Modal ===== */
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+        .modal.open {
+            display: flex;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: var(--bg-modal);
+            backdrop-filter: blur(10px);
+        }
+        .modal-toolbar {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: rgba(15, 15, 22, 0.95);
+            border-bottom: 1px solid var(--border);
+        }
+        .modal-toolbar .title-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .modal-toolbar .title-area h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .modal-toolbar .title-area .concept-num {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-glow);
+            border: 1px solid rgba(232, 164, 74, 0.25);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .modal-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal-controls button {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .modal-controls button:hover {
+            border-color: var(--text-muted);
+            color: var(--text);
+        }
+        .modal-controls button.active {
+            border-color: var(--teal);
+            color: var(--teal);
+            background: var(--teal-glow);
+        }
+        .modal-controls .separator {
+            width: 1px;
+            height: 20px;
+            background: var(--border);
+            margin: 0 4px;
+        }
+        .btn-close-modal {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--rose);
+            background: transparent;
+            color: var(--rose);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-close-modal:hover {
+            background: rgba(196, 120, 120, 0.1);
+        }
+
+        .modal-body {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .iframe-container {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+            transition: width 0.4s ease, height 0.4s ease;
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            height: 100%;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .iframe-container.tablet { max-width: 768px; }
+        .iframe-container.mobile { max-width: 375px; }
+
+        /* Nav arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: rgba(15, 15, 22, 0.8);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .nav-arrow:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(15, 15, 22, 0.95);
+        }
+        .nav-arrow.prev { right: 20px; }
+        .nav-arrow.next { left: 20px; }
+
+        /* ===== Compare Modal ===== */
+        .compare-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+        .compare-modal.open {
+            display: flex;
+            animation: modalIn 0.3s ease;
+        }
+        .compare-body {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            gap: 4px;
+            padding: 0;
+            overflow: hidden;
+        }
+        .compare-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .compare-pane-header {
+            padding: 10px 16px;
+            background: rgba(15, 15, 22, 0.95);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .compare-pane-header h4 {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .compare-pane iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: white;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-dim);
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border);
+            max-width: 1300px;
+            margin: 40px auto 0;
+        }
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .footer a:hover { text-decoration: underline; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .header { padding: 50px 20px 30px; }
+            .grid { grid-template-columns: 1fr; padding: 0 16px 24px; }
+            .section-label { padding: 30px 16px 12px; }
+            .modal-toolbar { flex-wrap: wrap; gap: 10px; padding: 10px 14px; }
+            .modal-controls { flex-wrap: wrap; }
+            .nav-arrow { width: 40px; height: 40px; font-size: 1rem; }
+            .nav-arrow.prev { right: 8px; }
+            .nav-arrow.next { left: 8px; }
+            .compare-body { flex-direction: column; }
+            .compare-bar { padding: 10px 16px; flex-wrap: wrap; }
+        }
+
+        /* ===== Scroll reveal ===== */
+        .card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, border-color var(--transition), box-shadow var(--transition);
+        }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Header ===== -->
+    <header class="header">
+        <div class="header-badge">חיבורים — קהילת מטפלים</div>
+        <h1>בחירת עיצוב לאתר הקהילה</h1>
+        <p>לפניכם 10 קונספטים עיצוביים לאתר. לחצו על כל עיצוב לצפייה בתצוגה מקדימה מלאה, או השוו שניים זה לצד זה.</p>
+        <div class="header-actions">
+            <button onclick="setMode('browse')" class="active" id="btn-browse">🖼 צפייה בודדת</button>
+            <button onclick="setMode('compare')" id="btn-compare">⚡ השוואה זו-לצד-זו</button>
+        </div>
+    </header>
+
+    <!-- ===== Round 1 ===== -->
+    <div class="section-label">
+        <div class="section-label-inner">
+            <span class="round-badge">סבב 1</span>
+            <h2>5 כיוונים ראשוניים</h2>
+            <span class="line"></span>
+        </div>
+    </div>
+
+    <div class="grid" id="grid1"></div>
+
+    <!-- ===== Round 2 ===== -->
+    <div class="section-label">
+        <div class="section-label-inner">
+            <span class="round-badge">סבב 2</span>
+            <h2>5 עיצובים מעודנים — מבוססי מועדפים</h2>
+            <span class="line"></span>
+        </div>
+    </div>
+
+    <div class="grid" id="grid2"></div>
+
+    <!-- ===== Compare Bar ===== -->
+    <div class="compare-bar" id="compareBar">
+        <div class="info">נבחרו <strong id="compareCount">0</strong> / 2</div>
+        <button class="btn-compare" id="btnStartCompare" disabled onclick="openCompare()">השוואה</button>
+        <button class="btn-cancel" onclick="clearCompare()">ביטול</button>
+    </div>
+
+    <!-- ===== Preview Modal ===== -->
+    <div class="modal" id="previewModal">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-toolbar">
+            <div class="title-area">
+                <span class="concept-num" id="modalNum"></span>
+                <h3 id="modalTitle"></h3>
+            </div>
+            <div class="modal-controls">
+                <button onclick="setViewport('desktop')" class="active vp-btn" data-vp="desktop">🖥 דסקטופ</button>
+                <button onclick="setViewport('tablet')" class="vp-btn" data-vp="tablet">📱 טאבלט</button>
+                <button onclick="setViewport('mobile')" class="vp-btn" data-vp="mobile">📲 נייד</button>
+                <span class="separator"></span>
+                <button onclick="navigateModal(-1)" title="הקודם">→</button>
+                <button onclick="navigateModal(1)" title="הבא">←</button>
+                <span class="separator"></span>
+                <button class="btn-close-modal" onclick="closeModal()">✕ סגירה</button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <button class="nav-arrow prev" onclick="navigateModal(-1)">→</button>
+            <div class="iframe-container" id="iframeContainer">
+                <iframe id="previewIframe" src="about:blank"></iframe>
+            </div>
+            <button class="nav-arrow next" onclick="navigateModal(1)">←</button>
+        </div>
+    </div>
+
+    <!-- ===== Compare Modal ===== -->
+    <div class="compare-modal" id="compareModal">
+        <div class="modal-backdrop" onclick="closeCompareModal()"></div>
+        <div class="modal-toolbar">
+            <div class="title-area">
+                <h3 id="compareTitle">השוואת עיצובים</h3>
+            </div>
+            <div class="modal-controls">
+                <button class="btn-close-modal" onclick="closeCompareModal()">✕ סגירה</button>
+            </div>
+        </div>
+        <div class="compare-body">
+            <div class="compare-pane">
+                <div class="compare-pane-header"><h4 id="compareTitleA"></h4></div>
+                <iframe id="compareIframeA" src="about:blank"></iframe>
+            </div>
+            <div class="compare-pane">
+                <div class="compare-pane-header"><h4 id="compareTitleB"></h4></div>
+                <iframe id="compareIframeB" src="about:blank"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        חיבורים — קהילת מטפלים ישראלים בעולם | 10 קונספטים לעיצוב | 2026
+    </footer>
+
+    <script>
+        // ===== Data =====
+        const concepts = [
+            { id: 1, file: 'designs/concept1-warm-community.html', name: 'Warm Community Hub', heb: 'בית קהילתי חם', desc: 'צבעי טורקיז וקורל, כרטיסים עגולים, אקורדיון, תחושת ״בית״ מקצועי.', tags: ['חם', 'קהילתי', 'מזמין'], favorite: true, round: 1 },
+            { id: 2, file: 'designs/concept2-professional-network.html', name: 'Professional Network', heb: 'רשת מקצועית', desc: 'פלטפורמה מקצועית, חיפוש מטפלים, Glassmorphism. כחול כהה וכתום-זהב.', tags: ['מקצועי', 'אמין', 'חיפוש'], favorite: false, round: 1 },
+            { id: 3, file: 'designs/concept3-modern-minimal.html', name: 'Modern Minimalist', heb: 'מינימליזם מודרני', desc: 'מרחב לבן, טיפוגרפיה סריפית, ירוק מרווה וורוד מאובק. תחושת מגזין.', tags: ['אלגנטי', 'מינימלי', 'עריכתי'], favorite: true, round: 1 },
+            { id: 4, file: 'designs/concept4-organic-nature.html', name: 'Organic & Nature', heb: 'אורגני וטבעי', desc: 'צורות אורגניות, גווני אדמה, עלים, blob shapes, מפרידי גלים.', tags: ['אורגני', 'טבעי', 'צמיחה'], favorite: true, round: 1 },
+            { id: 5, file: 'designs/concept5-bold-distinctive.html', name: 'Bold & Distinctive', heb: 'נועז וייחודי', desc: 'סגול עמוק, זהב, טיפוגרפיה ענקית בכתב יד. שובר מוסכמות.', tags: ['נועז', 'אמנותי', 'ייחודי'], favorite: false, round: 1 },
+            { id: 6, file: 'designs/concept6-warm-minimal.html', name: 'Warm Minimal', heb: 'חם ומינימלי', desc: 'חום קהילתי עם אלגנטיות ומרחב. סריף חם, טורקיז רך ובלאש.', tags: ['אלגנטי', 'חם', 'מאוזן'], blend: '01 + 03', round: 2 },
+            { id: 7, file: 'designs/concept7-nature-community.html', name: 'Nature Community', heb: 'קהילת טבע', desc: 'קהילתיות עם טבע. ירוק יער, דבש זהוב, גלים אורגניים, עלים.', tags: ['טבעי', 'קהילתי', 'דבש'], blend: '01 + 04', round: 2 },
+            { id: 8, file: 'designs/concept8-elegant-earth.html', name: 'Elegant Earth', heb: 'אדמה אלגנטית', desc: 'אלגנטיות עריכתית עם גווני אדמה. סריף מעודן, חימר ואזוב.', tags: ['עריכתי', 'אדמתי', 'מעודן'], blend: '03 + 04', round: 2 },
+            { id: 9, file: 'designs/concept9-serene-haven.html', name: 'Serene Haven', heb: 'מפלט שליו', desc: 'איזון מושלם: חום, אלגנטיות וטבע. קשתות עדינות, אפרסק.', tags: ['שליו', 'מאוזן', 'מעוגל'], blend: '01 + 03 + 04', round: 2 },
+            { id: 10, file: 'designs/concept10-mediterranean.html', name: 'Mediterranean Warmth', heb: 'חום ים-תיכוני', desc: 'אסתטיקה ים-תיכונית: טרקוטה, אבן חמה, זית, קשתות, שעת זהב.', tags: ['ים-תיכוני', 'ישראלי', 'קשתות'], blend: 'כיוון חדש', round: 2 },
+        ];
+
+        // ===== State =====
+        let mode = 'browse'; // 'browse' or 'compare'
+        let currentIndex = 0;
+        let compareSelections = [];
+
+        // ===== Render Cards =====
+        function renderCards() {
+            const grid1 = document.getElementById('grid1');
+            const grid2 = document.getElementById('grid2');
+            grid1.innerHTML = '';
+            grid2.innerHTML = '';
+
+            concepts.forEach((c, i) => {
+                const card = document.createElement('div');
+                card.className = `card${c.favorite ? ' favorite' : ''}`;
+                card.dataset.index = i;
+                card.innerHTML = `
+                    <div class="card-swatch s${c.id}">
+                        <span class="number">${String(c.id).padStart(2, '0')}</span>
+                        <div class="view-overlay"><span>${mode === 'compare' ? 'בחירה להשוואה' : 'צפייה בעיצוב'}</span></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>${c.name}</h3>
+                        <div class="subtitle">${c.heb}</div>
+                        ${c.blend ? `<div class="blend">שילוב: ${c.blend}</div>` : ''}
+                        <div class="desc">${c.desc}</div>
+                        <div class="card-tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => handleCardClick(i));
+                (c.round === 1 ? grid1 : grid2).appendChild(card);
+            });
+
+            // Scroll reveal
+            setTimeout(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, i) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => entry.target.classList.add('visible'), i * 60);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.card').forEach(c => observer.observe(c));
+            }, 50);
+        }
+
+        // ===== Mode =====
+        function setMode(m) {
+            mode = m;
+            document.getElementById('btn-browse').classList.toggle('active', m === 'browse');
+            document.getElementById('btn-compare').classList.toggle('active', m === 'compare');
+            clearCompare();
+            renderCards();
+        }
+
+        // ===== Card Click =====
+        function handleCardClick(index) {
+            if (mode === 'browse') {
+                openModal(index);
+            } else {
+                toggleCompareSelection(index);
+            }
+        }
+
+        // ===== Preview Modal =====
+        function openModal(index) {
+            currentIndex = index;
+            const c = concepts[index];
+            document.getElementById('modalNum').textContent = `#${String(c.id).padStart(2, '0')}`;
+            document.getElementById('modalTitle').textContent = `${c.name} — ${c.heb}`;
+            document.getElementById('previewIframe').src = c.file;
+            setViewport('desktop');
+            document.getElementById('previewModal').classList.add('open');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            document.getElementById('previewModal').classList.remove('open');
+            document.body.classList.remove('modal-open');
+            document.getElementById('previewIframe').src = 'about:blank';
+        }
+
+        function navigateModal(dir) {
+            // dir: -1 = prev, 1 = next (RTL aware)
+            let newIndex = currentIndex + dir;
+            if (newIndex < 0) newIndex = concepts.length - 1;
+            if (newIndex >= concepts.length) newIndex = 0;
+            openModal(newIndex);
+        }
+
+        function setViewport(vp) {
+            const container = document.getElementById('iframeContainer');
+            container.classList.remove('tablet', 'mobile');
+            if (vp !== 'desktop') container.classList.add(vp);
+            document.querySelectorAll('.vp-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.vp === vp);
+            });
+        }
+
+        // ===== Compare =====
+        function toggleCompareSelection(index) {
+            const pos = compareSelections.indexOf(index);
+            if (pos > -1) {
+                compareSelections.splice(pos, 1);
+            } else if (compareSelections.length < 2) {
+                compareSelections.push(index);
+            } else {
+                return; // already 2 selected
+            }
+            updateCompareUI();
+        }
+
+        function updateCompareUI() {
+            document.querySelectorAll('.card').forEach(c => {
+                const idx = parseInt(c.dataset.index);
+                c.classList.toggle('compare-selected', compareSelections.includes(idx));
+            });
+            const bar = document.getElementById('compareBar');
+            const count = document.getElementById('compareCount');
+            const btn = document.getElementById('btnStartCompare');
+            count.textContent = compareSelections.length;
+            bar.classList.toggle('visible', mode === 'compare' && compareSelections.length > 0);
+            btn.disabled = compareSelections.length < 2;
+        }
+
+        function clearCompare() {
+            compareSelections = [];
+            updateCompareUI();
+        }
+
+        function openCompare() {
+            if (compareSelections.length < 2) return;
+            const a = concepts[compareSelections[0]];
+            const b = concepts[compareSelections[1]];
+            document.getElementById('compareTitleA').textContent = `#${a.id} ${a.name} — ${a.heb}`;
+            document.getElementById('compareTitleB').textContent = `#${b.id} ${b.name} — ${b.heb}`;
+            document.getElementById('compareIframeA').src = a.file;
+            document.getElementById('compareIframeB').src = b.file;
+            document.getElementById('compareTitle').textContent = `השוואה: #${a.id} vs #${b.id}`;
+            document.getElementById('compareModal').classList.add('open');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeCompareModal() {
+            document.getElementById('compareModal').classList.remove('open');
+            document.body.classList.remove('modal-open');
+            document.getElementById('compareIframeA').src = 'about:blank';
+            document.getElementById('compareIframeB').src = 'about:blank';
+        }
+
+        // ===== Keyboard =====
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('previewModal').classList.contains('open')) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowRight') navigateModal(-1);
+                if (e.key === 'ArrowLeft') navigateModal(1);
+            }
+            if (document.getElementById('compareModal').classList.contains('open')) {
+                if (e.key === 'Escape') closeCompareModal();
+            }
+        });
+
+        // ===== Init =====
+        renderCards();
+    </script>
+</body>
+</html>
