@@ -8,7 +8,7 @@
     <!-- Open Graph -->
     <meta property="og:title" content="חיבורים - 10 קונספטים לעיצוב האתר">
     <meta property="og:description" content="הוכחת התכנות לאתר קהילת המטפלים והמטפלות בעברית. 10 כיוונים עיצוביים ייחודיים לבחירתכם.">
-    <meta property="og:image" content="https://hiburim-0vv5.onrender.com/designs/og-image.png">
+    <meta property="og:image" content="https://hiburim-0vv5.onrender.com/og-image.png">
     <meta property="og:url" content="https://hiburim-0vv5.onrender.com/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="he_IL">
@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="חיבורים - 10 קונספטים לעיצוב האתר">
     <meta name="twitter:description" content="הוכחת התכנות לאתר קהילת המטפלים והמטפלות בעברית. 10 כיוונים עיצוביים ייחודיים לבחירתכם.">
-    <meta name="twitter:image" content="https://hiburim-0vv5.onrender.com/designs/og-image.png">
+    <meta name="twitter:image" content="https://hiburim-0vv5.onrender.com/og-image.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -890,5 +890,114 @@
     <div class="footer">
         חיבורים - קהילת מטפלים ומטפלות בעברית | 10 קונספטים לעיצוב | 2026
     </div>
+
+<style>
+/* ===== Iframe lazy load fade-in ===== */
+.design-snippet iframe { opacity: 0; transition: opacity 0.5s ease; }
+.design-snippet iframe.loaded { opacity: 1; }
+
+/* ===== Fallback gradients per concept ===== */
+.d1 .design-snippet { background: linear-gradient(135deg, #1a6b6a, #c4694a); }
+.d2 .design-snippet { background: linear-gradient(135deg, #1a2744, #4a9eed); }
+.d3 .design-snippet { background: linear-gradient(135deg, #7d9b8a, #c9a0a0); }
+.d4 .design-snippet { background: linear-gradient(135deg, #5c7a4a, #b5634b); }
+.d5 .design-snippet { background: linear-gradient(135deg, #3d1c47, #f0c040); }
+.d6 .design-snippet { background: linear-gradient(135deg, #2a8a7e, #deb3a0); }
+.d7 .design-snippet { background: linear-gradient(135deg, #1b5e5a, #d4a35a); }
+.d8 .design-snippet { background: linear-gradient(135deg, #4a6741, #b8785a); }
+.d9 .design-snippet { background: linear-gradient(135deg, #5a9e97, #e6b8a2); }
+.d10 .design-snippet { background: linear-gradient(135deg, #c1694f, #4a5a3a); }
+
+/* ===== Viewport toggle buttons ===== */
+.view-toggle {
+    position: absolute; top: 10px; left: 10px; z-index: 10;
+    display: flex; gap: 5px;
+}
+.vt-btn {
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.65);
+    border-radius: 7px; padding: 4px 9px;
+    font-size: 0.68rem; cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    font-family: 'Heebo', sans-serif;
+    white-space: nowrap;
+}
+.vt-btn:hover { background: rgba(0,0,0,0.75); color: white; }
+.vt-btn.active { border-color: rgba(255,255,255,0.75); color: white; }
+@media (max-width: 1024px) { .view-toggle { display: none !important; } }
+</style>
+
+<script>
+// ===== Lazy-load iframes via IntersectionObserver =====
+document.querySelectorAll('.design-snippet iframe[src]').forEach(iframe => {
+    // Convert existing src to data-src for lazy loading
+    const src = iframe.getAttribute('src');
+    iframe.removeAttribute('src');
+    iframe.setAttribute('data-src', src);
+});
+
+const iframeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const iframe = entry.target;
+            if (!iframe.src && iframe.dataset.src) {
+                iframe.src = iframe.dataset.src;
+                iframe.addEventListener('load', () => {
+                    iframe.classList.add('loaded');
+                }, { once: true });
+                // Fallback: show after 3s even if load doesn't fire
+                setTimeout(() => iframe.classList.add('loaded'), 3000);
+            }
+            iframeObserver.unobserve(iframe);
+        }
+    });
+}, { rootMargin: '300px' });
+
+document.querySelectorAll('.design-snippet iframe').forEach(iframe => {
+    iframeObserver.observe(iframe);
+});
+
+// ===== Inject viewport toggle buttons into each snippet =====
+document.querySelectorAll('.design-snippet').forEach(snippet => {
+    const toggle = document.createElement('div');
+    toggle.className = 'view-toggle';
+    toggle.innerHTML = `
+        <button class="vt-btn active" data-view="desktop">🖥 מחשב</button>
+        <button class="vt-btn" data-view="tablet">⬜ טאבלט</button>
+        <button class="vt-btn" data-view="mobile">📱 נייד</button>
+    `;
+    // Insert before the overlay
+    const overlay = snippet.querySelector('.snippet-overlay');
+    snippet.insertBefore(toggle, overlay);
+
+    toggle.querySelectorAll('.vt-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const iframe = snippet.querySelector('iframe');
+            if (!iframe) return;
+            toggle.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const view = btn.dataset.view;
+            if (view === 'desktop') {
+                iframe.style.width = '1400px';
+                iframe.style.height = '900px';
+                iframe.style.transform = 'scale(0.3)';
+                iframe.style.transformOrigin = 'top left';
+            } else if (view === 'tablet') {
+                iframe.style.width = '768px';
+                iframe.style.height = '900px';
+                iframe.style.transform = 'scale(0.55)';
+                iframe.style.transformOrigin = 'top left';
+            } else if (view === 'mobile') {
+                iframe.style.width = '390px';
+                iframe.style.height = '900px';
+                iframe.style.transform = 'scale(0.9)';
+                iframe.style.transformOrigin = 'top center';
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
