@@ -3,89 +3,1045 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>חיבורים - 10 קונספטים לעיצוב האתר</title>
+    <title>הצעה לבניית אתר קהילת המטפלים והמטפלות בעברית</title>
 
     <!-- Open Graph -->
-    <meta property="og:title" content="חיבורים - 10 קונספטים לעיצוב האתר">
-    <meta property="og:description" content="הוכחת התכנות לאתר קהילת המטפלים והמטפלות בעברית. 10 כיוונים עיצוביים ייחודיים לבחירתכם.">
-    <meta property="og:image" content="https://hiburim-0vv5.onrender.com/og-image.png">
+    <meta property="og:title" content="טיפול קשוב — הצעה לאתר הקהילה שלנו">
+    <meta property="og:description" content="הקישור שדיברנו עליו. 10 קונספטים עיצוביים מוכנים, מסמך דרישות מלא, אסטרטגיית דומיין, תמחור שקוף, ולוח זמנים. הכל בפנים — בנוי במיוחד עבורכן.">
+    <meta property="og:image" content="https://hiburim-0vv5.onrender.com/og-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://hiburim-0vv5.onrender.com/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="he_IL">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="חיבורים - 10 קונספטים לעיצוב האתר">
-    <meta name="twitter:description" content="הוכחת התכנות לאתר קהילת המטפלים והמטפלות בעברית. 10 כיוונים עיצוביים ייחודיים לבחירתכם.">
-    <meta name="twitter:image" content="https://hiburim-0vv5.onrender.com/og-image.png">
+    <meta name="twitter:title" content="טיפול קשוב — הצעה לאתר הקהילה שלנו">
+    <meta name="twitter:description" content="הקישור שדיברנו עליו. 10 קונספטים עיצוביים מוכנים, מסמך דרישות מלא, אסטרטגיית דומיין, תמחור שקוף, ולוח זמנים. הכל בפנים — בנוי במיוחד עבורכן.">
+    <meta name="twitter:image" content="https://hiburim-0vv5.onrender.com/og-image.svg">
 
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700;900&family=Caveat:wght@400;500;600;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* ===== Reset ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
+        /* ===== Password Gate (Notebook Cover) ===== */
+        .gate {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #2c2620;
+            background-image:
+                radial-gradient(ellipse at 30% 20%, rgba(90,70,50,0.3), transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(60,50,40,0.2), transparent 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        .gate::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .gate.open {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+        .gate-inner {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .gate-band {
+            width: 180px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #8a7560, transparent);
+            margin: 0 auto 40px;
+            border-radius: 2px;
+        }
+        .gate-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #d4c4a8;
+            letter-spacing: 0.03em;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .gate-subtitle {
             font-family: 'Heebo', sans-serif;
-            background: #0c0c11;
-            color: #e0e0e0;
-            min-height: 100vh;
+            font-size: 0.95rem;
+            color: #8a7e6e;
+            margin-bottom: 48px;
+            font-weight: 300;
+        }
+        .gate-google-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 28px;
+            background: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #3c3c3c;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.12);
+            transition: box-shadow 0.2s ease, transform 0.15s ease;
+            margin: 0 auto;
+            direction: rtl;
+        }
+        .gate-google-btn:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+            transform: translateY(-1px);
+        }
+        .gate-google-btn:active { transform: translateY(0); }
+        .gate-google-btn svg { flex-shrink: 0; }
+        .gate-error {
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.82rem;
+            color: #c47a6a;
+            margin-top: 16px;
+            height: 20px;
+            text-align: center;
+        }
+        .gate-hint {
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.75rem;
+            color: #5a5040;
+            margin-top: 60px;
         }
 
-        /* ===== Header ===== */
+        /* ===== Notebook Body ===== */
+        body {
+            font-family: 'Heebo', sans-serif;
+            color: #2d2a26;
+            background-color: #f8f3eb;
+            background-image: repeating-linear-gradient(
+                transparent 0px, transparent 31px,
+                rgba(160,145,120,0.12) 31px, rgba(160,145,120,0.12) 32px
+            );
+            background-size: 100% 32px;
+            background-attachment: fixed;
+            min-height: 100vh;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Margin line (right side for RTL - the binding edge) */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 72px;
+            height: 100%;
+            border-left: 2px solid rgba(196,120,110,0.18);
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* Hide main content until unlocked */
+        .notebook-content {
+            opacity: 0;
+            transition: opacity 0.6s ease 0.4s;
+        }
+        body.unlocked .notebook-content { opacity: 1; }
+
+        /* ===== Floating Nav (notebook tabs) ===== */
+        .floating-nav {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 2px;
+            background: rgba(248,243,235,0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 30px;
+            padding: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .floating-nav.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .floating-nav a {
+            padding: 7px 18px;
+            border-radius: 24px;
+            color: #8a7e6e;
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .floating-nav a:hover { color: #4a4030; }
+        .floating-nav a.active {
+            background: #2d2a26;
+            color: #f8f3eb;
+        }
+
+        /* ===== Section utility ===== */
+        .p-section {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 28px 0 100px;
+        }
+        .p-section-heading {
+            margin-bottom: 44px;
+        }
+        .p-section-heading .p-label {
+            display: inline-block;
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #c4694a;
+            margin-bottom: 10px;
+        }
+        .p-section-heading h2 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d2a26;
+            margin-bottom: 12px;
+            line-height: 1.35;
+            position: relative;
+            display: inline-block;
+        }
+        .p-section-heading h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #c4694a, rgba(196,105,74,0.1));
+            border-radius: 2px;
+        }
+        .p-section-heading p {
+            font-size: 0.95rem;
+            color: #7a7468;
+            max-width: 600px;
+            line-height: 1.9;
+            margin-top: 16px;
+        }
+
+        /* Section divider */
+        .p-divider {
+            max-width: 820px;
+            margin: 64px auto;
+            padding: 0 28px 0 100px;
+        }
+        .p-divider-line {
+            height: 0;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+        }
+
+        /* ===== Hero (Title Page) ===== */
+        .proposal-hero {
+            padding: 120px 28px 40px 100px;
+            max-width: 820px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .proposal-hero .hero-draft {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: rgba(196,105,74,0.5);
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+            display: inline-block;
+        }
+        .proposal-hero h1 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: #2d2a26;
+        }
+        .proposal-hero .hero-sub {
+            font-size: 1.1rem;
+            color: #6a6050;
+            line-height: 1.9;
+            margin-bottom: 16px;
+            max-width: 600px;
+        }
+        .proposal-hero .hero-meta {
+            font-size: 0.82rem;
+            color: #a09888;
+            margin-top: 28px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .proposal-hero .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .proposal-hero .hero-meta span::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: #c4694a;
+            border-radius: 50%;
+        }
+        .proposal-hero .hero-meta span:first-child::before { display: none; }
+
+        /* ===== Conversation Highlights (Meeting Notes) ===== */
+        .highlights-section {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 4px;
+            padding: 36px 32px;
+            margin-top: 36px;
+            position: relative;
+        }
+        .highlights-section::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 32px;
+            width: 48px;
+            height: 12px;
+            background: rgba(196,105,74,0.2);
+            border-radius: 1px;
+            transform: rotate(-1deg);
+        }
+        .highlights-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .highlights-header h3 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2d2a26;
+        }
+        .highlights-header .hl-date {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            color: #a09888;
+        }
+        .highlights-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .highlights-list li {
+            font-size: 0.9rem;
+            color: #4a4538;
+            line-height: 1.75;
+            padding-right: 24px;
+            position: relative;
+        }
+        .highlights-list li::before {
+            content: '—';
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #c4694a;
+            font-weight: 700;
+        }
+        .highlights-list li strong {
+            color: #2d2a26;
+            font-weight: 600;
+        }
+        .highlights-list li em {
+            font-style: normal;
+            background: rgba(240,192,64,0.15);
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+        .margin-note {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            color: rgba(196,105,74,0.6);
+            transform: rotate(-2deg);
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        /* ===== Understanding cards ===== */
+        .understanding-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .understand-card {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .understand-card:hover {
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .understand-card .uc-icon {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .understand-card h3 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.05rem;
+            color: #2d2a26;
+            margin-bottom: 8px;
+        }
+        .understand-card p {
+            font-size: 0.85rem;
+            color: #7a7468;
+            line-height: 1.8;
+        }
+
+        /* ===== Feature cards ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .feature-card-full { grid-column: 1 / -1; }
+        .feature-card {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            padding: 24px 22px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--fc-accent, #c4694a);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 0 4px 4px 0;
+        }
+        .feature-card:hover {
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-card .fc-icon {
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+        .feature-card h3 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1rem;
+            color: #2d2a26;
+            margin-bottom: 8px;
+        }
+        .feature-card p {
+            font-size: 0.82rem;
+            color: #7a7468;
+            line-height: 1.85;
+        }
+
+        /* ===== Multiplier ===== */
+        .multiplier-section {
+            background: rgba(255,255,255,0.45);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 4px;
+            padding: 44px 36px;
+            margin-top: 32px;
+            position: relative;
+        }
+        .multiplier-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+        .multiplier-text h3 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.5rem;
+            color: #2d2a26;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+        .multiplier-text p {
+            font-size: 0.9rem;
+            color: #6a6050;
+            line-height: 1.9;
+            margin-bottom: 12px;
+        }
+        .multiplier-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .mf-step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 16px;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .mf-step + .mf-step { margin-top: -1px; }
+        .mf-step:first-child { border-radius: 4px 4px 0 0; }
+        .mf-step:last-child { border-radius: 0 0 4px 4px; }
+        .mf-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(196,105,74,0.1);
+            color: #c4694a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .mf-label {
+            font-size: 0.84rem;
+            color: #4a4538;
+        }
+        .mf-arrow {
+            text-align: center;
+            color: #c4a882;
+            font-size: 0.9rem;
+            padding: 2px 0;
+        }
+
+        /* ===== Domain cards ===== */
+        .domain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 32px;
+        }
+        .domain-card {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            padding: 22px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .domain-card:hover {
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .domain-card.recommended {
+            border-color: rgba(196,105,74,0.25);
+            background: rgba(255,250,242,0.8);
+        }
+        .domain-card.recommended:hover {
+            border-color: rgba(196,105,74,0.4);
+        }
+        .domain-card .dc-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-family: 'Caveat', cursive;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #c4694a;
+        }
+        .domain-card .dc-num {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(0,0,0,0.06);
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+        .domain-card .dc-name-he {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2d2a26;
+            margin-bottom: 4px;
+        }
+        .domain-card .dc-domain {
+            font-size: 1.15rem;
+            color: #c4694a;
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            margin-bottom: 8px;
+            direction: ltr;
+            text-align: right;
+        }
+        .domain-card .dc-tagline {
+            font-size: 0.82rem;
+            color: #8a7e6e;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .domain-card .dc-desc {
+            font-size: 0.8rem;
+            color: #7a7468;
+            line-height: 1.7;
+        }
+        .domain-card-full {
+            grid-column: 1 / -1;
+        }
+        .domain-note {
+            margin-top: 14px;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.35);
+            border: 1px dashed rgba(0,0,0,0.08);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #7a7468;
+            line-height: 1.8;
+        }
+
+        /* ===== Pricing ===== */
+        .pricing-layout {
+            margin-top: 32px;
+        }
+        .pricing-main {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            padding: 36px 32px;
+        }
+        .pricing-main .pm-total-label {
+            font-size: 0.82rem;
+            color: #8a7e6e;
+            margin-bottom: 4px;
+        }
+        .pricing-main .pm-total {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #2d2a26;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .pricing-main .pm-total-note {
+            font-size: 0.82rem;
+            color: #a09888;
+            margin-bottom: 28px;
+        }
+        .pm-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .pm-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px dashed rgba(0,0,0,0.06);
+        }
+        .pm-item:last-child { border-bottom: none; }
+        .pm-item .pm-item-name {
+            font-size: 0.9rem;
+            color: #4a4538;
+        }
+        .pm-item .pm-item-desc {
+            font-size: 0.75rem;
+            color: #a09888;
+            margin-top: 2px;
+        }
+        .pm-item .pm-item-price {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #2d2a26;
+            white-space: nowrap;
+            direction: ltr;
+        }
+
+        /* Flexibility callout */
+        .pricing-flex {
+            margin-top: 20px;
+            padding: 20px 24px;
+            background: rgba(240,192,64,0.06);
+            border: 1px dashed rgba(240,192,64,0.2);
+            border-radius: 4px;
+            position: relative;
+        }
+        .pricing-flex .pf-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #c4694a;
+            margin-bottom: 8px;
+        }
+        .pricing-flex p {
+            font-size: 0.85rem;
+            color: #6a6050;
+            line-height: 1.85;
+        }
+
+        /* ===== CMS Model ===== */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .partner-card {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            padding: 28px 24px;
+        }
+        .partner-card .pc-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .partner-card h3 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #2d2a26;
+            margin-bottom: 8px;
+        }
+        .partner-card p {
+            font-size: 0.88rem;
+            color: #5a5040;
+            line-height: 1.6;
+        }
+        .cms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .cms-col {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            padding: 26px;
+        }
+        .cms-col h3 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1rem;
+            color: #2d2a26;
+            margin-bottom: 4px;
+        }
+        .cms-col .cms-subtitle {
+            font-size: 0.78rem;
+            color: #a09888;
+            margin-bottom: 16px;
+        }
+        .cms-col.cms-free { border-color: rgba(74,140,100,0.2); }
+        .cms-col.cms-free h3 { color: #3a7d55; }
+        .cms-col.cms-paid h3 { color: #c4694a; }
+        .cms-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .cms-list li {
+            font-size: 0.84rem;
+            color: #6a6050;
+            padding-right: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .cms-list li::before {
+            position: absolute;
+            right: 0;
+            top: 2px;
+            font-size: 0.8rem;
+        }
+        .cms-free .cms-list li::before { content: '\2713'; color: #3a7d55; }
+        .cms-paid .cms-list li::before { content: '\2192'; color: #c4694a; }
+
+        /* ===== Timeline ===== */
+        .timeline-track {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-top: 32px;
+            position: relative;
+        }
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            right: 60px;
+            left: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #c4694a, #d4a853, #3a7d55);
+            opacity: 0.25;
+            border-radius: 2px;
+        }
+        .tl-step {
+            text-align: center;
+            position: relative;
+        }
+        .tl-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #c4694a;
+            margin: 22px auto 16px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 0 3px rgba(196,105,74,0.12);
+        }
+        .tl-step:nth-child(2) .tl-dot { background: #d4a853; box-shadow: 0 0 0 3px rgba(212,168,83,0.12); }
+        .tl-step:nth-child(3) .tl-dot { background: #3a7d55; box-shadow: 0 0 0 3px rgba(58,125,85,0.12); }
+        .tl-week {
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #c4694a;
+        }
+        .tl-step:nth-child(2) .tl-week { color: #d4a853; }
+        .tl-step:nth-child(3) .tl-week { color: #3a7d55; }
+        .tl-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2d2a26;
+            margin-bottom: 4px;
+        }
+        .tl-desc {
+            font-size: 0.8rem;
+            color: #7a7468;
+            line-height: 1.7;
+            max-width: 220px;
+            margin: 0 auto;
+        }
+        .timeline-note {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 0.9rem;
+            color: #6a6050;
+            background: rgba(255,255,255,0.35);
+            border: 1px dashed rgba(0,0,0,0.08);
+            border-radius: 4px;
+            padding: 14px 20px;
+        }
+        .timeline-note strong {
+            color: #c4694a;
+            font-weight: 700;
+        }
+
+        /* ===== Open decisions ===== */
+        .decisions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 32px;
+        }
+        .decision-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.35);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        .decision-item:hover { background: rgba(255,255,255,0.6); }
+        .decision-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(196,105,74,0.08);
+            color: #c4694a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .decision-text {
+            flex: 1;
+        }
+        .decision-text strong {
+            font-size: 0.86rem;
+            color: #2d2a26;
+            font-weight: 600;
+        }
+        .decision-text span {
+            font-size: 0.76rem;
+            color: #a09888;
+            margin-right: 4px;
+        }
+
+        /* ===== Task checklist ===== */
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 32px;
+        }
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 18px;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .task-item:hover {
+            background: rgba(255,255,255,0.8);
+        }
+        .task-checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            border: 1.5px solid rgba(0,0,0,0.15);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .task-item.task-urgent .task-checkbox { border-color: #c4694a; }
+        .task-content strong {
+            font-size: 0.88rem;
+            color: #2d2a26;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .task-content span {
+            font-size: 0.78rem;
+            color: #8a7e6e;
+            line-height: 1.6;
+        }
+        .task-urgent-badge {
+            font-family: 'Caveat', cursive;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #c4694a;
+            margin-left: 6px;
+        }
+
+        /* ===== Scroll to designs CTA ===== */
+        .designs-bridge {
+            text-align: center;
+            padding: 48px 28px 32px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .designs-bridge h2 {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #2d2a26;
+            margin-bottom: 10px;
+        }
+        .designs-bridge p {
+            font-size: 0.9rem;
+            color: #7a7468;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .scroll-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #c4694a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 10px 24px;
+            border: 1px solid rgba(196,105,74,0.2);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.5);
+        }
+        .scroll-arrow:hover {
+            background: rgba(255,255,255,0.8);
+            border-color: rgba(196,105,74,0.4);
+            transform: translateY(2px);
+        }
+        .scroll-arrow svg { width: 16px; height: 16px; }
+
+        /* ===== Designs Section ===== */
         .header {
             text-align: center;
-            padding: 70px 20px 50px;
+            padding: 60px 20px 40px;
             max-width: 800px;
             margin: 0 auto;
         }
         .header h1 {
-            font-family: 'Rubik', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f0c040, #c4694a, #7b4b94);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #2d2a26;
+            margin-bottom: 14px;
         }
         .header .subtitle {
-            font-size: 1.15rem;
-            color: #999;
+            font-size: 1.05rem;
+            color: #7a7468;
             line-height: 1.8;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .header .note {
-            font-size: 0.85rem;
-            color: #555;
+            font-size: 0.82rem;
+            color: #a09888;
             line-height: 1.6;
         }
 
-        /* ===== Designs Grid ===== */
         .designs {
-            max-width: 1300px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 24px 60px;
+            padding: 0 24px 60px 100px;
         }
 
         .design-card {
             display: grid;
-            grid-template-columns: 420px 1fr;
+            grid-template-columns: 360px 1fr;
             gap: 0;
-            background: #141419;
-            border-radius: 20px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 4px;
             overflow: hidden;
-            border: 1px solid #222233;
-            margin-bottom: 32px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.06);
+            margin-bottom: 28px;
+            transition: all 0.3s ease;
         }
         .design-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 50px rgba(0,0,0,0.5);
-            border-color: #333355;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border-color: rgba(0,0,0,0.1);
         }
 
-        /* Snippet / Preview column */
         .design-snippet {
             position: relative;
-            min-height: 340px;
+            min-height: 300px;
             overflow: hidden;
         }
         .design-snippet .thumb {
@@ -104,7 +1060,7 @@
             left: 0;
             width: 1400px;
             height: 900px;
-            transform: scale(0.3);
+            transform: scale(0.257);
             transform-origin: top left;
             border: none;
             pointer-events: none;
@@ -113,56 +1069,54 @@
         .snippet-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, transparent 60%, rgba(20,20,25,0.8) 100%);
+            background: linear-gradient(180deg, transparent 60%, rgba(255,255,255,0.6) 100%);
             z-index: 2;
         }
         .snippet-number {
             position: absolute;
-            bottom: 16px;
-            right: 16px;
-            font-family: 'Rubik', sans-serif;
-            font-size: 3rem;
+            bottom: 14px;
+            right: 14px;
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: rgba(255,255,255,0.12);
+            color: rgba(0,0,0,0.08);
             z-index: 3;
             line-height: 1;
         }
 
-        /* Info column */
         .design-info {
-            padding: 32px 36px;
+            padding: 28px 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         .design-info h2 {
-            font-family: 'Rubik', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.35rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
+            color: #2d2a26;
+            margin-bottom: 3px;
         }
         .design-info .name-he {
-            font-size: 1rem;
-            color: #aaa;
-            margin-bottom: 16px;
+            font-size: 0.92rem;
+            color: #8a7e6e;
+            margin-bottom: 14px;
         }
         .design-info .description {
-            font-size: 0.9rem;
-            color: #888;
+            font-size: 0.84rem;
+            color: #6a6050;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        /* Color palette swatches */
         .palette {
             display: flex;
             align-items: center;
             gap: 0;
-            margin-bottom: 16px;
-            border-radius: 8px;
+            margin-bottom: 14px;
+            border-radius: 4px;
             overflow: hidden;
-            height: 32px;
+            height: 28px;
         }
         .swatch {
             flex: 1;
@@ -172,73 +1126,65 @@
         .swatch:hover::after {
             content: attr(data-name);
             position: absolute;
-            bottom: -24px;
+            bottom: -22px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.65rem;
-            color: #888;
+            font-size: 0.6rem;
+            color: #8a7e6e;
             white-space: nowrap;
-            background: #1a1a24;
-            padding: 2px 6px;
-            border-radius: 4px;
+            background: #f8f3eb;
+            padding: 2px 5px;
+            border-radius: 2px;
             z-index: 10;
         }
 
-        /* Details row */
         .details-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 18px;
+            gap: 10px;
+            margin-bottom: 14px;
         }
         .detail-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.78rem;
-            color: #777;
+            gap: 5px;
+            font-size: 0.75rem;
+            color: #7a7468;
         }
-        .detail-item .detail-label {
-            color: #555;
-        }
-        .detail-item .detail-value {
-            color: #bbb;
-        }
+        .detail-item .detail-label { color: #a09888; }
+        .detail-item .detail-value { color: #4a4538; }
 
-        /* Tags */
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 20px;
+            gap: 5px;
+            margin-bottom: 16px;
         }
         .tag {
-            font-size: 0.72rem;
-            padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid #2a2a3a;
-            color: #999;
-            background: rgba(255,255,255,0.02);
+            font-size: 0.68rem;
+            padding: 3px 10px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.06);
+            color: #8a7e6e;
+            background: rgba(255,255,255,0.5);
         }
 
-        /* Button */
         .view-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 28px;
-            border-radius: 12px;
+            padding: 10px 22px;
+            border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: white;
             transition: all 0.3s ease;
             align-self: flex-start;
         }
-        .view-btn:hover { filter: brightness(1.2); transform: translateX(-4px); }
-        .view-btn svg { width: 16px; height: 16px; }
+        .view-btn:hover { filter: brightness(1.1); transform: translateX(-3px); }
+        .view-btn svg { width: 14px; height: 14px; }
 
-        /* Per-card accent colors */
         .d1 .view-btn { background: #1a6b6a; }
         .d2 .view-btn { background: #1a2744; }
         .d3 .view-btn { background: #7d9b8a; }
@@ -252,76 +1198,74 @@
 
         /* ===== Tech Section ===== */
         .tech-section {
-            max-width: 1300px;
+            max-width: 900px;
             margin: 40px auto 0;
-            padding: 0 24px;
+            padding: 0 24px 0 100px;
         }
         .tech-header {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 40px;
         }
         .tech-header h2 {
-            font-family: 'Rubik', sans-serif;
-            font-size: 2rem;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 12px;
+            color: #2d2a26;
+            margin-bottom: 10px;
         }
         .tech-header p {
-            font-size: 1rem;
-            color: #777;
-            max-width: 650px;
+            font-size: 0.95rem;
+            color: #7a7468;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.8;
         }
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
         }
         .tech-card {
-            background: #141419;
-            border: 1px solid #222233;
-            border-radius: 16px;
-            padding: 28px;
-            transition: border-color 0.3s ease;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 4px;
+            padding: 24px;
+            transition: all 0.3s ease;
         }
-        .tech-card:hover { border-color: #3a3a5a; }
+        .tech-card:hover {
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
         .tech-card .tech-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 18px;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+            display: block;
         }
         .tech-card h3 {
-            font-family: 'Rubik', sans-serif;
-            font-size: 1.05rem;
-            color: #fff;
-            margin-bottom: 10px;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 0.98rem;
+            color: #2d2a26;
+            margin-bottom: 8px;
         }
         .tech-card p {
-            font-size: 0.82rem;
-            color: #777;
+            font-size: 0.8rem;
+            color: #7a7468;
             line-height: 1.8;
         }
         .tech-card .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 14px;
+            gap: 4px;
+            margin-top: 12px;
         }
         .tech-card .tech-tag {
-            font-size: 0.65rem;
-            padding: 3px 8px;
-            border-radius: 6px;
-            background: rgba(255,255,255,0.04);
-            color: #666;
-            border: 1px solid #2a2a3a;
+            font-size: 0.78rem;
+            padding: 3px 9px;
+            border-radius: 3px;
+            background: rgba(0,0,0,0.03);
+            color: #8a7e6e;
+            border: 1px solid rgba(0,0,0,0.04);
             font-family: monospace;
         }
 
@@ -329,622 +1273,1179 @@
         .cta-section {
             max-width: 700px;
             margin: 20px auto 0;
-            padding: 48px 32px;
+            padding: 44px 32px;
             text-align: center;
-            background: linear-gradient(135deg, rgba(26,107,106,0.08), rgba(196,105,74,0.08));
-            border: 1px solid #222233;
-            border-radius: 24px;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 4px;
         }
         .cta-section h2 {
-            font-family: 'Rubik', sans-serif;
-            font-size: 1.6rem;
-            color: #fff;
-            margin-bottom: 12px;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.5rem;
+            color: #2d2a26;
+            margin-bottom: 10px;
         }
         .cta-section p {
-            font-size: 0.95rem;
-            color: #888;
+            font-size: 0.9rem;
+            color: #7a7468;
             line-height: 1.8;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
         .cta-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 36px;
-            border-radius: 14px;
+            padding: 14px 32px;
+            border-radius: 8px;
             background: #25D366;
             color: white;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(37,211,102,0.25);
+            box-shadow: 0 2px 12px rgba(37,211,102,0.2);
         }
         .cta-btn:hover {
             background: #20bd5a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(37,211,102,0.35);
+            box-shadow: 0 4px 20px rgba(37,211,102,0.3);
         }
-        .cta-btn svg { width: 22px; height: 22px; }
+        .cta-btn svg { width: 20px; height: 20px; }
 
-        /* Footer */
         .footer {
             text-align: center;
-            padding: 40px 20px;
-            color: #444;
-            font-size: 0.85rem;
-            border-top: 1px solid #1a1a2a;
-            max-width: 1300px;
+            padding: 36px 20px;
+            color: #a09888;
+            font-size: 0.82rem;
+            border-top: 1px dashed rgba(0,0,0,0.06);
+            max-width: 900px;
             margin: 40px auto 0;
         }
 
         /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 900px) {
-            .design-card {
-                grid-template-columns: 1fr;
-            }
-            .design-snippet {
-                min-height: 220px;
-            }
-            .design-snippet iframe {
-                transform: scale(0.26);
-            }
-            .header h1 { font-size: 2rem; }
+            body::after { display: none; }
+            .p-section, .p-divider, .designs, .tech-section { padding-left: 24px; padding-right: 24px; }
+            .proposal-hero { padding-left: 24px; padding-right: 24px; }
+            .design-card { grid-template-columns: 1fr; }
+            .design-snippet { min-height: 200px; }
+            .design-snippet iframe { transform: scale(0.26); }
+            .header h1 { font-size: 1.8rem; }
+            .proposal-hero h1 { font-size: 2rem; }
+            .understanding-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .multiplier-content { grid-template-columns: 1fr; }
+            .domain-grid { grid-template-columns: 1fr; }
+            .cms-grid { grid-template-columns: 1fr; }
+            .timeline-track { grid-template-columns: 1fr; gap: 16px; }
+            .timeline-track::before { display: none; }
+            .decisions-grid { grid-template-columns: 1fr; }
+            .tasks-grid { grid-template-columns: 1fr; }
+            .floating-nav { display: none; }
         }
         @media (max-width: 500px) {
-            .design-info { padding: 20px; }
-            .design-snippet { min-height: 180px; }
+            .design-info { padding: 18px; }
+            .design-snippet { min-height: 160px; }
             .design-snippet iframe { transform: scale(0.22); }
+            .proposal-hero { padding-top: 80px; }
+            .proposal-hero h1 { font-size: 1.7rem; }
+            .multiplier-section { padding: 28px 20px; }
+            .pricing-main { padding: 24px 20px; }
+            .pm-total { font-size: 2.5rem !important; }
+            .gate-title { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>חיבורים - קונספטים לעיצוב</h1>
-        <div class="subtitle">10 כיוונים עיצוביים ייחודיים לאתר הקהילה. כל קונספט הוא עמוד בית שלם ומלא - לחצו לצפייה.</div>
-        <div class="note">כל העיצובים הם רספונסיביים, תומכים בעברית מלאה (RTL), וכוללים אנימציות ואינטראקציות.</div>
-    </div>
 
-    <div class="designs">
-
-        <!-- 01 -->
-        <div class="design-card d1">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept1.png" alt="thumbnail">
-                <iframe src="designs/concept1-warm-community.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">01</div>
-            </div>
-            <div class="design-info">
-                <h2>Warm Community Hub</h2>
-                <div class="name-he">בית קהילתי חם</div>
-                <div class="description">עיצוב חם ומזמין שמרגיש כמו בית. שילוב של טורקיז עמוק עם קורל חם יוצר תחושה מקצועית אך אישית. כרטיסי מטפלים עגולים, אקורדיון שאלות ותשובות, ניווט שקוף שמשתנה בגלילה, ומפרידי סקשנים מעוגלים.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#1a6b6a" data-name="טורקיז עמוק"></div>
-                    <div class="swatch" style="background:#c4694a" data-name="קורל"></div>
-                    <div class="swatch" style="background:#d4a853" data-name="זהב"></div>
-                    <div class="swatch" style="background:#faf6f0" data-name="קרם"></div>
-                    <div class="swatch" style="background:#f5ede3" data-name="קרם חם"></div>
-                    <div class="swatch" style="background:#3d3d3d" data-name="טקסט"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Assistant + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">חם, עגול, קהילתי</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">כרטיסים עגולים</span>
-                    <span class="tag">אקורדיון FAQ</span>
-                    <span class="tag">ניווט שקוף</span>
-                    <span class="tag">מפרידים מעוגלים</span>
-                </div>
-                <a href="designs/concept1-warm-community.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 02 -->
-        <div class="design-card d2">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept2.png" alt="thumbnail">
-                <iframe src="designs/concept2-professional-network.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">02</div>
-            </div>
-            <div class="design-info">
-                <h2>Professional Network</h2>
-                <div class="name-he">רשת מקצועית</div>
-                <div class="description">פלטפורמה מקצועית בהשראת רשתות מודרניות. חיפוש מטפלים עם פילטרים, כרטיסי Glassmorphism, תגיות התמחות צבעוניות. עיצוב כחול כהה עם נגיעות כתום-זהב. מתאים למי שרוצה תחושה טכנולוגית ומקצועית.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#1a2744" data-name="כחול כהה"></div>
-                    <div class="swatch" style="background:#4a9eed" data-name="כחול שמיים"></div>
-                    <div class="swatch" style="background:#f0a030" data-name="כתום-זהב"></div>
-                    <div class="swatch" style="background:#f5f5f5" data-name="לבן"></div>
-                    <div class="swatch" style="background:#e8f2fd" data-name="כחול בהיר"></div>
-                    <div class="swatch" style="background:#333333" data-name="טקסט"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Rubik + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">מקצועי, טכנולוגי, אמין</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">Glassmorphism</span>
-                    <span class="tag">חיפוש ופילטרים</span>
-                    <span class="tag">תגיות התמחות</span>
-                    <span class="tag">אנימציות Hover</span>
-                </div>
-                <a href="designs/concept2-professional-network.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 03 -->
-        <div class="design-card d3">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept3.png" alt="thumbnail">
-                <iframe src="designs/concept3-modern-minimal.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">03</div>
-            </div>
-            <div class="design-info">
-                <h2>Modern Minimalist</h2>
-                <div class="name-he">מינימליזם מודרני</div>
-                <div class="description">אלגנטיות שקטה בהשראת מגזיני עיצוב. הרבה מרחב לבן, טיפוגרפיה סריפית עדינה, גוונים של ירוק מרווה וורוד מאובק. כל אלמנט מדויק ומחושב. תחושת בוטיק יוקרתי שלא צועק אלא לוחש.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#7d9b8a" data-name="מרווה"></div>
-                    <div class="swatch" style="background:#5f7d6e" data-name="מרווה כהה"></div>
-                    <div class="swatch" style="background:#c9a0a0" data-name="ורוד מאובק"></div>
-                    <div class="swatch" style="background:#fdfbf8" data-name="שנהב"></div>
-                    <div class="swatch" style="background:#e8f0eb" data-name="מרווה בהיר"></div>
-                    <div class="swatch" style="background:#333333" data-name="פחם"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Frank Ruhl Libre (סריף) + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">מינימלי, עריכתי, אלגנטי</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">טיפוגרפיה סריפית</span>
-                    <span class="tag">מרחב לבן</span>
-                    <span class="tag">אנימציות עדינות</span>
-                    <span class="tag">תחושת מגזין</span>
-                </div>
-                <a href="designs/concept3-modern-minimal.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 04 -->
-        <div class="design-card d4">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept4.png" alt="thumbnail">
-                <iframe src="designs/concept4-organic-nature.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">04</div>
-            </div>
-            <div class="design-info">
-                <h2>Organic Nature</h2>
-                <div class="name-he">אורגני וטבעי</div>
-                <div class="description">עיצוב בהשראת הטבע עם צורות אורגניות זורמות, גווני אדמה, עלים ומפרידי גלים. Blob shapes מתחלפים, כרטיסים עם פינות אורגניות, ואיור עץ צומח ב-CSS. תחושה של צמיחה, שורשים, וטיפוח.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#5c7a4a" data-name="זית"></div>
-                    <div class="swatch" style="background:#8cb07a" data-name="עלה"></div>
-                    <div class="swatch" style="background:#b5634b" data-name="טרקוטה"></div>
-                    <div class="swatch" style="background:#d4c5a0" data-name="חול"></div>
-                    <div class="swatch" style="background:#f5f0e6" data-name="קרם"></div>
-                    <div class="swatch" style="background:#3a2e28" data-name="חום כהה"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Secular One + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">אורגני, טבעי, שורשי</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">Blob Shapes</span>
-                    <span class="tag">מפרידי גלים</span>
-                    <span class="tag">פינות אורגניות</span>
-                    <span class="tag">איור CSS</span>
-                </div>
-                <a href="designs/concept4-organic-nature.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 05 -->
-        <div class="design-card d5">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept5.png" alt="thumbnail">
-                <iframe src="designs/concept5-bold-distinctive.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">05</div>
-            </div>
-            <div class="design-info">
-                <h2>Bold & Distinctive</h2>
-                <div class="name-he">נועז וייחודי</div>
-                <div class="description">שובר את כל המוסכמות של אתרי טיפול. סגול עמוק, זהב, טיפוגרפיה ענקית בכתב יד (Amatic SC). אמנותי, אנושי ובלתי נשכח. לא מתאים לכל קהל, אבל מי שרוצה לבלוט - זה העיצוב.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#3d1c47" data-name="סגול עמוק"></div>
-                    <div class="swatch" style="background:#6b3a7d" data-name="סגול"></div>
-                    <div class="swatch" style="background:#f0c040" data-name="זהב"></div>
-                    <div class="swatch" style="background:#f5f0e8" data-name="קרם"></div>
-                    <div class="swatch" style="background:#2d1a35" data-name="כהה"></div>
-                    <div class="swatch" style="background:#e0d5c8" data-name="בז'"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Amatic SC (כתב יד) + Rubik + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">נועז, אמנותי, בלתי נשכח</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">כתב יד ענק</span>
-                    <span class="tag">סגול וזהב</span>
-                    <span class="tag">שובר מוסכמות</span>
-                    <span class="tag">אנימציות דרמטיות</span>
-                </div>
-                <a href="designs/concept5-bold-distinctive.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 06 -->
-        <div class="design-card d6">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept6.png" alt="thumbnail">
-                <iframe src="designs/concept6-warm-minimal.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">06</div>
-            </div>
-            <div class="design-info">
-                <h2>Warm Minimal</h2>
-                <div class="name-he">חם ומינימלי</div>
-                <div class="description">האיזון בין חום לאלגנטיות. טורקיז רך שנפגש עם בלאש (ורוד חמים), מרחב נשימה גדול, טיפוגרפיה סריפית עברית (Noto Serif Hebrew). כרטיסים נקיים עם הרבה אוויר. כשמינימליזם פוגש לב חם.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#2a8a7e" data-name="טורקיז"></div>
-                    <div class="swatch" style="background:#3a9e91" data-name="טורקיז רך"></div>
-                    <div class="swatch" style="background:#deb3a0" data-name="בלאש"></div>
-                    <div class="swatch" style="background:#f0ddd4" data-name="בלאש בהיר"></div>
-                    <div class="swatch" style="background:#faf7f4" data-name="לבן חם"></div>
-                    <div class="swatch" style="background:#2d2d2d" data-name="טקסט"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Noto Serif Hebrew (סריף) + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">מינימלי, חם, מאוזן</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">סריף עברי</span>
-                    <span class="tag">מרחב נשימה</span>
-                    <span class="tag">כרטיסים נקיים</span>
-                    <span class="tag">טורקיז ובלאש</span>
-                </div>
-                <a href="designs/concept6-warm-minimal.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 07 -->
-        <div class="design-card d7">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept7.png" alt="thumbnail">
-                <iframe src="designs/concept7-nature-community.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">07</div>
-            </div>
-            <div class="design-info">
-                <h2>Nature Community</h2>
-                <div class="name-he">קהילת טבע</div>
-                <div class="description">יער, דבש וקהילה. ירוק יער-טורקיז עמוק שנפגש עם זהב-דבש חם. מפרידי גלים אורגניים בין סקשנים, עלים דקורטיביים, ואיור עץ צומח. תחושה של מקום בטוח בטבע שאפשר לגדול בו.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#1b5e5a" data-name="יער-טורקיז"></div>
-                    <div class="swatch" style="background:#8aab7f" data-name="מרווה"></div>
-                    <div class="swatch" style="background:#d4a35a" data-name="דבש"></div>
-                    <div class="swatch" style="background:#b8893e" data-name="דבש כהה"></div>
-                    <div class="swatch" style="background:#f7f3ec" data-name="קרם"></div>
-                    <div class="swatch" style="background:#3a332d" data-name="חום יער"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Secular One + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">טבעי, קהילתי, חם</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">גלים אורגניים</span>
-                    <span class="tag">עלים דקורטיביים</span>
-                    <span class="tag">דבש וירוק</span>
-                    <span class="tag">עץ CSS</span>
-                </div>
-                <a href="designs/concept7-nature-community.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 08 -->
-        <div class="design-card d8">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept8.png" alt="thumbnail">
-                <iframe src="designs/concept8-elegant-earth.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">08</div>
-            </div>
-            <div class="design-info">
-                <h2>Elegant Earth</h2>
-                <div class="name-he">אדמה אלגנטית</div>
-                <div class="description">עריכתיות של מגזין Kinfolk עם גווני אדמה עמוקים. ירוק אזוב כהה שנפגש עם חימר חם, טיפוגרפיה סריפית מעודנת (Frank Ruhl Libre), Drop Caps בתחילת פסקאות, ו-Masonry Grid. יוקרה שקטה.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#4a6741" data-name="אזוב"></div>
-                    <div class="swatch" style="background:#b8785a" data-name="חימר"></div>
-                    <div class="swatch" style="background:#c4978a" data-name="חימר בהיר"></div>
-                    <div class="swatch" style="background:#dce8d6" data-name="אזוב בהיר"></div>
-                    <div class="swatch" style="background:#faf8f5" data-name="שנהב"></div>
-                    <div class="swatch" style="background:#2c2c2c" data-name="פחם"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Frank Ruhl Libre (סריף) + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">עריכתי, אדמתי, יוקרתי</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">Drop Caps</span>
-                    <span class="tag">Masonry Grid</span>
-                    <span class="tag">Kinfolk Style</span>
-                    <span class="tag">חימר ואזוב</span>
-                </div>
-                <a href="designs/concept8-elegant-earth.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 09 -->
-        <div class="design-card d9">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept9.png" alt="thumbnail">
-                <iframe src="designs/concept9-serene-haven.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">09</div>
-            </div>
-            <div class="design-info">
-                <h2>Serene Haven</h2>
-                <div class="name-he">מפלט שליו</div>
-                <div class="description">שלווה מעוצבת. טורקיז רך שנפגש עם גווני אפרסק חמים ומרווה עדינה. ניווט צף כפתור pill, מעברים מעוגלים בין סקשנים, כרטיסים עם קשתות עדינות. האיזון המושלם בין מקצועי, חם וטבעי.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#5a9e97" data-name="טורקיז רך"></div>
-                    <div class="swatch" style="background:#4a8a83" data-name="טורקיז כהה"></div>
-                    <div class="swatch" style="background:#e6b8a2" data-name="אפרסק"></div>
-                    <div class="swatch" style="background:#a3bfa8" data-name="מרווה"></div>
-                    <div class="swatch" style="background:#f8f5f0" data-name="קרם"></div>
-                    <div class="swatch" style="background:#2d3b35" data-name="ירוק כהה"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Alef + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">שליו, מאוזן, מעוגל</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">ניווט Pill צף</span>
-                    <span class="tag">קשתות עדינות</span>
-                    <span class="tag">מעברים מעוגלים</span>
-                    <span class="tag">אפרסק וטורקיז</span>
-                </div>
-                <a href="designs/concept9-serene-haven.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-        <!-- 10 -->
-        <div class="design-card d10">
-            <div class="design-snippet">
-                <img class="thumb" src="designs/thumb-concept10.png" alt="thumbnail">
-                <iframe src="designs/concept10-mediterranean.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
-                <div class="snippet-overlay"></div>
-                <div class="snippet-number">10</div>
-            </div>
-            <div class="design-info">
-                <h2>Mediterranean Warmth</h2>
-                <div class="name-he">חום ים-תיכוני</div>
-                <div class="description">זהות ישראלית-ים תיכונית ייחודית. טרקוטה, אבן ירושלמית, זית וכחול ים. קשתות אדריכליות (Mediterranean arches), תחושת שעת זהב, ואסתטיקה של בית רחוק מהבית. משהו שלא תמצאו באף אתר טיפול אחר.</div>
-                <div class="palette">
-                    <div class="swatch" style="background:#c1694f" data-name="טרקוטה"></div>
-                    <div class="swatch" style="background:#d6cbb8" data-name="אבן חמה"></div>
-                    <div class="swatch" style="background:#4a5a3a" data-name="זית כהה"></div>
-                    <div class="swatch" style="background:#c5a55a" data-name="זהב ירושלמי"></div>
-                    <div class="swatch" style="background:#7ab0cc" data-name="כחול ים"></div>
-                    <div class="swatch" style="background:#2b2520" data-name="חום עמוק"></div>
-                </div>
-                <div class="details-row">
-                    <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Secular One + Heebo</span></div>
-                    <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">ים-תיכוני, ישראלי, ייחודי</span></div>
-                </div>
-                <div class="tags">
-                    <span class="tag">קשתות ים-תיכוניות</span>
-                    <span class="tag">טרקוטה וזית</span>
-                    <span class="tag">שעת זהב</span>
-                    <span class="tag">זהות ישראלית</span>
-                </div>
-                <a href="designs/concept10-mediterranean.html" class="view-btn">
-                    צפייה בעיצוב המלא
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                </a>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ===== Tech Specs Section ===== -->
-    <div class="tech-section">
-        <div class="tech-header">
-            <h2>מה מתחת למכסה המנוע?</h2>
-            <p>במקום להכביר במילים, בחרנו להראות לכם הוכחת התכנות. אבל חשוב שתדעו - מאחורי העיצוב היפה עומדת תשתית טכנולוגית מתקדמת שתלווה אתכם לשנים.</p>
-        </div>
-
-        <div class="tech-grid">
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(26,107,106,0.15); color:#1a6b6a;">&#9881;</div>
-                <h3>מערכת ניהול תוכן (CMS) מלאה</h3>
-                <p>ממשק ניהול בעברית שמאפשר לכל אחת מכן לעדכן את הפרופיל שלה, להעלות מאמרים, לערוך תכנים ולהוסיף אירועים - בלי לגעת בקוד. פשוט, אינטואיטיבי, ובשליטה מלאה שלכן.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Headless CMS</span>
-                    <span class="tech-tag">WYSIWYG Editor</span>
-                    <span class="tech-tag">Media Upload</span>
-                    <span class="tech-tag">Draft / Publish</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(74,158,237,0.15); color:#4a9eed;">&#128274;</div>
-                <h3>אבטחה ברמה הגבוהה ביותר</h3>
-                <p>תעודת SSL/TLS (HTTPS) מובנית, הגנה מפני התקפות XSS ו-CSRF, Content Security Policy, ו-Rate Limiting. האתר שלכן מוגן כמו כספת - אנחנו לא מתפשרים על אבטחה.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">SSL/TLS</span>
-                    <span class="tech-tag">CSP Headers</span>
-                    <span class="tech-tag">GDPR Ready</span>
-                    <span class="tech-tag">WAF Protection</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(240,192,64,0.15); color:#f0c040;">&#128640;</div>
-                <h3>ביצועים וזמני טעינה</h3>
-                <p>האתר בנוי עם Static Site Generation (SSG) ו-CDN גלובלי - מה שאומר שהוא נטען בפחות משנייה מכל מקום בעולם. ציון מושלם ב-Google PageSpeed Insights (Core Web Vitals).</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">SSG / ISR</span>
-                    <span class="tech-tag">Global CDN</span>
-                    <span class="tech-tag">Image Optimization</span>
-                    <span class="tech-tag">Lazy Loading</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(125,155,138,0.15); color:#7d9b8a;">&#128269;</div>
-                <h3>SEO מתקדם - שגוגל אוהב</h3>
-                <p>Structured Data (Schema.org) למטפלים, Open Graph tags לשיתוף ברשתות, Sitemap אוטומטי, ו-Semantic HTML. האתר שלכן יהיה גלוי למי שמחפש מטפל/ת בעברית בגוגל.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Schema.org</span>
-                    <span class="tech-tag">Open Graph</span>
-                    <span class="tech-tag">Auto Sitemap</span>
-                    <span class="tech-tag">Meta Tags</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(92,122,74,0.15); color:#5c7a4a;">&#128241;</div>
-                <h3>רספונסיבי לכל מסך</h3>
-                <p>Mobile-First Design - האתר נראה מושלם בנייד, טאבלט ומחשב. כל אלמנט מותאם, כל טקסט קריא, וכל כפתור נגיש. יותר מ-70% מהגולשים מגיעים מהנייד - אנחנו מוכנים.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Mobile First</span>
-                    <span class="tech-tag">Fluid Typography</span>
-                    <span class="tech-tag">Touch Optimized</span>
-                    <span class="tech-tag">Breakpoints</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(193,105,79,0.15); color:#c1694f;">&#127463;&#127470;</div>
-                <h3>עברית מלאה - RTL Native</h3>
-                <p>לא תרגום, לא hack - עברית מהיסוד. כיווניות RTL מובנית בכל רכיב, גופנים עבריים מותאמים (Heebo, Assistant, Frank Ruhl Libre), וטיפוגרפיה שמכבדת את השפה.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">RTL Native</span>
-                    <span class="tech-tag">Hebrew Fonts</span>
-                    <span class="tech-tag">Bidi Support</span>
-                    <span class="tech-tag">i18n Ready</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(90,158,151,0.15); color:#5a9e97;">&#128187;</div>
-                <h3>הקוד שלכן - לגמרי</h3>
-                <p>בעלות מלאה על הקוד (Open Source). אין נעילה לספק, אין מנוי חודשי לפלטפורמה. תרצו להחליף מפתח מחר? הקוד נקי, מתועד, ומוכן להעברה. זה שלכן, נקודה.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Git Repository</span>
-                    <span class="tech-tag">Clean Code</span>
-                    <span class="tech-tag">No Lock-in</span>
-                    <span class="tech-tag">Documentation</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(61,28,71,0.15); color:#7b4b94;">&#9889;</div>
-                <h3>גמישות ויכולת הרחבה</h3>
-                <p>ארכיטקטורה מודולרית שצומחת איתכן. היום אינדקס מטפלים, מחר קבוצות אונליין, סדנאות, או בלוג. Component-Based Architecture שמאפשרת להוסיף פיצ'רים בלי לשבור דברים.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Component Based</span>
-                    <span class="tech-tag">API Ready</span>
-                    <span class="tech-tag">Modular</span>
-                    <span class="tech-tag">Scalable</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(212,163,90,0.15); color:#d4a35a;">&#127760;</div>
-                <h3>אחסון ותשתית ענן</h3>
-                <p>Hosting על Vercel / Netlify עם Uptime של 99.99%, גיבויים אוטומטיים, ו-Preview Deployments - כל שינוי אפשר לראות לפני שהוא עולה לאוויר. דומיין מותאם אישית כלול.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Vercel / Netlify</span>
-                    <span class="tech-tag">Auto Backups</span>
-                    <span class="tech-tag">Preview Deploys</span>
-                    <span class="tech-tag">Custom Domain</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(99,179,237,0.15); color:#63b3ed;">&#129302;</div>
-                <h3>AEO - אופטימיזציה למנועי תשובות</h3>
-                <p>מעבר ל-SEO קלאסי - האתר שלכן מוכן לעידן ה-AI. Answer Engine Optimization מבטיח שגוגל, ChatGPT, Perplexity ו-Claude ידעו לענות על שאלות כמו "מי מטפל/ת בעברית בהולנד?" ויפנו ישירות אליכן. תגובות AI הן הדור הבא של מנועי החיפוש - ואנחנו מוכנים.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">AEO</span>
-                    <span class="tech-tag">AI Search Ready</span>
-                    <span class="tech-tag">FAQ Schema</span>
-                    <span class="tech-tag">Conversational SEO</span>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon" style="background:rgba(154,230,180,0.15); color:#68d391;">&#9193;</div>
-                <h3>מהירות בנייה - בלי פשרות על איכות</h3>
-                <p>בניית אתר מותאם אישית תוך שבועות, לא חודשים. תהליך עבודה מובנה עם Wireframes, סבבי אישור ברורים, ואבני דרך מוגדרות - כך שתמיד ידעו איפה עומדים. מהירות לא באה על חשבון הפרטים - כל pixel מחושב.</p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Rapid Delivery</span>
-                    <span class="tech-tag">Wireframes First</span>
-                    <span class="tech-tag">Milestone Based</span>
-                    <span class="tech-tag">Zero Compromise</span>
-                </div>
-            </div>
+    <!-- ===== Auth Gate (Notebook Cover) ===== -->
+    <div class="gate" id="passwordGate">
+        <div class="gate-inner">
+            <div class="gate-band"></div>
+            <div class="gate-title">טיפול קשוב</div>
+            <div class="gate-subtitle">הצעה לבניית אתר קהילת המטפלים והמטפלות</div>
+            <button class="gate-google-btn" id="googleSignInBtn">
+                <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+                כניסה עם Google
+            </button>
+            <div class="gate-error" id="gateError"></div>
+            <div class="gate-hint">מסמך פרטי - גישה על ידי הזמנה בלבד</div>
         </div>
     </div>
 
-    <!-- ===== CTA Section ===== -->
-    <div class="cta-section">
-        <h2>אהבתם? בואו נדבר.</h2>
-        <p>מוזמנים להעיף מבט בכל 10 הקונספטים, לשתף אותי בהערות, ולשלוח לי אתרים שאהבתם כדי שנמצה מהם השראה. אשמח לענות על כל שאלה ולהתאים את ההצעה בדיוק לצרכים שלכם.</p>
-        <a href="https://api.whatsapp.com/send?phone=31644295691&text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%95%D7%9F%2C%20%D7%9E%D7%94%20%D7%A9%D7%9C%D7%95%D7%9E%D7%9A%3F%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%93%D7%91%D7%A8%20%D7%90%D7%99%D7%AA%D7%9A%20%D7%A2%D7%9C%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A2%D7%91%D7%95%D7%A8%20%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%94%D7%9E%D7%98%D7%A4%D7%9C%D7%95%D7%AA%20%D7%95%D7%94%D7%9E%D7%98%D7%A4%D7%9C%D7%99%D7%9D" class="cta-btn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            דברו עם אלון בוואטסאפ
-        </a>
-    </div>
+    <!-- ===== Main Notebook Content ===== -->
+    <div class="notebook-content">
 
-    <div class="footer">
-        חיבורים - קהילת מטפלים ומטפלות בעברית | 10 קונספטים לעיצוב | 2026
-    </div>
+        <!-- Floating Navigation -->
+        <nav class="floating-nav" id="floatingNav">
+            <a href="#proposal" class="active">ההצעה</a>
+            <a href="#designs-section">10 עיצובים</a>
+            <a href="#tech-section">טכנולוגיה</a>
+            <a href="#final-cta">צור קשר</a>
+        </nav>
+
+        <!-- ============================================================ -->
+        <!--                     PROPOSAL SECTION                         -->
+        <!-- ============================================================ -->
+        <div id="proposal">
+
+            <!-- HERO -->
+            <div class="proposal-hero">
+                <div class="hero-draft">draft v1.2 - april 2026</div>
+                <h1>הצעה לבניית אתר<br>קהילת המטפלים והמטפלות בעברית</h1>
+                <div class="hero-sub">מסמך דרישות מוצר מלא הכולל אפיון, אסטרטגיית מיתוג, תמחור שקוף, ו-10 קונספטים עיצוביים מוכנים. הכול במקום אחד.</div>
+                <div class="hero-meta">
+                    <span>אלון גילדוני</span>
+                    <span>אפריל 2026</span>
+                    <span>גרסה 1.2</span>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- CONVERSATION HIGHLIGHTS (First Section) -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">על מה דיברנו היום</div>
+                    <h2>סיכום השיחה שלנו</h2>
+                    <p>2 באפריל, 2026 - הנקודות המרכזיות שעלו בשיחה, מרוכזות במקום אחד.</p>
+                </div>
+                <div class="highlights-section">
+                    <div class="highlights-header">
+                        <h3>עיקרי הדברים</h3>
+                        <div class="hl-date">2.4.2026</div>
+                    </div>
+                    <ul class="highlights-list">
+                        <li><strong>דף אישי = אתר עצמאי:</strong> כל מטפלת מקבלת כתובת כמו sol.tipulkashuv.com שאפשר לשתף כאתר פרופסיונלי עצמאי, לשים על כרטיס ביקור, ולפרסם בלינקדאין - לא רק כרטיס בתוך אינדקס</li>
+                        <li><strong>עצמאות מלאה מהמפתח:</strong> שאלה שעלתה בשיחה - "מה קורה אם המפתח נעלם?" התשובה: כל הקוד שלכן ב-GitHub, מתועד, עם הנחיות מסירה. אם מחר תרצו מפתח אחר - אפס תלות</li>
+                        <li><strong>נגישות WCAG 2.1 AA - מובנית:</strong> לא תוסף, לא afterthought. נגישות בנויה מהיסוד. זה חשוב במיוחד לפלטפורמה שנועדה לשרת אנשים בפגיעות רגשית - הנגישות היא חלק מהאתוס</li>
+                        <li><strong>פרטיות ו-GDPR - מטופלים:</strong> עסקנו בזה - אתר קידום (ללא רישומי מטופלים, ללא login) חושף אתכן לסיכון GDPR נמוך מאוד. SSL, טפסי יצירת קשר מוגנים, cookie consent - הכל מובנה</li>
+                        <li><strong>אפקט מכפיל:</strong> כל מטפלת שמשתפת את הדף האישי שלה מביאה תנועה לכל הקבוצה - <em>הקולקטיב חזק יותר מסכום החלקים</em></li>
+                        <li><strong>בלוג כפול - SEO שמתרכב:</strong> בלוג קהילתי משותף + בלוג אישי לכל מטפלת. כל פוסט שמישהי כותבת מחזק את ה-SEO של כולן. תוכן איכותי בעברית = יתרון משמעותי</li>
+                        <li><strong>דומיין וזהות:</strong> דנו באפשרויות שונות ובחרנו ב-<em>tipulkashuv.com</em> - חד-משמעי, חם, מקצועי. sol.tipulkashuv.com נשמע כמו אתר אמיתי</li>
+                        <li><strong>גמישות מובנית:</strong> מה שלא יודעים מראש - יבוא. כל שינוי עתידי מתומחר בהצעה כתובה לפני שמתחילים. אין שעון שרץ בלי אישורכן</li>
+                        <li><strong>השראה:</strong> ככל שתשתפו יותר דוגמאות לאתרים שאתן אוהבות - כך המוצר הסופי יהיה מדויק יותר. שלחו לינקים, צילומי מסך, כל דבר שמדבר אליכן</li>
+                    </ul>
+                    <div class="margin-note">↰ כל נקודה מפורטת בהרחבה בהמשך המסמך</div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- UNDERSTANDING -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">מה אני מבין שחשוב לכן</div>
+                    <h2>הנקודות שהכי חשובות לכן</h2>
+                    <p>אחרי השיחה שלנו - אלה הדברים שאני מבין שהכי חשובים לכן, ושבניתי את ההצעה סביבם.</p>
+                </div>
+                <div class="understanding-grid">
+                    <div class="understand-card">
+                        <span class="uc-icon">&#127758;</span>
+                        <h3>מטפלות ישראליות בחו"ל</h3>
+                        <p>קבוצה של ~10 מטפלות ומטפלים מוסמכים, חיים בחו"ל (הולנד, פורטוגל, האיים הקנריים ועוד), מעניקים טיפול אונליין בעברית. מכירות זו את זו באופן אישי ומקצועי.</p>
+                    </div>
+                    <div class="understand-card">
+                        <span class="uc-icon">&#127919;</span>
+                        <h3>קהל היעד</h3>
+                        <p>דוברי עברית בחו"ל (גילאי 25-55) שמחפשים טיפול רגשי בשפת האם. אנשים שעברו רילוקיישן ורוצים מטפל/ת שמבינ/ה את החוויה הזאת מבפנים.</p>
+                    </div>
+                    <div class="understand-card">
+                        <span class="uc-icon">&#129309;</span>
+                        <h3>יחד, לא לבד</h3>
+                        <p>לא רק אינדקס מטפלים - פלטפורמה לשיתופי פעולה, יוזמות, סדנאות, והפניות הדדיות. הכוח הוא בקהילה. הערבות ההדדית היא הבידול.</p>
+                    </div>
+                    <div class="understand-card">
+                        <span class="uc-icon">&#128736;</span>
+                        <h3>ליווי טכני שוטף</h3>
+                        <p>הקבוצה צריכה גורם חיצוני שילווה את האתר - לא רק יבנה ויעלם. מישהו שיידע להגיד "זה אפשרי, זה לא, ככה עושים שינוי" - בלי שמטפלת תצטרך להפוך למפתחת.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- WHAT YOU GET -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">מה מקבלים</div>
+                    <h2>אתר שעובד בשבילכן</h2>
+                    <p>לא רק אתר יפה - אתר שהוא כלי עבודה אמיתי. בבעלותכן המלאה, עם חופש מלא לעדכן, לשנות, ולצמוח.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card" style="--fc-accent: #1a6b6a;">
+                        <span class="fc-icon">&#127968;</span>
+                        <h3>דף אישי = אתר מקצועי עצמאי</h3>
+                        <p>כל מטפל/ת מקבל/ת כתובת ייעודית - sol.tipulkashuv.com. אפשר לשתף אותו כמו אתר עצמאי, לשים על כרטיס ביקור, לפרסם בלינקדאין. כולל בלוג אישי לכתיבה מקצועית שמחזקת את הנוכחות הדיגיטלית שלכן.</p>
+                    </div>
+                    <div class="feature-card" style="--fc-accent: #d4a853;">
+                        <span class="fc-icon">&#9881;</span>
+                        <h3>CMS - עדכון תוכן בעצמכן</h3>
+                        <p>ממשק ניהול בעברית שמאפשר לעדכן ביוגרפיה, תמונות, מאמרים, FAQ - בלי לגעת בקוד ובלי לחכות למפתח. שליטה מלאה שלכן.</p>
+                    </div>
+                    <div class="feature-card" style="--fc-accent: #3a7d55;">
+                        <span class="fc-icon">&#128275;</span>
+                        <h3>הקוד שלכן - לגמרי</h3>
+                        <p>בעלות מלאה על כל הקוד ב-GitHub. רוצות להחליף מפתח? אפס בעיה. אין נעילת ספק, אין מנוי לפלטפורמה. כמו Gmail מול Yahoo - אתן תמיד חופשיות.</p>
+                    </div>
+                    <div class="feature-card" style="--fc-accent: #4a9eed;">
+                        <span class="fc-icon">&#128269;</span>
+                        <h3>SEO + AEO מתקדם</h3>
+                        <p>לא רק גוגל - גם ChatGPT, Perplexity ו-Claude ידעו לענות "מי מטפלת בעברית בהולנד?" ולהפנות אליכן. Schema.org, Open Graph, סייטמאפ אוטומטי. בלוג קהילתי + אישי לכל מטפלת - כל מאמר שנכתב מחזק את ה-SEO של כולן.</p>
+                    </div>
+                    <div class="feature-card" style="--fc-accent: #c4694a;">
+                        <span class="fc-icon">&#128274;</span>
+                        <h3>אבטחה וביצועים</h3>
+                        <p>SSL, CDN גלובלי, טעינה בפחות משנייה מכל מקום בעולם. גיבויים אוטומטיים, הגנה מפני התקפות. האתר שלכן מוגן ומהיר.</p>
+                    </div>
+                    <div class="feature-card" style="--fc-accent: #7b4b94;">
+                        <span class="fc-icon">&#127463;&#127470;</span>
+                        <h3>עברית מהיסוד - RTL Native</h3>
+                        <p>לא תרגום, לא hack. עברית מובנית בכל רכיב, גופנים עבריים מותאמים, טיפוגרפיה שמכבדת את השפה. רספונסיבי בנייד, טאבלט ומחשב.</p>
+                    </div>
+                    <div class="feature-card feature-card-full" style="--fc-accent: #5c8a4a;">
+                        <span class="fc-icon">&#9855;</span>
+                        <h3>נגישות WCAG 2.1 AA - מחויבות, לא אפשרות</h3>
+                        <p>האתר עומד בתקן הנגישות הבינלאומי WCAG 2.1 ברמה AA - מובנה מהיסוד, לא תוסף שנוסף בדיעבד. זה חשוב במיוחד עבורכן: פלטפורמה שנועדה לשרת אנשים בפגיעות רגשית חייבת להיות נגישה לכל אחד ואחת - לקויות ראייה, שמיעה, מוטוריקה. הנגישות היא חלק מהאתוס הטיפולי, לא רק דרישה טכנית. כולל: ניווט מקלדת מלא, תמיכה בקוראי מסך, ניגודיות צבעים עומדת בתקן, טקסט חלופי לכל תמונה.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- MULTIPLIER EFFECT -->
+            <div class="p-section">
+                <div class="multiplier-section">
+                    <div class="multiplier-content">
+                        <div class="multiplier-text">
+                            <div class="p-label" style="margin-bottom:14px;">אפקט מכפיל הכוח</div>
+                            <h3>ביחד אתן חזקות יותר<br>מסכום החלקים</h3>
+                            <p>כל מטפלת שמשתפת את הדף האישי שלה - מביאה תנועה לאתר כולו. כל קישור, כל שיתוף בפייסבוק, כל כרטיס ביקור - מחזק את ה-SEO של כל הקבוצה.</p>
+                            <p>זו הסינרגיה שדיברנו עליה: לא רק פלטפורמה משותפת, אלא מנוע צמיחה שבו כל אחת תורמת לכולן.</p>
+                        </div>
+                        <div class="multiplier-flow">
+                            <div class="mf-step">
+                                <div class="mf-num">1</div>
+                                <div class="mf-label">לירון משתפת את הדף שלה בקבוצת פייסבוק</div>
+                            </div>
+                            <div class="mf-arrow">&#8595;</div>
+                            <div class="mf-step">
+                                <div class="mf-num">2</div>
+                                <div class="mf-label">גולשים מגיעים לדף של לירון באתר</div>
+                            </div>
+                            <div class="mf-arrow">&#8595;</div>
+                            <div class="mf-step">
+                                <div class="mf-num">3</div>
+                                <div class="mf-label">חלקם ממשיכים לגלות מטפלות נוספות באתר</div>
+                            </div>
+                            <div class="mf-arrow">&#8595;</div>
+                            <div class="mf-step">
+                                <div class="mf-num">4</div>
+                                <div class="mf-label">גוגל רואה תנועה + תוכן איכותי → מדרג גבוה יותר</div>
+                            </div>
+                            <div class="mf-arrow">&#8595;</div>
+                            <div class="mf-step">
+                                <div class="mf-num">5</div>
+                                <div class="mf-label">כל הקבוצה נהנית מחשיפה גדולה יותר</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- DOMAIN STRATEGY -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">אסטרטגיית מיתוג</div>
+                    <h2>5 שמות מומלצים לאתר</h2>
+                    <p>בחרנו שמות שעובדים ברמת הרגש, המיתוג, הדומיין וה-SEO. כל הדומיינים נבדקו ופנויים לרכישה.</p>
+                </div>
+                <div class="domain-grid">
+                    <!-- #1 Recommended -->
+                    <div class="domain-card recommended">
+                        <div class="dc-badge">&#9733; מומלץ</div>
+                        <div class="dc-num">01</div>
+                        <div class="dc-name-he">טיפול קשוב</div>
+                        <div class="dc-domain">tipulkashuv.com</div>
+                        <div class="dc-tagline">"טיפול רגשי בעברית - בקשב מלא"</div>
+                        <div class="dc-desc">חם, מקצועי, חד-משמעי. "קשוב" מעביר איכות של הקשבה ותשומת לב - בדיוק מה שמטופלים מחפשים. דומיין נקי ופנוי, SEO חזק, ופוטנציאל מיתוגי מעולה. sol.tipulkashuv.com - נשמע אמין ומקצועי.</div>
+                    </div>
+                    <!-- #2 -->
+                    <div class="domain-card">
+                        <div class="dc-num">02</div>
+                        <div class="dc-name-he">קרוב ללב</div>
+                        <div class="dc-domain">karovlalev.com</div>
+                        <div class="dc-tagline">"קהילת מטפלים בעברית - מכל מקום בעולם"</div>
+                        <div class="dc-desc">רגשי, ייחודי, בלתי נשכח. "קרוב ללב" מבטא קרבה, טיפול, חום - ועובד בכל רמה: מיתוג, דומיין, SEO. פוטנציאל מיתוגי חזק.</div>
+                    </div>
+                    <!-- #3 -->
+                    <div class="domain-card">
+                        <div class="dc-num">03</div>
+                        <div class="dc-name-he">מרחק קרוב</div>
+                        <div class="dc-domain">merhakkarov.com</div>
+                        <div class="dc-tagline">"קהילת מטפלים ישראלים בחו"ל"</div>
+                        <div class="dc-desc">פואטי וייחודי. "מרחק קרוב" הוא פרדוקס שמתאר בדיוק טיפול אונליין מרחוק - קרבה למרות המרחק הפיזי.</div>
+                    </div>
+                    <!-- #4 -->
+                    <div class="domain-card">
+                        <div class="dc-num">04</div>
+                        <div class="dc-name-he">נקודת חיבור</div>
+                        <div class="dc-domain">nekudatchibur.com</div>
+                        <div class="dc-tagline">"מטפלים בעברית - מתחברים אליך"</div>
+                        <div class="dc-desc">משמר את ה"חיבור" שהקבוצה אוהבת, ללא ההתנגשויות של "חיבורים". ספציפי יותר, ייחודי יותר.</div>
+                    </div>
+                    <!-- #5 full width -->
+                    <div class="domain-card domain-card-full">
+                        <div class="dc-num">05</div>
+                        <div class="dc-name-he">טיפול בעברית</div>
+                        <div class="dc-domain">tipulbeivrit.com</div>
+                        <div class="dc-tagline">"המטפלים שלך, בשפה שלך"</div>
+                        <div class="dc-desc">חזק ב-SEO - אנשים מחפשים את הביטוי הזה בדיוק. ישיר וברור. <strong style="color:#6a6050;">אבל:</strong> "טיפול בעברית" נושא משמעות כפולה - טיפול <em>בשפה</em> העברית, או טיפול <em>באמצעות</em> העברית? העמימות הזו יכולה לבלבל. כמותג, "טיפול קשוב" חד יותר.</div>
+                    </div>
+                </div>
+                <div class="domain-note">
+                    <strong style="color:#6a6050;">למה לא "חיבורים"?</strong> - שני הדומיינים (com. ו-co.il.) תפוסים. "חיבורים" היא מילה גנרית מדי עם תחרות SEO עזה (אתר שידוכים, אוניברסיטאות, מרכזי קהילה). מילה יפה - אבל כסאבליין, לא כשם מותג.<br><br>
+                    <strong style="color:#6a6050;">למה "טיפול קשוב" מנצח?</strong> - חד-משמעי, חם, ומקצועי. "קשוב" מדבר ישירות ללקוח ומבטיח את מה שהוא מחפש. בניגוד ל"טיפול בעברית" שנושא משמעות כפולה (טיפול <em>בשפה</em> מול טיפול <em>בעברית כתחום</em>), "טיפול קשוב" ברור לגמרי.
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- PRICING -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">תמחור שקוף</div>
+                    <h2>בלי הפתעות, בלי אותיות קטנות</h2>
+                    <p>כל המחירים שקופים ומוגדרים מראש. תוספות תמחור רק לאחר הצעה כתובה ואישורכן.</p>
+                </div>
+                <div class="pricing-layout">
+                    <div class="pricing-main">
+                        <div class="pm-total-label">סה"כ שנה ראשונה</div>
+                        <div class="pm-total">&euro;2,000</div>
+                        <div class="pm-total-note">לא כולל מע"מ (במידה וחל, תלוי במיקום) &middot; לא כולל רכישת דומיין (~&euro;15/שנה)</div>
+                        <div class="pm-items">
+                            <div class="pm-item">
+                                <div>
+                                    <div class="pm-item-name">בניית האתר</div>
+                                    <div class="pm-item-desc">עיצוב מותאם, CMS, 10+ עמודי מטפלים, רספונסיבי, RTL</div>
+                                </div>
+                                <div class="pm-item-price">&euro;1,800</div>
+                            </div>
+                            <div class="pm-item">
+                                <div>
+                                    <div class="pm-item-name">תחזוקה שנתית</div>
+                                    <div class="pm-item-desc">אחסון, תחזוקה, אבטחה, גיבויים, עדכוני מערכת</div>
+                                </div>
+                                <div class="pm-item-price">&euro;200<span style="font-size:0.7rem;color:#a09888;font-weight:400;">/שנה</span></div>
+                            </div>
+                            <div class="pm-item">
+                                <div>
+                                    <div class="pm-item-name">פונקציונליות חדשה</div>
+                                    <div class="pm-item-desc">לפי הצעת מחיר מוגדרת מראש - ללא הפתעות</div>
+                                </div>
+                                <div class="pm-item-price">&euro;75<span style="font-size:0.7rem;color:#a09888;font-weight:400;">/שעה</span></div>
+                            </div>
+                            <div class="pm-item">
+                                <div>
+                                    <div class="pm-item-name">דומיין</div>
+                                    <div class="pm-item-desc">רכישה עצמאית בליווי שלנו - הדומיין שלכן, לגמרי</div>
+                                </div>
+                                <div class="pm-item-price" style="color:#a09888;">באחריותכן</div>
+                            </div>
+                        </div>
+
+                        <!-- Flexibility / Unknown Unknowns -->
+                        <div class="pricing-flex">
+                            <div class="pf-title">על גמישות ודברים שלא יודעים מראש</div>
+                            <p>בכל פרויקט יש דברים שצצים בדרך - רגולציה שמשתנה, פיצ'ר שלא חשבתם עליו, אינטגרציה חדשה שפתאום צריך. זה טבעי ובריא.</p>
+                            <p style="margin-top:8px;">לכן המודל שלנו בנוי לגמישות: <strong style="color:#2d2a26;">כל שינוי או תוספת מתומחרים בהצעה כתובה לפני שמתחילים.</strong> אתן תמיד יודעות מראש כמה זה עולה, כמה זמן זה לוקח, ומה בדיוק מקבלים. שעון לא רץ בלי אישור.</p>
+                            <p style="margin-top:8px;">המטרה: שתרגישו בטוחות לבקש שינויים, לא חוששות מ"חשבון מפתיע".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- CMS MODEL -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">מודל עבודה</div>
+                    <h2>מה בעצמכן ומה דורש מפתח</h2>
+                    <p>החלוקה ברורה מראש - רוב העדכונים השוטפים אתן עושות בעצמכן, בחינם, דרך ה-CMS.</p>
+                </div>
+                <div class="cms-grid">
+                    <div class="cms-col cms-free">
+                        <h3>עצמאי דרך ה-CMS</h3>
+                        <div class="cms-subtitle">חינם, ללא תלות במפתח</div>
+                        <ul class="cms-list">
+                            <li>עדכון ביוגרפיה, תמונה ופרטי מטפל/ת</li>
+                            <li>פרסום מאמרים ופוסטים בבלוג</li>
+                            <li>עדכון שאלות ותשובות (FAQ)</li>
+                            <li>עריכת טקסטים בעמודים קיימים</li>
+                            <li>הוספת מטפל/ת חדש/ה בתבנית קיימת</li>
+                        </ul>
+                    </div>
+                    <div class="cms-col cms-paid">
+                        <h3>דורש מפתח</h3>
+                        <div class="cms-subtitle">&euro;75/שעה, עם הצעת מחיר מראש</div>
+                        <ul class="cms-list">
+                            <li>שינוי מבנה עמוד או לייאאוט חדש</li>
+                            <li>אינטגרציית תשלומים / סליקה</li>
+                            <li>שיבוץ תורים / לוח זמנים</li>
+                            <li>פיצ'ר התאמת מטפל-מטופל</li>
+                            <li>אזור משתמשים / פורטל חברים</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- TECH PARTNER -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">שותף טכני לטווח ארוך</div>
+                    <h2>לא בונה ונעלם</h2>
+                    <p>אני נקודת הקשר הבודדת שלכן לכל דבר טכני - לא צוות אנונימי, לא ticket system. אדם אחד שמכיר את הקוד, מכיר אתכן, וזמין.</p>
+                </div>
+                <div class="partner-grid">
+                    <div class="partner-card">
+                        <div class="pc-icon">&#9889;</div>
+                        <h3>תקלות קריטיות</h3>
+                        <p>אתר לא עולה? טופס לא שולח? טיפול תוך <strong>48 שעות</strong> - מחויבות, לא הבטחה.</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="pc-icon">&#128203;</div>
+                        <h3>הצעת מחיר לפני הכל</h3>
+                        <p>כל פיצ'ר חדש? שעון לא רץ לפני שאישרתן. קיבלתן הצעה כתובה עם שעות מדויקות - ורק אז מתחילים.</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="pc-icon">&#128218;</div>
+                        <h3>מסירה ותיעוד</h3>
+                        <p>הנחיות מסירה מלאות ב-GitHub. כל החלטה טכנית מתועדת. אם מחר תרצו מפתח אחר - הכל מוכן, הכל ברור. <strong>אפס תלות.</strong></p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="pc-icon">&#128200;</div>
+                        <h3>צמיחה מתוכננת</h3>
+                        <p>האתר הנוכחי הוא אתר קידום. בעתיד: תשלומים, שיבוץ תורים, פורטל משתמשים, סדנאות. כל אחד מאלה הוא שדרוג מוגדר ב-€75/שעה, עם הצעה כתובה מראש.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- TIMELINE -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">לוח זמנים</div>
+                    <h2>מהחלטה לאתר חי</h2>
+                </div>
+                <div class="timeline-track">
+                    <div class="tl-step">
+                        <div class="tl-week">שבוע 1</div>
+                        <div class="tl-dot"></div>
+                        <div class="tl-title">כיוון ותוכן</div>
+                        <div class="tl-desc">בחירת עיצוב סופי, איסוף תכנים (ביוגרפיות, תמונות), סגירת שם ודומיין</div>
+                    </div>
+                    <div class="tl-step">
+                        <div class="tl-week">שבוע 2</div>
+                        <div class="tl-dot"></div>
+                        <div class="tl-title">פיתוח ובנייה</div>
+                        <div class="tl-desc">בניית האתר, הגדרת CMS, עמודי מטפלים, SEO טכני, חיבור דומיין</div>
+                    </div>
+                    <div class="tl-step">
+                        <div class="tl-week">שבוע 3</div>
+                        <div class="tl-dot"></div>
+                        <div class="tl-title">סיום ומסירה</div>
+                        <div class="tl-desc">סבב תיקונים, בדיקות ביצועים, הדרכת CMS, העלאה לאוויר</div>
+                    </div>
+                </div>
+                <div class="timeline-note">
+                    <strong>2-3 שבועות</strong> מרגע ההחלטה ועד לאתר חי באוויר. צוואר הבקבוק הוא בדרך כלל התוכן, לא הפיתוח.
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- OPEN DECISIONS -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">החלטות פתוחות</div>
+                    <h2>מה הקבוצה צריכה להחליט</h2>
+                    <p>10 נושאים שצריכים החלטה שלכן לפני או במהלך הפיתוח. חלקם דחופים, חלקם יכולים לחכות.</p>
+                </div>
+                <div class="decisions-grid">
+                    <div class="decision-item">
+                        <div class="decision-num">1</div>
+                        <div class="decision-text"><strong>שם האתר</strong> <span>-בחירה סופית מ-5 מועמדים</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">2</div>
+                        <div class="decision-text"><strong>ישות משפטית</strong> <span>-מסגרת משפטית, הסרת אחריות</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">3</div>
+                        <div class="decision-text"><strong>פניות כלליות</strong> <span>-מי מטפל/ת ובאיזה אופן?</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">4</div>
+                        <div class="decision-text"><strong>מסמך הצטרפות</strong> <span>-תנאי הצטרפות לקהילה</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">5</div>
+                        <div class="decision-text"><strong>הסמכות נדרשות</strong> <span>-אילו הסמכות חובה?</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">6</div>
+                        <div class="decision-text"><strong>חוזה טיפולי</strong> <span>-הנגשה דו-לשונית באתר</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">7</div>
+                        <div class="decision-text"><strong>מודל חלוקת עלויות</strong> <span>-חלוקה שווה? רמות שונות?</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">8</div>
+                        <div class="decision-text"><strong>שינויים עתידיים</strong> <span>-תהליך הצבעה ומימון שינויים עתידיים</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">9</div>
+                        <div class="decision-text"><strong>גישת SEO</strong> <span>-טכני בלבד או כולל בלוג ותוכן שוטף?</span></div>
+                    </div>
+                    <div class="decision-item">
+                        <div class="decision-num">10</div>
+                        <div class="decision-text"><strong>בחירת ספק</strong> <span>-איזו הצעה מתאימה לכן?</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVIDER -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+
+            <!-- TASK CHECKLIST -->
+            <div class="p-section">
+                <div class="p-section-heading">
+                    <div class="p-label">צ'קליסט לקבוצה</div>
+                    <h2>מה צריך לעשות עכשיו?</h2>
+                    <p>6 משימות קונקרטיות שהקבוצה צריכה לטפל בהן כדי שנוכל להתקדם. סדר לפי עדיפות.</p>
+                </div>
+                <div class="tasks-grid">
+                    <div class="task-item task-urgent">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <strong>רכישת דומיין <span class="task-urgent-badge">דחוף</span></strong>
+                            <span>לבחור שם סופי ולרכוש את הדומיין. אנחנו נלווה אתכן בתהליך - אנחנו ממליצים על <a href="https://www.godaddy.com/" target="_blank" rel="noopener" style="color:#c4694a; text-decoration:underline;">GoDaddy</a> - פשוט, מהיר, ואמין. ~€15/שנה.</span>
+                        </div>
+                    </div>
+                    <div class="task-item task-urgent">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <strong>בחירת כיוון עיצובי <span class="task-urgent-badge">דחוף</span></strong>
+                            <span>לגלול למטה, לעבור על 10 הקונספטים, ולבחור כיוון אחד (או שילוב אלמנטים מכמה). זו ההחלטה שמשחררת את הפיתוח.</span>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <strong>החלטה על מייל ופניות</strong>
+                            <span>האם תהיה כתובת מייל משותפת (info@tipulkashuv.com)? מי מטפל/ת בפניות כלליות שמגיעות דרך האתר? צריך גורם אחראי.</span>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <strong>ניתוב הודעות</strong>
+                            <span>כשמישהו יוצר קשר דרך האתר - לאן זה הולך? טופס כללי שמועבר לאחראית? ישירות למטפל/ת הרלוונטי/ת? שילוב של שניהם?</span>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <strong>החלטה על דפים אישיים</strong>
+                            <span>האם כל מטפל/ת רוצה דף אישי מלא (ביוגרפיה, התמחויות, שפות, FAQ)? או שמספיק כרטיס מקוצר באינדקס הכללי? ההמלצה שלנו: דף מלא.</span>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <strong>איסוף תכנים מכל מטפל/ת</strong>
+                            <span>תמונת פרופיל מקצועית, ביוגרפיה (3-5 משפטים), תחומי התמחות, שפות, אזור זמן, דרכי יצירת קשר. נכין לכן טמפלט מוכן למילוי.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BRIDGE TO DESIGNS -->
+            <div class="p-divider"><div class="p-divider-line"></div></div>
+            <div class="designs-bridge">
+                <h2>ועכשיו - 10 כיוונים עיצוביים</h2>
+                <p>כל קונספט הוא עמוד בית שלם ומלא שאפשר לגלול בו. בחרו את מה שמדבר אליכן - או שלבו אלמנטים מכמה כיוונים.</p>
+                <p style="margin-top:8px; font-size:0.85rem; color:#a09888;">טיפ: ככל שתשתפו יותר דוגמאות לאתרים ועיצובים שאתן אוהבות - לא בהכרח מתחום הטיפול - כך נוכל להתאים את המוצר הסופי בדיוק לטעם שלכן.</p>
+                <a href="#designs-section" class="scroll-arrow">
+                    צפייה ב-10 הקונספטים
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                </a>
+            </div>
+
+        </div><!-- /proposal -->
+
+
+        <!-- ============================================================ -->
+        <!--                   DESIGNS SECTION                            -->
+        <!-- ============================================================ -->
+        <div id="designs-section">
+            <div class="header">
+                <h1>קונספטים לעיצוב</h1>
+                <div class="subtitle">10 כיוונים עיצוביים ייחודיים לאתר הקהילה. כל קונספט הוא עמוד בית שלם ומלא - לחצו לצפייה.</div>
+                <div class="note">כל העיצובים הם רספונסיביים, תומכים בעברית מלאה (RTL), וכוללים אנימציות ואינטראקציות.</div>
+            </div>
+
+            <div class="designs">
+
+                <!-- 01 -->
+                <div class="design-card d1">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept1.png" alt="thumbnail">
+                        <iframe src="designs/concept1-warm-community.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">01</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Warm Community Hub</h2>
+                        <div class="name-he">בית קהילתי חם</div>
+                        <div class="description">עיצוב חם ומזמין שמרגיש כמו בית. שילוב של טורקיז עמוק עם קורל חם יוצר תחושה מקצועית אך אישית. כרטיסי מטפלים עגולים, אקורדיון שאלות ותשובות, ניווט שקוף שמשתנה בגלילה, ומפרידי סקשנים מעוגלים.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#1a6b6a" data-name="טורקיז עמוק"></div>
+                            <div class="swatch" style="background:#c4694a" data-name="קורל"></div>
+                            <div class="swatch" style="background:#d4a853" data-name="זהב"></div>
+                            <div class="swatch" style="background:#faf6f0" data-name="קרם"></div>
+                            <div class="swatch" style="background:#f5ede3" data-name="קרם חם"></div>
+                            <div class="swatch" style="background:#3d3d3d" data-name="טקסט"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Assistant + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">חם, עגול, קהילתי</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">כרטיסים עגולים</span>
+                            <span class="tag">אקורדיון FAQ</span>
+                            <span class="tag">ניווט שקוף</span>
+                            <span class="tag">מפרידים מעוגלים</span>
+                        </div>
+                        <a href="designs/concept1-warm-community.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 02 -->
+                <div class="design-card d2">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept2.png" alt="thumbnail">
+                        <iframe src="designs/concept2-professional-network.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">02</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Professional Network</h2>
+                        <div class="name-he">רשת מקצועית</div>
+                        <div class="description">פלטפורמה מקצועית בהשראת רשתות מודרניות. חיפוש מטפלים עם פילטרים, כרטיסי Glassmorphism, תגיות התמחות צבעוניות. עיצוב כחול כהה עם נגיעות כתום-זהב. מתאים למי שרוצה תחושה טכנולוגית ומקצועית.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#1a2744" data-name="כחול כהה"></div>
+                            <div class="swatch" style="background:#4a9eed" data-name="כחול שמיים"></div>
+                            <div class="swatch" style="background:#f0a030" data-name="כתום-זהב"></div>
+                            <div class="swatch" style="background:#f5f5f5" data-name="לבן"></div>
+                            <div class="swatch" style="background:#e8f2fd" data-name="כחול בהיר"></div>
+                            <div class="swatch" style="background:#333333" data-name="טקסט"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Rubik + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">מקצועי, טכנולוגי, אמין</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Glassmorphism</span>
+                            <span class="tag">חיפוש ופילטרים</span>
+                            <span class="tag">תגיות התמחות</span>
+                            <span class="tag">אנימציות Hover</span>
+                        </div>
+                        <a href="designs/concept2-professional-network.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 03 -->
+                <div class="design-card d3">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept3.png" alt="thumbnail">
+                        <iframe src="designs/concept3-modern-minimal.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">03</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Modern Minimalist</h2>
+                        <div class="name-he">מינימליזם מודרני</div>
+                        <div class="description">אלגנטיות שקטה בהשראת מגזיני עיצוב. הרבה מרחב לבן, טיפוגרפיה סריפית עדינה, גוונים של ירוק מרווה וורוד מאובק. כל אלמנט מדויק ומחושב. תחושת בוטיק יוקרתי שלא צועק אלא לוחש.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#7d9b8a" data-name="מרווה"></div>
+                            <div class="swatch" style="background:#5f7d6e" data-name="מרווה כהה"></div>
+                            <div class="swatch" style="background:#c9a0a0" data-name="ורוד מאובק"></div>
+                            <div class="swatch" style="background:#fdfbf8" data-name="שנהב"></div>
+                            <div class="swatch" style="background:#e8f0eb" data-name="מרווה בהיר"></div>
+                            <div class="swatch" style="background:#333333" data-name="פחם"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Frank Ruhl Libre (סריף) + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">מינימלי, עריכתי, אלגנטי</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">טיפוגרפיה סריפית</span>
+                            <span class="tag">מרחב לבן</span>
+                            <span class="tag">אנימציות עדינות</span>
+                            <span class="tag">תחושת מגזין</span>
+                        </div>
+                        <a href="designs/concept3-modern-minimal.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 04 -->
+                <div class="design-card d4">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept4.png" alt="thumbnail">
+                        <iframe src="designs/concept4-organic-nature.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">04</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Organic Nature</h2>
+                        <div class="name-he">אורגני וטבעי</div>
+                        <div class="description">עיצוב בהשראת הטבע עם צורות אורגניות זורמות, גווני אדמה, עלים ומפרידי גלים. Blob shapes מתחלפים, כרטיסים עם פינות אורגניות, ואיור עץ צומח ב-CSS. תחושה של צמיחה, שורשים, וטיפוח.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#5c7a4a" data-name="זית"></div>
+                            <div class="swatch" style="background:#8cb07a" data-name="עלה"></div>
+                            <div class="swatch" style="background:#b5634b" data-name="טרקוטה"></div>
+                            <div class="swatch" style="background:#d4c5a0" data-name="חול"></div>
+                            <div class="swatch" style="background:#f5f0e6" data-name="קרם"></div>
+                            <div class="swatch" style="background:#3a2e28" data-name="חום כהה"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Secular One + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">אורגני, טבעי, שורשי</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Blob Shapes</span>
+                            <span class="tag">מפרידי גלים</span>
+                            <span class="tag">פינות אורגניות</span>
+                            <span class="tag">איור CSS</span>
+                        </div>
+                        <a href="designs/concept4-organic-nature.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 05 -->
+                <div class="design-card d5">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept5.png" alt="thumbnail">
+                        <iframe src="designs/concept5-bold-distinctive.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">05</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Bold & Distinctive</h2>
+                        <div class="name-he">נועז וייחודי</div>
+                        <div class="description">שובר את כל המוסכמות של אתרי טיפול. סגול עמוק, זהב, טיפוגרפיה ענקית בכתב יד (Amatic SC). אמנותי, אנושי ובלתי נשכח. לא מתאים לכל קהל, אבל מי שרוצה לבלוט - זה העיצוב.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#3d1c47" data-name="סגול עמוק"></div>
+                            <div class="swatch" style="background:#6b3a7d" data-name="סגול"></div>
+                            <div class="swatch" style="background:#f0c040" data-name="זהב"></div>
+                            <div class="swatch" style="background:#f5f0e8" data-name="קרם"></div>
+                            <div class="swatch" style="background:#2d1a35" data-name="כהה"></div>
+                            <div class="swatch" style="background:#e0d5c8" data-name="בז'"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Amatic SC (כתב יד) + Rubik + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">נועז, אמנותי, בלתי נשכח</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">כתב יד ענק</span>
+                            <span class="tag">סגול וזהב</span>
+                            <span class="tag">שובר מוסכמות</span>
+                            <span class="tag">אנימציות דרמטיות</span>
+                        </div>
+                        <a href="designs/concept5-bold-distinctive.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 06 -->
+                <div class="design-card d6">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept6.png" alt="thumbnail">
+                        <iframe src="designs/concept6-warm-minimal.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">06</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Warm Minimal</h2>
+                        <div class="name-he">חם ומינימלי</div>
+                        <div class="description">האיזון בין חום לאלגנטיות. טורקיז רך שנפגש עם בלאש (ורוד חמים), מרחב נשימה גדול, טיפוגרפיה סריפית עברית (Noto Serif Hebrew). כרטיסים נקיים עם הרבה אוויר. כשמינימליזם פוגש לב חם.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#2a8a7e" data-name="טורקיז"></div>
+                            <div class="swatch" style="background:#3a9e91" data-name="טורקיז רך"></div>
+                            <div class="swatch" style="background:#deb3a0" data-name="בלאש"></div>
+                            <div class="swatch" style="background:#f0ddd4" data-name="בלאש בהיר"></div>
+                            <div class="swatch" style="background:#faf7f4" data-name="לבן חם"></div>
+                            <div class="swatch" style="background:#2d2d2d" data-name="טקסט"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Noto Serif Hebrew (סריף) + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">מינימלי, חם, מאוזן</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">סריף עברי</span>
+                            <span class="tag">מרחב נשימה</span>
+                            <span class="tag">כרטיסים נקיים</span>
+                            <span class="tag">טורקיז ובלאש</span>
+                        </div>
+                        <a href="designs/concept6-warm-minimal.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 07 -->
+                <div class="design-card d7">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept7.png" alt="thumbnail">
+                        <iframe src="designs/concept7-nature-community.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">07</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Nature Community</h2>
+                        <div class="name-he">קהילת טבע</div>
+                        <div class="description">יער, דבש וקהילה. ירוק יער-טורקיז עמוק שנפגש עם זהב-דבש חם. מפרידי גלים אורגניים בין סקשנים, עלים דקורטיביים, ואיור עץ צומח. תחושה של מקום בטוח בטבע שאפשר לגדול בו.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#1b5e5a" data-name="יער-טורקיז"></div>
+                            <div class="swatch" style="background:#8aab7f" data-name="מרווה"></div>
+                            <div class="swatch" style="background:#d4a35a" data-name="דבש"></div>
+                            <div class="swatch" style="background:#b8893e" data-name="דבש כהה"></div>
+                            <div class="swatch" style="background:#f7f3ec" data-name="קרם"></div>
+                            <div class="swatch" style="background:#3a332d" data-name="חום יער"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Secular One + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">טבעי, קהילתי, חם</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">גלים אורגניים</span>
+                            <span class="tag">עלים דקורטיביים</span>
+                            <span class="tag">דבש וירוק</span>
+                            <span class="tag">עץ CSS</span>
+                        </div>
+                        <a href="designs/concept7-nature-community.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 08 -->
+                <div class="design-card d8">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept8.png" alt="thumbnail">
+                        <iframe src="designs/concept8-elegant-earth.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">08</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Elegant Earth</h2>
+                        <div class="name-he">אדמה אלגנטית</div>
+                        <div class="description">עריכתיות של מגזין Kinfolk עם גווני אדמה עמוקים. ירוק אזוב כהה שנפגש עם חימר חם, טיפוגרפיה סריפית מעודנת (Frank Ruhl Libre), Drop Caps בתחילת פסקאות, ו-Masonry Grid. יוקרה שקטה.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#4a6741" data-name="אזוב"></div>
+                            <div class="swatch" style="background:#b8785a" data-name="חימר"></div>
+                            <div class="swatch" style="background:#c4978a" data-name="חימר בהיר"></div>
+                            <div class="swatch" style="background:#dce8d6" data-name="אזוב בהיר"></div>
+                            <div class="swatch" style="background:#faf8f5" data-name="שנהב"></div>
+                            <div class="swatch" style="background:#2c2c2c" data-name="פחם"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Frank Ruhl Libre (סריף) + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">עריכתי, אדמתי, יוקרתי</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Drop Caps</span>
+                            <span class="tag">Masonry Grid</span>
+                            <span class="tag">Kinfolk Style</span>
+                            <span class="tag">חימר ואזוב</span>
+                        </div>
+                        <a href="designs/concept8-elegant-earth.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 09 -->
+                <div class="design-card d9">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept9.png" alt="thumbnail">
+                        <iframe src="designs/concept9-serene-haven.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">09</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Serene Haven</h2>
+                        <div class="name-he">מפלט שליו</div>
+                        <div class="description">שלווה מעוצבת. טורקיז רך שנפגש עם גווני אפרסק חמים ומרווה עדינה. ניווט צף כפתור pill, מעברים מעוגלים בין סקשנים, כרטיסים עם קשתות עדינות. האיזון המושלם בין מקצועי, חם וטבעי.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#5a9e97" data-name="טורקיז רך"></div>
+                            <div class="swatch" style="background:#4a8a83" data-name="טורקיז כהה"></div>
+                            <div class="swatch" style="background:#e6b8a2" data-name="אפרסק"></div>
+                            <div class="swatch" style="background:#a3bfa8" data-name="מרווה"></div>
+                            <div class="swatch" style="background:#f8f5f0" data-name="קרם"></div>
+                            <div class="swatch" style="background:#2d3b35" data-name="ירוק כהה"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Alef + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">שליו, מאוזן, מעוגל</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">ניווט Pill צף</span>
+                            <span class="tag">קשתות עדינות</span>
+                            <span class="tag">מעברים מעוגלים</span>
+                            <span class="tag">אפרסק וטורקיז</span>
+                        </div>
+                        <a href="designs/concept9-serene-haven.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="design-card d10">
+                    <div class="design-snippet">
+                        <img class="thumb" src="designs/thumb-concept10.png" alt="thumbnail">
+                        <iframe src="designs/concept10-mediterranean.html" loading="lazy" sandbox="allow-same-origin" tabindex="-1"></iframe>
+                        <div class="snippet-overlay"></div>
+                        <div class="snippet-number">10</div>
+                    </div>
+                    <div class="design-info">
+                        <h2>Mediterranean Warmth</h2>
+                        <div class="name-he">חום ים-תיכוני</div>
+                        <div class="description">זהות ישראלית-ים תיכונית ייחודית. טרקוטה, אבן ירושלמית, זית וכחול ים. קשתות אדריכליות (Mediterranean arches), תחושת שעת זהב, ואסתטיקה של בית רחוק מהבית. משהו שלא תמצאו באף אתר טיפול אחר.</div>
+                        <div class="palette">
+                            <div class="swatch" style="background:#c1694f" data-name="טרקוטה"></div>
+                            <div class="swatch" style="background:#d6cbb8" data-name="אבן חמה"></div>
+                            <div class="swatch" style="background:#4a5a3a" data-name="זית כהה"></div>
+                            <div class="swatch" style="background:#c5a55a" data-name="זהב ירושלמי"></div>
+                            <div class="swatch" style="background:#7ab0cc" data-name="כחול ים"></div>
+                            <div class="swatch" style="background:#2b2520" data-name="חום עמוק"></div>
+                        </div>
+                        <div class="details-row">
+                            <div class="detail-item"><span class="detail-label">גופנים:</span> <span class="detail-value">Secular One + Heebo</span></div>
+                            <div class="detail-item"><span class="detail-label">סגנון:</span> <span class="detail-value">ים-תיכוני, ישראלי, ייחודי</span></div>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">קשתות ים-תיכוניות</span>
+                            <span class="tag">טרקוטה וזית</span>
+                            <span class="tag">שעת זהב</span>
+                            <span class="tag">זהות ישראלית</span>
+                        </div>
+                        <a href="designs/concept10-mediterranean.html" class="view-btn">
+                            צפייה בעיצוב המלא
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- /designs-section -->
+
+        <!-- ===== Tech Specs Section ===== -->
+        <div class="tech-section" id="tech-section">
+            <div class="tech-header">
+                <h2>מה מתחת למכסה המנוע?</h2>
+                <p>במקום להכביר במילים, בחרנו להראות לכם הוכחת התכנות. אבל חשוב שתדעו - מאחורי העיצוב היפה עומדת תשתית טכנולוגית מתקדמת שתלווה אתכם לשנים.</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <span class="tech-icon">&#9881;</span>
+                    <h3>מערכת ניהול תוכן (CMS) מלאה</h3>
+                    <p>ממשק ניהול בעברית שמאפשר לכל אחת מכן לעדכן את הפרופיל שלה, להעלות מאמרים, לערוך תכנים ולהוסיף אירועים - בלי לגעת בקוד.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Headless CMS</span>
+                        <span class="tech-tag">WYSIWYG Editor</span>
+                        <span class="tech-tag">Media Upload</span>
+                        <span class="tech-tag">Draft / Publish</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#128274;</span>
+                    <h3>אבטחה ברמה הגבוהה ביותר</h3>
+                    <p>תעודת SSL/TLS (HTTPS) מובנית, הגנה מפני התקפות XSS ו-CSRF, Content Security Policy, ו-Rate Limiting.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">SSL/TLS</span>
+                        <span class="tech-tag">CSP Headers</span>
+                        <span class="tech-tag">GDPR Ready</span>
+                        <span class="tech-tag">WAF Protection</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#128640;</span>
+                    <h3>ביצועים וזמני טעינה</h3>
+                    <p>האתר בנוי עם Static Site Generation (SSG) ו-CDN גלובלי - נטען בפחות משנייה מכל מקום בעולם. ציון מושלם ב-Google PageSpeed.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">SSG / ISR</span>
+                        <span class="tech-tag">Global CDN</span>
+                        <span class="tech-tag">Image Optimization</span>
+                        <span class="tech-tag">Lazy Loading</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#128269;</span>
+                    <h3>SEO מתקדם</h3>
+                    <p>Structured Data (Schema.org) למטפלים, Open Graph tags לשיתוף ברשתות, Sitemap אוטומטי, ו-Semantic HTML.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Schema.org</span>
+                        <span class="tech-tag">Open Graph</span>
+                        <span class="tech-tag">Auto Sitemap</span>
+                        <span class="tech-tag">Meta Tags</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#128241;</span>
+                    <h3>רספונסיבי לכל מסך</h3>
+                    <p>Mobile-First Design - האתר נראה מושלם בנייד, טאבלט ומחשב. יותר מ-70% מהגולשים מגיעים מהנייד.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Mobile First</span>
+                        <span class="tech-tag">Fluid Typography</span>
+                        <span class="tech-tag">Touch Optimized</span>
+                        <span class="tech-tag">Breakpoints</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#127463;&#127470;</span>
+                    <h3>עברית מלאה - RTL Native</h3>
+                    <p>לא תרגום, לא hack - עברית מהיסוד. כיווניות RTL מובנית בכל רכיב, גופנים עבריים מותאמים.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">RTL Native</span>
+                        <span class="tech-tag">Hebrew Fonts</span>
+                        <span class="tech-tag">Bidi Support</span>
+                        <span class="tech-tag">i18n Ready</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#128187;</span>
+                    <h3>הקוד שלכן - לגמרי</h3>
+                    <p>בעלות מלאה על הקוד (Open Source). אין נעילה לספק, אין מנוי חודשי לפלטפורמה. הקוד נקי, מתועד, ומוכן להעברה.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Git Repository</span>
+                        <span class="tech-tag">Clean Code</span>
+                        <span class="tech-tag">No Lock-in</span>
+                        <span class="tech-tag">Documentation</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#9889;</span>
+                    <h3>גמישות ויכולת הרחבה</h3>
+                    <p>ארכיטקטורה מודולרית שצומחת איתכן. היום אינדקס מטפלים, מחר קבוצות אונליין, סדנאות, או בלוג.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Component Based</span>
+                        <span class="tech-tag">API Ready</span>
+                        <span class="tech-tag">Modular</span>
+                        <span class="tech-tag">Scalable</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#127760;</span>
+                    <h3>אחסון ותשתית ענן</h3>
+                    <p>Hosting על Vercel / Netlify עם Uptime של 99.99%, גיבויים אוטומטיים, ו-Preview Deployments.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Vercel / Netlify</span>
+                        <span class="tech-tag">Auto Backups</span>
+                        <span class="tech-tag">Preview Deploys</span>
+                        <span class="tech-tag">Custom Domain</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#129302;</span>
+                    <h3>AEO - אופטימיזציה למנועי תשובות</h3>
+                    <p>מעבר ל-SEO קלאסי - האתר שלכן מוכן לעידן ה-AI. Answer Engine Optimization מבטיח שגוגל, ChatGPT ו-Perplexity יפנו אליכן.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">AEO</span>
+                        <span class="tech-tag">AI Search Ready</span>
+                        <span class="tech-tag">FAQ Schema</span>
+                        <span class="tech-tag">Conversational SEO</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">&#9193;</span>
+                    <h3>מהירות בנייה - בלי פשרות</h3>
+                    <p>בניית אתר מותאם אישית תוך שבועות, לא חודשים. תהליך עבודה מובנה עם Wireframes ואבני דרך מוגדרות.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Rapid Delivery</span>
+                        <span class="tech-tag">Wireframes First</span>
+                        <span class="tech-tag">Milestone Based</span>
+                        <span class="tech-tag">Zero Compromise</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CTA Section ===== -->
+        <div class="cta-section" id="final-cta">
+            <h2>מוכנים להתחיל?</h2>
+            <p>ראיתם את ההצעה, ראיתם את העיצובים, ראיתם את הטכנולוגיה. עכשיו הכדור אצלכן. שלחו הודעה ונתחיל לרוץ.</p>
+            <a href="https://api.whatsapp.com/send?phone=31644295691&text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%95%D7%9F%2C%20%D7%9E%D7%94%20%D7%A9%D7%9C%D7%95%D7%9E%D7%9A%3F%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%93%D7%91%D7%A8%20%D7%90%D7%99%D7%AA%D7%9A%20%D7%A2%D7%9C%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A2%D7%91%D7%95%D7%A8%20%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%94%D7%9E%D7%98%D7%A4%D7%9C%D7%95%D7%AA%20%D7%95%D7%94%D7%9E%D7%98%D7%A4%D7%9C%D7%99%D7%9D" class="cta-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                דברו עם אלון בוואטסאפ
+            </a>
+        </div>
+
+        <div class="footer">
+            הצעת מוצר - טיפול קשוב | קהילת מטפלים ומטפלות בעברית | אלון גילדוני | אפריל 2026
+        </div>
+
+    </div><!-- /notebook-content -->
 
 <style>
-/* ===== Iframe lazy load fade-in ===== */
+/* ===== Iframe lazy load ===== */
 .design-snippet iframe { opacity: 0; transition: opacity 0.6s ease; }
 .design-snippet iframe.loaded { opacity: 1; }
-/* Thumbnail fades out when iframe is ready */
 .design-snippet .thumb { transition: opacity 0.6s ease; }
 .design-snippet.iframe-loaded .thumb { opacity: 0; }
 
-/* ===== Fallback gradients per concept ===== */
+/* Fallback gradients */
 .d1 .design-snippet { background: linear-gradient(135deg, #1a6b6a, #c4694a); }
 .d2 .design-snippet { background: linear-gradient(135deg, #1a2744, #4a9eed); }
 .d3 .design-snippet { background: linear-gradient(135deg, #7d9b8a, #c9a0a0); }
@@ -956,31 +2457,97 @@
 .d9 .design-snippet { background: linear-gradient(135deg, #5a9e97, #e6b8a2); }
 .d10 .design-snippet { background: linear-gradient(135deg, #c1694f, #4a5a3a); }
 
-/* ===== Viewport toggle buttons ===== */
+/* Viewport toggle */
 .view-toggle {
-    position: absolute; top: 10px; left: 10px; z-index: 10;
-    display: flex; gap: 5px;
+    position: absolute; top: 8px; left: 8px; z-index: 10;
+    display: flex; gap: 4px;
 }
 .vt-btn {
-    background: rgba(0,0,0,0.55);
-    border: 1px solid rgba(255,255,255,0.18);
-    color: rgba(255,255,255,0.65);
-    border-radius: 7px; padding: 4px 9px;
-    font-size: 0.68rem; cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+    border-radius: 4px; padding: 3px 8px;
+    font-size: 0.65rem; cursor: pointer;
     transition: all 0.2s ease;
     backdrop-filter: blur(4px);
     font-family: 'Heebo', sans-serif;
     white-space: nowrap;
 }
-.vt-btn:hover { background: rgba(0,0,0,0.75); color: white; }
-.vt-btn.active { border-color: rgba(255,255,255,0.75); color: white; }
+.vt-btn:hover { background: rgba(0,0,0,0.7); color: white; }
+.vt-btn.active { border-color: rgba(255,255,255,0.7); color: white; }
 @media (max-width: 1024px) { .view-toggle { display: none !important; } }
 </style>
 
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBiaV5lVWTbFyVCUivZmkOHcjbID6K6vKo",
+    authDomain: "therapists-website-offer.firebaseapp.com",
+    projectId: "therapists-website-offer",
+    storageBucket: "therapists-website-offer.firebasestorage.app",
+    messagingSenderId: "548096525630",
+    appId: "1:548096525630:web:9bf587a81b6b5481c1186f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+const gate = document.getElementById('passwordGate');
+const btn = document.getElementById('googleSignInBtn');
+const error = document.getElementById('gateError');
+
+function unlock() {
+    gate.classList.add('open');
+    document.body.classList.add('unlocked');
+    setTimeout(() => { gate.style.display = 'none'; }, 1000);
+}
+
+async function logAccess(user) {
+    try {
+        await addDoc(collection(db, 'access_log'), {
+            email: user.email,
+            name: user.displayName,
+            photo: user.photoURL,
+            uid: user.uid,
+            timestamp: serverTimestamp(),
+            userAgent: navigator.userAgent
+        });
+    } catch(e) { /* silent - logging failure shouldn't block access */ }
+}
+
+// Auto-unlock if already signed in
+onAuthStateChanged(auth, (user) => {
+    if (user) { unlock(); }
+});
+
+btn.addEventListener('click', async () => {
+    error.textContent = '';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    try {
+        const result = await signInWithPopup(auth, provider);
+        await logAccess(result.user);
+        unlock();
+    } catch(e) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        if (e.code !== 'auth/popup-closed-by-user') {
+            error.textContent = 'שגיאה בכניסה. אנא נסו שנית.';
+        }
+    }
+});
+</script>
+
 <script>
-// ===== Lazy-load iframes via IntersectionObserver =====
+
+// ===== Lazy-load iframes =====
 document.querySelectorAll('.design-snippet iframe[src]').forEach(iframe => {
-    // Convert existing src to data-src for lazy loading
     const src = iframe.getAttribute('src');
     iframe.removeAttribute('src');
     iframe.setAttribute('data-src', src);
@@ -996,7 +2563,6 @@ const iframeObserver = new IntersectionObserver((entries) => {
                     iframe.classList.add('loaded');
                     iframe.closest('.design-snippet').classList.add('iframe-loaded');
                 }, { once: true });
-                // Fallback: show after 4s even if load doesn't fire
                 setTimeout(() => {
                     iframe.classList.add('loaded');
                     iframe.closest('.design-snippet').classList.add('iframe-loaded');
@@ -1011,16 +2577,15 @@ document.querySelectorAll('.design-snippet iframe').forEach(iframe => {
     iframeObserver.observe(iframe);
 });
 
-// ===== Inject viewport toggle buttons into each snippet =====
+// ===== Viewport toggle =====
 document.querySelectorAll('.design-snippet').forEach(snippet => {
     const toggle = document.createElement('div');
     toggle.className = 'view-toggle';
     toggle.innerHTML = `
-        <button class="vt-btn active" data-view="desktop">🖥 מחשב</button>
-        <button class="vt-btn" data-view="tablet">⬜ טאבלט</button>
-        <button class="vt-btn" data-view="mobile">📱 נייד</button>
+        <button class="vt-btn active" data-view="desktop">מחשב</button>
+        <button class="vt-btn" data-view="tablet">טאבלט</button>
+        <button class="vt-btn" data-view="mobile">נייד</button>
     `;
-    // Insert before the overlay
     const overlay = snippet.querySelector('.snippet-overlay');
     snippet.insertBefore(toggle, overlay);
 
@@ -1034,20 +2599,49 @@ document.querySelectorAll('.design-snippet').forEach(snippet => {
             if (view === 'desktop') {
                 iframe.style.width = '1400px';
                 iframe.style.height = '900px';
-                iframe.style.transform = 'scale(0.3)';
+                iframe.style.transform = 'scale(0.257)';
                 iframe.style.transformOrigin = 'top left';
             } else if (view === 'tablet') {
                 iframe.style.width = '768px';
                 iframe.style.height = '900px';
-                iframe.style.transform = 'scale(0.55)';
+                iframe.style.transform = 'scale(0.47)';
                 iframe.style.transformOrigin = 'top left';
             } else if (view === 'mobile') {
                 iframe.style.width = '390px';
                 iframe.style.height = '900px';
-                iframe.style.transform = 'scale(0.9)';
+                iframe.style.transform = 'scale(0.8)';
                 iframe.style.transformOrigin = 'top center';
             }
         });
+    });
+});
+
+// ===== Floating nav =====
+const floatingNav = document.getElementById('floatingNav');
+const navLinks = floatingNav.querySelectorAll('a');
+const sections = ['proposal', 'designs-section', 'tech-section', 'final-cta'].map(id => document.getElementById(id));
+
+window.addEventListener('scroll', () => {
+    floatingNav.classList.toggle('visible', window.scrollY > 300);
+    let current = '';
+    sections.forEach(section => {
+        if (section && section.offsetTop - 200 <= window.scrollY) {
+            current = section.id;
+        }
+    });
+    navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     });
 });
 </script>
