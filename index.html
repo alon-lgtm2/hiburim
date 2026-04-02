@@ -197,6 +197,112 @@
             color: #f8f3eb;
         }
 
+        /* ===== Floating FABs ===== */
+        .fab-container {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            gap: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .fab-container.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* WhatsApp button */
+        .fab-wa {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            padding: 12px 20px 12px 16px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            direction: rtl;
+        }
+        .fab-wa:hover {
+            background: #1ebe5d;
+            box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+            transform: translateY(-2px);
+        }
+        .fab-wa svg { flex-shrink: 0; }
+
+        /* Menu FAB */
+        .fab-menu-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(248,243,235,0.95);
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.25s ease;
+            color: #4a4030;
+        }
+        .fab-menu-btn:hover { background: #f0e8d8; transform: translateY(-1px); }
+
+        .fab-menu-panel {
+            background: rgba(248,243,235,0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0,0,0,0.07);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            padding: 8px 0;
+            min-width: 200px;
+            display: none;
+            direction: rtl;
+        }
+        .fab-menu-panel.open { display: block; }
+        .fab-menu-panel a {
+            display: block;
+            padding: 9px 20px;
+            color: #5a5040;
+            text-decoration: none;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.83rem;
+            font-weight: 500;
+            transition: background 0.15s ease, color 0.15s ease;
+            white-space: nowrap;
+        }
+        .fab-menu-panel a:hover { background: rgba(196,105,74,0.06); color: #2d2a26; }
+        .fab-menu-panel .fmp-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.06);
+            margin: 4px 12px;
+        }
+        .fab-menu-panel .fmp-section-label {
+            padding: 6px 20px 2px;
+            font-size: 0.68rem;
+            color: #a09888;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-family: 'Heebo', sans-serif;
+        }
+        @media (max-width: 600px) {
+            .fab-container { bottom: 20px; left: 16px; }
+            .fab-wa span { display: none; }
+            .fab-wa { padding: 12px; border-radius: 50%; }
+        }
+
         /* ===== Section utility ===== */
         .p-section {
             max-width: 820px;
@@ -1387,6 +1493,38 @@
             <a href="#final-cta">צור קשר</a>
         </nav>
 
+        <!-- Floating FABs: WhatsApp + Menu -->
+        <div class="fab-container" id="fabContainer">
+            <!-- WhatsApp -->
+            <a class="fab-wa" href="https://wa.me/31644295691" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span>שאלה? כתבו לי</span>
+            </a>
+            <!-- Nav Menu -->
+            <div style="position:relative;">
+                <button class="fab-menu-btn" id="fabMenuBtn" aria-label="תפריט ניווט">☰</button>
+                <div class="fab-menu-panel" id="fabMenuPanel">
+                    <div class="fmp-section-label">ההצעה</div>
+                    <a href="#sec-highlights">על מה דיברנו</a>
+                    <a href="#sec-understanding">מה חשוב לכן</a>
+                    <a href="#sec-features">מה מקבלים</a>
+                    <a href="#sec-multiplier">אפקט מכפיל</a>
+                    <a href="#sec-domains">דומיינים</a>
+                    <a href="#sec-pricing">תמחור</a>
+                    <a href="#sec-cms">מודל עבודה</a>
+                    <a href="#sec-partner">שותף טכני</a>
+                    <a href="#sec-timeline">לוח זמנים</a>
+                    <a href="#sec-decisions">החלטות פתוחות</a>
+                    <a href="#sec-checklist">צ'קליסט</a>
+                    <div class="fmp-divider"></div>
+                    <div class="fmp-section-label">עיצוב וטכנולוגיה</div>
+                    <a href="#designs-section">10 עיצובים</a>
+                    <a href="#tech-section">טכנולוגיה</a>
+                    <a href="#final-cta">צור קשר</a>
+                </div>
+            </div>
+        </div>
+
         <!-- ============================================================ -->
         <!--                     PROPOSAL SECTION                         -->
         <!-- ============================================================ -->
@@ -1408,7 +1546,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- CONVERSATION HIGHLIGHTS (First Section) -->
-            <div class="p-section">
+            <div class="p-section" id="sec-highlights">
                 <div class="p-section-heading">
                     <div class="p-label">על מה דיברנו היום</div>
                     <h2>סיכום השיחה שלנו</h2>
@@ -1438,7 +1576,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- UNDERSTANDING -->
-            <div class="p-section">
+            <div class="p-section" id="sec-understanding">
                 <div class="p-section-heading">
                     <div class="p-label">מה אני מבין שחשוב לכן</div>
                     <h2>הנקודות שהכי חשובות לכן</h2>
@@ -1472,7 +1610,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- WHAT YOU GET -->
-            <div class="p-section">
+            <div class="p-section" id="sec-features">
                 <div class="p-section-heading">
                     <div class="p-label">מה מקבלים</div>
                     <h2>אתר שעובד בשבילכן</h2>
@@ -1521,7 +1659,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- MULTIPLIER EFFECT -->
-            <div class="p-section">
+            <div class="p-section" id="sec-multiplier">
                 <div class="multiplier-section">
                     <div class="multiplier-content">
                         <div class="multiplier-text">
@@ -1564,7 +1702,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- DOMAIN STRATEGY -->
-            <div class="p-section">
+            <div class="p-section" id="sec-domains">
                 <div class="p-section-heading">
                     <div class="p-label">אסטרטגיית מיתוג</div>
                     <h2>5 שמות מומלצים לאתר</h2>
@@ -1623,7 +1761,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- PRICING -->
-            <div class="p-section">
+            <div class="p-section" id="sec-pricing">
                 <div class="p-section-heading">
                     <div class="p-label">תמחור שקוף</div>
                     <h2>בלי הפתעות, בלי אותיות קטנות</h2>
@@ -1680,7 +1818,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- CMS MODEL -->
-            <div class="p-section">
+            <div class="p-section" id="sec-cms">
                 <div class="p-section-heading">
                     <div class="p-label">מודל עבודה</div>
                     <h2>מה בעצמכן ומה דורש מפתח</h2>
@@ -1716,7 +1854,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- TECH PARTNER -->
-            <div class="p-section">
+            <div class="p-section" id="sec-partner">
                 <div class="p-section-heading">
                     <div class="p-label">שותף טכני לטווח ארוך</div>
                     <h2>לא בונה ונעלם</h2>
@@ -1750,7 +1888,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- TIMELINE -->
-            <div class="p-section">
+            <div class="p-section" id="sec-timeline">
                 <div class="p-section-heading">
                     <div class="p-label">לוח זמנים</div>
                     <h2>מהחלטה לאתר חי</h2>
@@ -1784,7 +1922,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- OPEN DECISIONS -->
-            <div class="p-section">
+            <div class="p-section" id="sec-decisions">
                 <div class="p-section-heading">
                     <div class="p-label">החלטות פתוחות</div>
                     <h2>מה הקבוצה צריכה להחליט</h2>
@@ -1838,7 +1976,7 @@
             <div class="p-divider"><div class="p-divider-line"></div></div>
 
             <!-- TASK CHECKLIST -->
-            <div class="p-section">
+            <div class="p-section" id="sec-checklist">
                 <div class="p-section-heading">
                     <div class="p-label">צ'קליסט לקבוצה</div>
                     <h2>מה צריך לעשות עכשיו?</h2>
@@ -2631,6 +2769,31 @@ window.addEventListener('scroll', () => {
     });
     navLinks.forEach(link => {
         link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+});
+
+// ===== FAB container visibility =====
+const fabContainer = document.getElementById('fabContainer');
+window.addEventListener('scroll', () => {
+    fabContainer.classList.toggle('visible', window.scrollY > 300);
+});
+
+// ===== FAB menu toggle =====
+const fabMenuBtn = document.getElementById('fabMenuBtn');
+const fabMenuPanel = document.getElementById('fabMenuPanel');
+fabMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fabMenuPanel.classList.toggle('open');
+    fabMenuBtn.textContent = fabMenuPanel.classList.contains('open') ? '✕' : '☰';
+});
+document.addEventListener('click', () => {
+    fabMenuPanel.classList.remove('open');
+    fabMenuBtn.textContent = '☰';
+});
+fabMenuPanel.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        fabMenuPanel.classList.remove('open');
+        fabMenuBtn.textContent = '☰';
     });
 });
 
