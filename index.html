@@ -1424,6 +1424,59 @@
         }
         .cta-btn svg { width: 20px; height: 20px; }
 
+        /* ===== About Alon ===== */
+        .about-alon-section {
+            max-width: 700px;
+            margin: 32px auto 0;
+            padding: 0 20px;
+        }
+        .about-alon-inner {
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 4px;
+            padding: 36px 40px 36px 36px;
+            position: relative;
+        }
+        .about-alon-inner::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 24px;
+            bottom: 24px;
+            width: 3px;
+            background: linear-gradient(180deg, #c4694a, rgba(196,105,74,0.08));
+            border-radius: 0 2px 2px 0;
+        }
+        .about-alon-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c4694a;
+            margin-bottom: 6px;
+        }
+        .about-alon-title {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #2d2a26;
+            margin-bottom: 18px;
+        }
+        .about-alon-body p {
+            font-size: 0.9rem;
+            color: #7a7468;
+            line-height: 1.85;
+            margin-bottom: 10px;
+        }
+        .about-alon-body p:last-child { margin-bottom: 20px; }
+        .about-alon-link {
+            font-size: 0.85rem;
+            color: #c4694a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .about-alon-link:hover { opacity: 0.7; }
+
         .footer {
             text-align: center;
             padding: 36px 20px;
@@ -1630,32 +1683,32 @@
                     <div class="feature-card" style="--fc-accent: #d4a853;">
                         <span class="fc-icon">&#9881;</span>
                         <h3>CMS - עדכון תוכן בעצמכן</h3>
-                        <p>ממשק ניהול בעברית שמאפשר לעדכן ביוגרפיה, תמונות, מאמרים, FAQ - בלי לגעת בקוד ובלי לחכות למפתח. שליטה מלאה שלכן.</p>
+                        <p><strong>CMS = מערכת ניהול תוכן</strong> — חשבו על זה כמו וורד של האתר שלכן. מתחברות, לוחצות, עורכות — ורואות את השינוי תוך שניות. רוצות לשנות תמונת פרופיל? לפרסם מאמר? לעדכן שאלות ותשובות? הכל בעצמכן, בלי לחכות למפתח ובלי לשלם על כל שינוי קטן.</p>
                     </div>
                     <div class="feature-card" style="--fc-accent: #3a7d55;">
                         <span class="fc-icon">&#128275;</span>
                         <h3>הקוד שלכן - לגמרי</h3>
-                        <p>בעלות מלאה על כל הקוד ב-GitHub. רוצות להחליף מפתח? אפס בעיה. אין נעילת ספק, אין מנוי לפלטפורמה. כמו Gmail מול Yahoo - אתן תמיד חופשיות.</p>
+                        <p>כל קוד האתר שמור אצלכן ב-<strong>GitHub — ספרייה דיגיטלית מאובטחת בענן</strong>, לא אצל המפתח. אם מחר תרצו מפתח אחר, ספק אחר, כיוון אחר — הכל שלכן ואין תלות. כמו ההבדל בין Gmail לדואר שספק אחר מחזיק לכן — אתן שולטות, לא אנחנו.</p>
                     </div>
                     <div class="feature-card" style="--fc-accent: #4a9eed;">
                         <span class="fc-icon">&#128269;</span>
                         <h3>SEO + AEO מתקדם</h3>
-                        <p>לא רק גוגל - גם ChatGPT, Perplexity ו-Claude ידעו לענות "מי מטפלת בעברית בהולנד?" ולהפנות אליכן. Schema.org, Open Graph, סייטמאפ אוטומטי. בלוג קהילתי + אישי לכל מטפלת - כל מאמר שנכתב מחזק את ה-SEO של כולן.</p>
+                        <p><strong>SEO = קידום בגוגל</strong> — שכשמחפשים "מטפלת בעברית בברלין" תופיעו ראשונות. <strong>AEO = קידום בבינה מלאכותית</strong> — שכשמישהי תשאל את ChatGPT "מי מטפלת בעברית בהולנד?" האתר שלכן יופיע בתשובה. כשמשתפות קישור בוואצאפ — נראה מקצועי עם תמונה וכותרת. כל מאמר שמישהי בקבוצה כותבת — מחזק את כולן.</p>
                     </div>
                     <div class="feature-card" style="--fc-accent: #c4694a;">
                         <span class="fc-icon">&#128274;</span>
                         <h3>אבטחה וביצועים</h3>
-                        <p>SSL, CDN גלובלי, טעינה בפחות משנייה מכל מקום בעולם. גיבויים אוטומטיים, הגנה מפני התקפות. האתר שלכן מוגן ומהיר.</p>
+                        <p><strong>SSL = המנעול הירוק שרואים בדפדפן</strong> (https://) — מסמן שהחיבור מוצפן ומאובטח, חיוני לאמון של מטופלים פוטנציאליים. <strong>CDN גלובלי = שרתים ב-20 נקודות בעולם</strong> — מי שמגיעה מניו-יורק נטענת מהר כמו מתל-אביב. גיבוי אוטומטי יומי — התוכן שלכן לא יאבד לעולם.</p>
                     </div>
                     <div class="feature-card" style="--fc-accent: #7b4b94;">
                         <span class="fc-icon">&#127463;&#127470;</span>
                         <h3>עברית מהיסוד - RTL Native</h3>
-                        <p>לא תרגום, לא hack. עברית מובנית בכל רכיב, גופנים עבריים מותאמים, טיפוגרפיה שמכבדת את השפה. רספונסיבי בנייד, טאבלט ומחשב.</p>
+                        <p><strong>RTL = כיוון הכתיבה העברי, מימין לשמאל.</strong> Native = מובנה מהיסוד, לא אתר אנגלי שתורגם בדיעבד. כל רכיב — כפתורים, תפריטים, גופנים — מכבד את השפה. אתרים שנבנו לאנגלית ואחר כך "מסתגלים" לעברית תמיד נראים קצת עקומים. כאן לא.</p>
                     </div>
                     <div class="feature-card feature-card-full" style="--fc-accent: #5c8a4a;">
                         <span class="fc-icon">&#9855;</span>
                         <h3>נגישות WCAG 2.1 AA - מחויבות, לא אפשרות</h3>
-                        <p>האתר עומד בתקן הנגישות הבינלאומי WCAG 2.1 ברמה AA - מובנה מהיסוד, לא תוסף שנוסף בדיעבד. זה חשוב במיוחד עבורכן: פלטפורמה שנועדה לשרת אנשים בפגיעות רגשית חייבת להיות נגישה לכל אחד ואחת - לקויות ראייה, שמיעה, מוטוריקה. הנגישות היא חלק מהאתוס הטיפולי, לא רק דרישה טכנית. כולל: ניווט מקלדת מלא, תמיכה בקוראי מסך, ניגודיות צבעים עומדת בתקן, טקסט חלופי לכל תמונה.</p>
+                        <p><strong>WCAG 2.1 AA = תקן הנגישות הבינלאומי לאתרי אינטרנט</strong> (ה-AA מסמן את הרמה הגבוהה מבין שלוש רמות האישור). בפועל: מי שרואה בקושי יכולה להגדיל טקסט, קוראי מסך עובדים מלא, ניגודי צבעים ברורים לקריאה. לא תוסף שנוסף בדיעבד — בנוי כך מהיסוד. זה חשוב במיוחד לכן: פלטפורמה שנועדה לשרת אנשים בפגיעות רגשית חייבת להיות פתוחה לכולם.</p>
                     </div>
                 </div>
             </div>
@@ -2428,7 +2481,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#9881;</span>
                     <h3>מערכת ניהול תוכן (CMS) מלאה</h3>
-                    <p>ממשק ניהול בעברית שמאפשר לכל אחת מכן לעדכן את הפרופיל שלה, להעלות מאמרים, לערוך תכנים ולהוסיף אירועים - בלי לגעת בקוד.</p>
+                        <p>ממשק עריכה בעברית — <strong>WYSIWYG (מה שרואות זה מה שיתפרסם)</strong> — כמו וורד של האתר שלכן. מעדכנות פרופיל, מעלות מאמרים, מנהלות תמונות, מוסיפות אירועים — בלי לגעת בקוד ובלי לחכות למפתח.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Headless CMS</span>
                         <span class="tech-tag">WYSIWYG Editor</span>
@@ -2439,7 +2492,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#128274;</span>
                     <h3>אבטחה ברמה הגבוהה ביותר</h3>
-                    <p>תעודת SSL/TLS (HTTPS) מובנית, הגנה מפני התקפות XSS ו-CSRF, Content Security Policy, ו-Rate Limiting.</p>
+                    <p><strong>SSL/TLS = המנעול הירוק בדפדפן (https://)</strong> — מצפין את כל התעבורה כך שאף אחד לא יכול "להאזין". הגנה מפני התקפות נפוצות שמנסות לפרוץ דרך טפסים. <strong>WAF = חומת אש דיגיטלית</strong> שחוסמת תעבורה חשודה אוטומטית. <strong>GDPR Ready = עומד בתקנות הפרטיות האירופאיות</strong> — חשוב לכן כמטפלות.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">SSL/TLS</span>
                         <span class="tech-tag">CSP Headers</span>
@@ -2450,7 +2503,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#128640;</span>
                     <h3>ביצועים וזמני טעינה</h3>
-                    <p>האתר בנוי עם Static Site Generation (SSG) ו-CDN גלובלי - נטען בפחות משנייה מכל מקום בעולם. ציון מושלם ב-Google PageSpeed.</p>
+                    <p>העמודים מוכנים מראש ומוגשים מיד — כמו ספר מודפס מול הדפסה בזמן אמת. <strong>CDN גלובלי = שרתים ב-20 מקומות בעולם</strong> שמגישים את האתר מהנקודה הקרובה ביותר לגולשת — מהיר מניו-יורק כמו מתל-אביב. תמונות נטענות רק כשנגללים אליהן — חיסכון בזמן גם בחיבור חלש.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">SSG / ISR</span>
                         <span class="tech-tag">Global CDN</span>
@@ -2461,7 +2514,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#128269;</span>
                     <h3>SEO מתקדם</h3>
-                    <p>Structured Data (Schema.org) למטפלים, Open Graph tags לשיתוף ברשתות, Sitemap אוטומטי, ו-Semantic HTML.</p>
+                    <p><strong>Schema.org = תגיות שמסבירות לגוגל בדיוק מה תוכן הדף</strong> ("זו מטפלת פסיכולוגית בברלין") — עוזר להופיע בתוצאות מדויקות. <strong>Open Graph = מה שנראה כשמשתפות קישור בוואצאפ או פייסבוק</strong> — תמונה, כותרת, תיאור מקצועי. Sitemap = מפת האתר שנשלחת לגוגל אוטומטית לאנדקוס כל עמוד.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Schema.org</span>
                         <span class="tech-tag">Open Graph</span>
@@ -2472,7 +2525,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#128241;</span>
                     <h3>רספונסיבי לכל מסך</h3>
-                    <p>Mobile-First Design - האתר נראה מושלם בנייד, טאבלט ומחשב. יותר מ-70% מהגולשים מגיעים מהנייד.</p>
+                    <p><strong>Mobile-First = העיצוב נבנה קודם לנייד</strong> ואחר כך מותאם למסך גדול — כי 70%+ מהגולשים מגיעות מהטלפון. כל לחיצה, כל תפריט, כל תמונה — מותאמים לאצבע, לא לעכבר. נראה מושלם בנייד, טאבלט ומחשב.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Mobile First</span>
                         <span class="tech-tag">Fluid Typography</span>
@@ -2483,7 +2536,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#127463;&#127470;</span>
                     <h3>עברית מלאה - RTL Native</h3>
-                    <p>לא תרגום, לא hack - עברית מהיסוד. כיווניות RTL מובנית בכל רכיב, גופנים עבריים מותאמים.</p>
+                    <p><strong>RTL = כיוון הכתיבה העברי (מימין לשמאל)</strong>, מובנה בכל רכיב — לא אתר אנגלי שתורגם. <strong>Bidi Support = תמיכה בטקסט דו-כיווני</strong> — שמות לועזיים בתוך משפט עברי נראים נכון ולא הפוכים. גופנים עבריים מותאמים לקריאה מושלמת.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">RTL Native</span>
                         <span class="tech-tag">Hebrew Fonts</span>
@@ -2494,7 +2547,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#128187;</span>
                     <h3>הקוד שלכן - לגמרי</h3>
-                    <p>בעלות מלאה על הקוד (Open Source). אין נעילה לספק, אין מנוי חודשי לפלטפורמה. הקוד נקי, מתועד, ומוכן להעברה.</p>
+                    <p>הקוד שמור ב-<strong>Git Repository — ספרייה דיגיטלית שעוקבת אחרי כל שינוי</strong>, כמו "היסטוריית עריכה" לכל האתר. הקוד פתוח לעיון — לא קופסה שחורה. אין נעילה לספק, אין תשלום חודשי על הפלטפורמה. רוצות מפתחת אחרת? כל המסמכים מוכנים להעברה.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Git Repository</span>
                         <span class="tech-tag">Clean Code</span>
@@ -2505,7 +2558,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#9889;</span>
                     <h3>גמישות ויכולת הרחבה</h3>
-                    <p>ארכיטקטורה מודולרית שצומחת איתכן. היום אינדקס מטפלים, מחר קבוצות אונליין, סדנאות, או בלוג.</p>
+                    <p>האתר בנוי ממודולים עצמאיים — <strong>כמו לגו</strong>. אפשר להוסיף, לשנות או להסיר פיצ'רים בלי להפיל את כל המבנה. היום אינדקס מטפלות, מחר קבוצות אונליין, סדנאות, חנות ספרים דיגיטלית — הכל אפשרי בלי לבנות מחדש.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Component Based</span>
                         <span class="tech-tag">API Ready</span>
@@ -2516,7 +2569,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#127760;</span>
                     <h3>אחסון ותשתית ענן</h3>
-                    <p>Hosting על Vercel / Netlify עם Uptime של 99.99%, גיבויים אוטומטיים, ו-Preview Deployments.</p>
+                    <p><strong>Hosting = האחסון בענן</strong> — איפה שהאתר "גר". Vercel ו-Netlify הם ספקי הענן המובילים בעולם לאתרים מהירים. <strong>Uptime 99.99% = האתר פעיל כמעט ללא הפסקות</strong> לאורך השנה. כל שינוי נבדק בסביבה נפרדת לפני שעולה לאוויר — לא "נסיינות" על הגולשות.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Vercel / Netlify</span>
                         <span class="tech-tag">Auto Backups</span>
@@ -2527,7 +2580,7 @@
                 <div class="tech-card">
                     <span class="tech-icon">&#129302;</span>
                     <h3>AEO - אופטימיזציה למנועי תשובות</h3>
-                    <p>מעבר ל-SEO קלאסי - האתר שלכן מוכן לעידן ה-AI. Answer Engine Optimization מבטיח שגוגל, ChatGPT ו-Perplexity יפנו אליכן.</p>
+                    <p><strong>AEO = Answer Engine Optimization = אופטימיזציה למנועי תשובות.</strong> בעוד SEO = שגוגל ימצא אתכן בחיפוש רגיל, AEO = שבינה מלאכותית תמליץ עליכן. כשמישהי תשאל את ChatGPT "מי מטפלת בעברית ברוטרדם?" — ה-AEO הוא מה שגורם לאתר שלכן להופיע בתשובה.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">AEO</span>
                         <span class="tech-tag">AI Search Ready</span>
@@ -2557,6 +2610,20 @@
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 דברו עם אלון בוואטסאפ
             </a>
+        </div>
+
+        <!-- ===== About Alon ===== -->
+        <div class="about-alon-section">
+            <div class="about-alon-inner">
+                <div class="about-alon-label">מי בנה את זה</div>
+                <h3 class="about-alon-title">אלון גילדוני</h3>
+                <div class="about-alon-body">
+                    <p>יש לי יותר מ-20 שנה של ניסיון בבניית אתרים ומוצרים דיגיטליים. אני לא הסוג שנעלם אחרי ההשקה — אני כאן לטווח הארוך, ואכפת לי מהעולם שלכן.</p>
+                    <p>מנהל טכנולוגי עם כמעט שני עשורים של ניסיון בבניית ארגוני מוצר בסדר גודל. מייסד Israeli Tech Network בהולנד, בוגר Harvard Business School, ובעל שני תארים מהאוניברסיטה העברית בירושלים.</p>
+                    <p>גר באמסטרדם עם אשתי ושלושת ילדינו, ותמיד שמח להכיר אנשים שרוצים לעשות דברים שיש בהם משמעות.</p>
+                </div>
+                <a href="http://www.linkedin.com/in/alongildoni" class="about-alon-link" target="_blank" rel="noopener">LinkedIn ←</a>
+            </div>
         </div>
 
         <div class="footer">
