@@ -32,12 +32,9 @@
     /* ── grain overlay ── */
     body::after {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9000;
-      opacity: 0.7;
+      pointer-events: none; z-index: 9000; opacity: 0.7;
     }
 
     /* ════════════════════ HEADER ════════════════════ */
@@ -65,12 +62,10 @@
     /* ════════════════════ HERO ════════════════════ */
     .hero {
       padding: 96px 48px 80px;
-      max-width: 1200px;
-      margin: 0 auto;
+      max-width: 1200px; margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr auto;
-      align-items: end;
-      gap: 40px;
+      align-items: end; gap: 40px;
     }
     .hero-eyebrow {
       font-family: 'Syne', sans-serif;
@@ -81,17 +76,14 @@
       display: flex; align-items: center; gap: 14px;
     }
     .hero-eyebrow::before {
-      content: ''; width: 36px; height: 1px; background: var(--accent);
-      flex-shrink: 0;
+      content: ''; width: 36px; height: 1px; background: var(--accent); flex-shrink: 0;
     }
     .hero h1 {
       font-family: 'Syne', sans-serif;
       font-size: clamp(52px, 8vw, 104px);
-      font-weight: 800; line-height: 0.92;
-      letter-spacing: -0.03em;
+      font-weight: 800; line-height: 0.92; letter-spacing: -0.03em;
       background: linear-gradient(150deg, #eae5db 0%, #7878a0 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .hero-sub {
       font-size: 16px; font-weight: 300; color: var(--muted);
@@ -101,8 +93,7 @@
       font-family: 'Syne', sans-serif;
       font-size: 80px; font-weight: 800;
       color: rgba(255,255,255,0.03);
-      line-height: 1; align-self: center;
-      direction: ltr;
+      line-height: 1; align-self: center; direction: ltr;
     }
 
     /* ════════════════════ DIVIDER ════════════════════ */
@@ -113,8 +104,8 @@
       display: flex; justify-content: space-between; align-items: center;
     }
     .section-divider span {
-      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
-      font-family: 'Syne', sans-serif;
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); font-family: 'Syne', sans-serif;
     }
 
     /* ════════════════════ GRID ════════════════════ */
@@ -127,34 +118,27 @@
       gap: 2px;
     }
 
-    /* Card spans */
-    .card-span-8  { grid-column: span 8; }
     .card-span-4  { grid-column: span 4; }
-    .card-span-6  { grid-column: span 6; }
     .card-span-5  { grid-column: span 5; }
+    .card-span-6  { grid-column: span 6; }
     .card-span-7  { grid-column: span 7; }
+    .card-span-8  { grid-column: span 8; }
     .card-span-12 { grid-column: span 12; }
 
     /* ════════════════════ CARD ════════════════════ */
     .card {
       background: var(--bg2);
-      overflow: hidden;
-      position: relative;
-      display: block;
-      text-decoration: none;
-      color: inherit;
+      overflow: hidden; position: relative;
+      display: block; text-decoration: none; color: inherit;
       transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
     }
     .card:hover { transform: scale(1.012); z-index: 10; }
 
-    /* Visual area */
     .card-visual {
-      position: relative;
-      overflow: hidden;
-      height: 220px;
+      position: relative; overflow: hidden; height: 220px;
     }
-    .card-span-8 .card-visual,
-    .card-span-7 .card-visual  { height: 280px; }
+    .card-span-7 .card-visual,
+    .card-span-8 .card-visual  { height: 280px; }
     .card-span-12 .card-visual { height: 340px; }
 
     .card-visual-bg {
@@ -163,76 +147,54 @@
     }
     .card:hover .card-visual-bg { transform: scale(1.08); }
 
-    /* number watermark */
     .card-visual::after {
       content: attr(data-num);
-      position: absolute;
-      bottom: -16px; left: -8px;
+      position: absolute; bottom: -16px; left: -8px;
       font-family: 'Syne', sans-serif;
-      font-size: 130px; font-weight: 800;
-      line-height: 1;
+      font-size: 130px; font-weight: 800; line-height: 1;
       color: rgba(255,255,255,0.045);
       pointer-events: none; user-select: none;
     }
 
-    /* glow dot */
     .card-glow {
-      position: absolute;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.35;
-      pointer-events: none;
+      position: absolute; width: 200px; height: 200px;
+      border-radius: 50%; filter: blur(60px); opacity: 0.35; pointer-events: none;
     }
 
-    /* domain chip */
     .card-domain {
-      position: absolute; top: 18px; right: 18px;
-      direction: ltr;
-      font-size: 11px; letter-spacing: 0.06em;
-      padding: 4px 12px; border-radius: 20px;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.6);
+      position: absolute; top: 18px; right: 18px; direction: ltr;
+      font-size: 11px; letter-spacing: 0.06em; padding: 4px 12px; border-radius: 20px;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
       font-family: 'Syne', sans-serif;
     }
 
-    /* Body */
     .card-body {
-      padding: 24px 28px 30px;
-      border-top: 1px solid var(--border);
+      padding: 24px 28px 30px; border-top: 1px solid var(--border);
       display: flex; flex-direction: column; gap: 10px;
     }
 
-    .card-meta {
-      display: flex; align-items: center; gap: 10px;
-    }
+    .card-meta { display: flex; align-items: center; gap: 10px; }
     .card-num {
       font-family: 'Syne', sans-serif;
-      font-size: 10px; font-weight: 700;
-      color: var(--muted); letter-spacing: 0.14em;
+      font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 0.14em;
     }
     .card-tag {
       font-size: 10px; padding: 2px 9px; border-radius: 12px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
       color: var(--muted); letter-spacing: 0.06em;
     }
 
     .card-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 22px; font-weight: 700;
+      font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700;
       color: var(--text); line-height: 1.1;
     }
-    .card-span-8  .card-name,
-    .card-span-7  .card-name  { font-size: 28px; }
+    .card-span-7  .card-name,
+    .card-span-8  .card-name  { font-size: 28px; }
     .card-span-12 .card-name  { font-size: 34px; }
 
     .card-desc {
-      font-size: 14px; font-weight: 300;
-      color: #7a7a96; line-height: 1.8;
-      max-width: 480px;
+      font-size: 14px; font-weight: 300; color: #7a7a96; line-height: 1.8; max-width: 480px;
     }
     .card-span-12 .card-desc { max-width: 680px; font-size: 15px; }
 
@@ -240,23 +202,34 @@
       margin-top: 6px;
       display: inline-flex; align-items: center; gap: 7px;
       font-family: 'Syne', sans-serif;
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      transition: gap 0.25s, opacity 0.25s;
-      opacity: 0.5;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: gap 0.25s, opacity 0.25s; opacity: 0.5;
     }
     .card:hover .card-cta { gap: 14px; opacity: 1; }
     .card-cta-arrow { font-size: 14px; }
 
-    /* ════════════════════ CARD THEMES ════════════════════ */
+    /* ════════════════════ THEMES ════════════════════ */
 
-    /* 01 — TechExpats */
+    /* SimilarWeb — teal/data */
+    .theme-similarweb .card-visual-bg {
+      background: radial-gradient(ellipse at 40% 60%, #084040 0%, #021a1c 55%, #010c0e 100%);
+    }
+    .theme-similarweb .card-glow { background: #10c0b8; top: 40%; left: 30%; }
+    .theme-similarweb .card-cta  { color: #28d8cc; }
+    .theme-similarweb .card-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg,  rgba(0,200,190,0.1) 0px, transparent 1px, transparent 24px),
+        repeating-linear-gradient(90deg, rgba(0,200,190,0.06) 0px, transparent 1px, transparent 56px);
+    }
+
+    /* TechExpats — blue/grid */
     .theme-tech .card-visual-bg {
       background: radial-gradient(ellipse at 30% 70%, #0d3a78 0%, #060e2a 55%, #020510 100%);
     }
     .theme-tech .card-glow { background: #2060c0; top: 30%; left: 20%; }
-    .theme-tech .card-cta { color: #5a9aee; }
-    /* grid lines overlay */
+    .theme-tech .card-cta  { color: #5a9aee; }
     .theme-tech .card-visual::before {
       content: '';
       position: absolute; inset: 0;
@@ -266,7 +239,7 @@
       background-size: 40px 40px;
     }
 
-    /* 02 — HateCheck */
+    /* HateCheck — red/diagonal */
     .theme-hate .card-visual-bg {
       background: radial-gradient(ellipse at 70% 30%, #701020 0%, #2a0508 55%, #0f0204 100%);
     }
@@ -276,19 +249,32 @@
       content: '';
       position: absolute; inset: 0;
       background: repeating-linear-gradient(
-        -45deg,
-        transparent, transparent 18px,
+        -45deg, transparent, transparent 18px,
         rgba(160,10,30,0.08) 18px, rgba(160,10,30,0.08) 19px
       );
     }
 
-    /* 03 — Fun Israelis */
+    /* Mambu — emerald/fintech */
+    .theme-mambu .card-visual-bg {
+      background: radial-gradient(ellipse at 60% 40%, #0a4030 0%, #031810 55%, #010a08 100%);
+    }
+    .theme-mambu .card-glow { background: #10a870; top: 35%; right: 25%; }
+    .theme-mambu .card-cta  { color: #28c888; }
+    .theme-mambu .card-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg,  rgba(10,180,100,0.1) 0px, transparent 1px, transparent 30px),
+        repeating-linear-gradient(90deg, rgba(10,180,100,0.1) 0px, transparent 1px, transparent 30px);
+      background-size: 30px 30px;
+    }
+
+    /* Fun Israelis — amber/dots */
     .theme-fun .card-visual-bg {
       background: radial-gradient(ellipse at 50% 80%, #6a4010 0%, #2a1804 55%, #0e0904 100%);
     }
-    .theme-fun .card-glow  { background: #d07820; top: 60%; left: 40%; }
-    .theme-fun .card-cta   { color: #e8962a; }
-    /* dots */
+    .theme-fun .card-glow { background: #d07820; top: 60%; left: 40%; }
+    .theme-fun .card-cta  { color: #e8962a; }
     .theme-fun .card-visual::before {
       content: '';
       position: absolute; inset: 0;
@@ -296,13 +282,12 @@
       background-size: 22px 22px;
     }
 
-    /* 04 — Catchball */
+    /* Catchball — green/arcs */
     .theme-catch .card-visual-bg {
       background: radial-gradient(ellipse at 20% 50%, #0a4828 0%, #04180c 55%, #020a06 100%);
     }
-    .theme-catch .card-glow  { background: #10b060; top: 30%; left: 10%; }
-    .theme-catch .card-cta   { color: #40c878; }
-    /* arc shapes */
+    .theme-catch .card-glow { background: #10b060; top: 30%; left: 10%; }
+    .theme-catch .card-cta  { color: #40c878; }
     .theme-catch .card-visual::before {
       content: '';
       position: absolute; inset: 0;
@@ -312,13 +297,25 @@
         radial-gradient(circle at 110% 50%, transparent 72%, rgba(20,160,80,0.05) 73%, transparent 90%);
     }
 
-    /* 05 — SederMap */
+    /* Instruqt — orange/terminal */
+    .theme-instruqt .card-visual-bg {
+      background: radial-gradient(ellipse at 70% 30%, #502010 0%, #1e0c04 55%, #0a0604 100%);
+    }
+    .theme-instruqt .card-glow { background: #d06010; top: 20%; right: 20%; }
+    .theme-instruqt .card-cta  { color: #e87030; }
+    .theme-instruqt .card-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(200,100,20,0.13) 0px, transparent 1px, transparent 20px);
+    }
+
+    /* SederMap — purple/dots */
     .theme-seder .card-visual-bg {
       background: radial-gradient(ellipse at 80% 80%, #3a0d68 0%, #14042a 55%, #07020f 100%);
     }
-    .theme-seder .card-glow  { background: #8040d0; bottom: 20%; right: 15%; }
-    .theme-seder .card-cta   { color: #a070e8; }
-    /* dot world map feel */
+    .theme-seder .card-glow { background: #8040d0; bottom: 20%; right: 15%; }
+    .theme-seder .card-cta  { color: #a070e8; }
     .theme-seder .card-visual::before {
       content: '';
       position: absolute; inset: 0;
@@ -329,26 +326,26 @@
       background-position: 0 0, 7px 7px;
     }
 
-    /* 06 — Israelis Elect */
+    /* Israelis Elect — navy */
     .theme-elect .card-visual-bg {
       background: radial-gradient(ellipse at 30% 30%, #0d2870 0%, #040e2a 55%, #020510 100%);
     }
-    .theme-elect .card-glow  { background: #2050d0; top: 20%; left: 25%; }
-    .theme-elect .card-cta   { color: #5080e8; }
+    .theme-elect .card-glow { background: #2050d0; top: 20%; left: 25%; }
+    .theme-elect .card-cta  { color: #5080e8; }
     .theme-elect .card-visual::before {
       content: '';
       position: absolute; inset: 0;
       background:
-        repeating-linear-gradient(0deg,   rgba(20,60,180,0.1) 0px, transparent 1px, transparent 28px),
-        repeating-linear-gradient(90deg,  rgba(20,60,180,0.1) 0px, transparent 1px, transparent 56px);
+        repeating-linear-gradient(0deg,  rgba(20,60,180,0.1) 0px, transparent 1px, transparent 28px),
+        repeating-linear-gradient(90deg, rgba(20,60,180,0.1) 0px, transparent 1px, transparent 56px);
     }
 
-    /* 07 — Gildoni */
+    /* Gildoni — warm amber */
     .theme-gildoni .card-visual-bg {
       background: radial-gradient(ellipse at 60% 20%, #5a3010 0%, #221006 55%, #0c0604 100%);
     }
-    .theme-gildoni .card-glow  { background: #c06820; top: 10%; right: 30%; }
-    .theme-gildoni .card-cta   { color: #d87830; }
+    .theme-gildoni .card-glow { background: #c06820; top: 10%; right: 30%; }
+    .theme-gildoni .card-cta  { color: #d87830; }
     .theme-gildoni .card-visual::before {
       content: '';
       position: absolute; inset: 0;
@@ -371,18 +368,19 @@
       from { opacity: 0; transform: translateY(32px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .hero-text  { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both; }
-    .hero-sub   { animation: fadeUp 0.9s 0.12s cubic-bezier(0.16,1,0.3,1) both; }
-    .card {
-      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;
-    }
-    .card:nth-child(1) { animation-delay: 0.15s; }
-    .card:nth-child(2) { animation-delay: 0.22s; }
-    .card:nth-child(3) { animation-delay: 0.28s; }
-    .card:nth-child(4) { animation-delay: 0.34s; }
-    .card:nth-child(5) { animation-delay: 0.40s; }
-    .card:nth-child(6) { animation-delay: 0.46s; }
-    .card:nth-child(7) { animation-delay: 0.52s; }
+    .hero-text { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+    .hero-sub  { animation: fadeUp 0.9s 0.12s cubic-bezier(0.16,1,0.3,1) both; }
+    .card { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both; }
+    .card:nth-child(1)  { animation-delay: 0.12s; }
+    .card:nth-child(2)  { animation-delay: 0.18s; }
+    .card:nth-child(3)  { animation-delay: 0.23s; }
+    .card:nth-child(4)  { animation-delay: 0.28s; }
+    .card:nth-child(5)  { animation-delay: 0.33s; }
+    .card:nth-child(6)  { animation-delay: 0.38s; }
+    .card:nth-child(7)  { animation-delay: 0.43s; }
+    .card:nth-child(8)  { animation-delay: 0.48s; }
+    .card:nth-child(9)  { animation-delay: 0.53s; }
+    .card:nth-child(10) { animation-delay: 0.58s; }
 
     /* ════════════════════ RESPONSIVE ════════════════════ */
     @media (max-width: 900px) {
@@ -391,13 +389,11 @@
       .hero-count { display: none; }
       .section-divider { padding: 0 24px 32px; }
       .projects-wrap { padding: 2px 24px 80px; }
-      .card-span-8, .card-span-4, .card-span-6,
-      .card-span-5, .card-span-7, .card-span-12 {
-        grid-column: span 12;
-      }
+      .card-span-4, .card-span-5, .card-span-6,
+      .card-span-7, .card-span-8, .card-span-12 { grid-column: span 12; }
       .card-visual,
-      .card-span-8 .card-visual,
       .card-span-7 .card-visual,
+      .card-span-8 .card-visual,
       .card-span-12 .card-visual { height: 200px; }
       .site-footer { padding: 28px 24px; flex-direction: column; gap: 12px; align-items: flex-start; }
     }
@@ -409,8 +405,8 @@
   <header class="site-header">
     <span class="logo">אלון — עבודות</span>
     <div class="header-info">
-      <span>7 פרויקטים</span>
-      <span>2023–2025</span>
+      <span>10 פרויקטים</span>
+      <span>2022–2025</span>
     </div>
   </header>
 
@@ -419,9 +415,9 @@
     <div>
       <p class="hero-eyebrow">תיק עבודות נבחר</p>
       <h1 class="hero-text">עבודות<br>נבחרות</h1>
-      <p class="hero-sub">אתרים שבניתי לקהילה הישראלית בהולנד ומעבר לה — קהילה, ספורט, כלים אזרחיים ומיתוג אישי.</p>
+      <p class="hero-sub">אתרים שבניתי — מוצרים גלובליים, קהילות, ספורט, כלים אזרחיים ומיתוג אישי.</p>
     </div>
-    <div class="hero-count" aria-hidden="true">07</div>
+    <div class="hero-count" aria-hidden="true">10</div>
   </section>
 
   <!-- ── DIVIDER ── -->
@@ -434,88 +430,139 @@
   <div class="projects-wrap">
     <div class="projects-grid">
 
-      <!-- 01 TechExpats — WIDE -->
-      <a class="card card-span-8 theme-tech" href="https://www.techexpats.nl/" target="_blank" rel="noopener">
+      <!-- 01 SimilarWeb — FULL WIDTH -->
+      <a class="card card-span-12 theme-similarweb" href="https://similarweb.com" target="_blank" rel="noopener">
         <div class="card-visual" data-num="01">
+          <div class="card-visual-bg"></div>
+          <div class="card-glow"></div>
+          <span class="card-domain">similarweb.com</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-num">01</span>
+            <span class="card-tag">אנליטיקת ווב</span>
+          </div>
+          <h2 class="card-name">SimilarWeb</h2>
+          <p class="card-desc">פלטפורמת אנליטיקת אינטרנט מובילה בעולם. ניתוח תעבורת אתרים, מחקר שוק ומודיעין תחרותי — עבור מיליוני עסקים שרוצים להבין מה קורה מאחורי כל אתר ברשת.</p>
+          <span class="card-cta" style="color:#28d8cc">כניסה לאתר <span class="card-cta-arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 02 TechExpats — WIDE  /  03 HateCheck — NARROW -->
+      <a class="card card-span-7 theme-tech" href="https://www.techexpats.nl/" target="_blank" rel="noopener">
+        <div class="card-visual" data-num="02">
           <div class="card-visual-bg"></div>
           <div class="card-glow"></div>
           <span class="card-domain">techexpats.nl</span>
         </div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-num">01</span>
+            <span class="card-num">02</span>
             <span class="card-tag">קהילה מקצועית</span>
           </div>
-          <h2 class="card-name">TechExpats NL</h2>
-          <p class="card-desc">פלטפורמת קהילה לאנשי טכנולוגיה ישראלים בהולנד. מחבר בין מקצועני טק לאירועים, הזדמנויות ורשת חברתית בלב סצנת ההייטק ההולנדית.</p>
+          <h2 class="card-name">TechExpats</h2>
+          <p class="card-desc">קהילה דיגיטלית לאנשי טכנולוגיה ישראלים בהולנד. מחבר בין מקצועני טק לאירועים, הזדמנויות ורשת חברתית בלב סצנת ההייטק.</p>
           <span class="card-cta" style="color:#5a9aee">כניסה לאתר <span class="card-cta-arrow">→</span></span>
         </div>
       </a>
 
-      <!-- 02 HateCheck — NARROW -->
-      <a class="card card-span-4 theme-hate" href="https://hatecheck.nl/en" target="_blank" rel="noopener">
-        <div class="card-visual" data-num="02">
+      <a class="card card-span-5 theme-hate" href="https://hatecheck.nl/en" target="_blank" rel="noopener">
+        <div class="card-visual" data-num="03">
           <div class="card-visual-bg"></div>
           <div class="card-glow"></div>
           <span class="card-domain">hatecheck.nl</span>
         </div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-num">02</span>
+            <span class="card-num">03</span>
             <span class="card-tag">בטיחות מקוונת</span>
           </div>
-          <h2 class="card-name">HateCheck NL</h2>
-          <p class="card-desc">כלי לזיהוי ודיווח תוכן שנאה ברשת בהולנד. ממשק נגיש לציבור הרחב לשמירה על מרחב דיגיטלי בריא.</p>
+          <h2 class="card-name">HateCheck</h2>
+          <p class="card-desc">כלי לזיהוי ודיווח תוכן שנאה ברשת. ממשק נגיש לציבור הרחב לשמירה על מרחב דיגיטלי בריא.</p>
           <span class="card-cta" style="color:#e05070">כניסה לאתר <span class="card-cta-arrow">→</span></span>
         </div>
       </a>
 
-      <!-- 03 Fun Israelis — MEDIUM -->
-      <a class="card card-span-5 theme-fun" href="https://fun.israelis.nl" target="_blank" rel="noopener">
-        <div class="card-visual" data-num="03">
+      <!-- 04 Mambu — NARROW  /  05 Fun Israelis — WIDE -->
+      <a class="card card-span-5 theme-mambu" href="https://mambu.com" target="_blank" rel="noopener">
+        <div class="card-visual" data-num="04">
+          <div class="card-visual-bg"></div>
+          <div class="card-glow"></div>
+          <span class="card-domain">mambu.com</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-num">04</span>
+            <span class="card-tag">פינטק / בנקאות ענן</span>
+          </div>
+          <h2 class="card-name">Mambu</h2>
+          <p class="card-desc">פלטפורמת בנקאות ענן SaaS לגופים פיננסיים. תשתית גמישה לבנקים, הלוואות ומוצרים פיננסיים דיגיטליים.</p>
+          <span class="card-cta" style="color:#28c888">כניסה לאתר <span class="card-cta-arrow">→</span></span>
+        </div>
+      </a>
+
+      <a class="card card-span-7 theme-fun" href="https://fun.israelis.nl" target="_blank" rel="noopener">
+        <div class="card-visual" data-num="05">
           <div class="card-visual-bg"></div>
           <div class="card-glow"></div>
           <span class="card-domain">fun.israelis.nl</span>
         </div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-num">03</span>
+            <span class="card-num">05</span>
             <span class="card-tag">אירועים ובידור</span>
           </div>
-          <h2 class="card-name">Fun Israelis NL</h2>
+          <h2 class="card-name">Fun Israelis</h2>
           <p class="card-desc">מרכז הבידור של הישראלים בהולנד. פעילויות, מפגשים ואטרקציות לכל הגילאים — כל מה שצריך לדעת לבלות טוב.</p>
           <span class="card-cta" style="color:#e8962a">כניסה לאתר <span class="card-cta-arrow">→</span></span>
         </div>
       </a>
 
-      <!-- 04 Catchball — MEDIUM -->
-      <a class="card card-span-7 theme-catch" href="https://catchball.nl" target="_blank" rel="noopener">
-        <div class="card-visual" data-num="04">
+      <!-- 06 Catchball — NARROW  /  07 Instruqt — WIDE -->
+      <a class="card card-span-4 theme-catch" href="https://catchball.nl" target="_blank" rel="noopener">
+        <div class="card-visual" data-num="06">
           <div class="card-visual-bg"></div>
           <div class="card-glow"></div>
           <span class="card-domain">catchball.nl</span>
         </div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-num">04</span>
+            <span class="card-num">06</span>
             <span class="card-tag">ספורט</span>
           </div>
-          <h2 class="card-name">Catchball NL</h2>
-          <p class="card-desc">הבית הדיגיטלי של קאצ׳בול בהולנד. לוחות משחקים, רישום קבוצות ומידע לכל מי שרוצה להצטרף לספורט הנשי הצומח.</p>
+          <h2 class="card-name">Catchball</h2>
+          <p class="card-desc">הבית הדיגיטלי של קאצ׳בול. לוחות משחקים, רישום קבוצות ומידע לכל מי שרוצה להצטרף לספורט הנשי הצומח.</p>
           <span class="card-cta" style="color:#40c878">כניסה לאתר <span class="card-cta-arrow">→</span></span>
         </div>
       </a>
 
-      <!-- 05 SederMap — FULL WIDTH -->
+      <a class="card card-span-8 theme-instruqt" href="https://instruqt.com" target="_blank" rel="noopener">
+        <div class="card-visual" data-num="07">
+          <div class="card-visual-bg"></div>
+          <div class="card-glow"></div>
+          <span class="card-domain">instruqt.com</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-num">07</span>
+            <span class="card-tag">למידה טכנולוגית</span>
+          </div>
+          <h2 class="card-name">Instruqt</h2>
+          <p class="card-desc">פלטפורמת למידה אינטראקטיבית למפתחים וצוותי טכנולוגיה. סביבות הדגמה והכשרה חיות שמשנות את האופן שבו אנשים לומדים טכנולוגיה.</p>
+          <span class="card-cta" style="color:#e87030">כניסה לאתר <span class="card-cta-arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 08 SederMap — FULL WIDTH -->
       <a class="card card-span-12 theme-seder" href="https://sedermap.com" target="_blank" rel="noopener">
-        <div class="card-visual" data-num="05">
+        <div class="card-visual" data-num="08">
           <div class="card-visual-bg"></div>
           <div class="card-glow"></div>
           <span class="card-domain">sedermap.com</span>
         </div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-num">05</span>
+            <span class="card-num">08</span>
             <span class="card-tag">קהילה יהודית</span>
           </div>
           <h2 class="card-name">SederMap</h2>
@@ -524,34 +571,33 @@
         </div>
       </a>
 
-      <!-- 06 Israelis Elect — NARROW -->
+      <!-- 09 Israelis Elect — NARROW  /  10 Gildoni — WIDE -->
       <a class="card card-span-4 theme-elect" href="https://israelis.nl/elect" target="_blank" rel="noopener">
-        <div class="card-visual" data-num="06">
+        <div class="card-visual" data-num="09">
           <div class="card-visual-bg"></div>
           <div class="card-glow"></div>
           <span class="card-domain">israelis.nl/elect</span>
         </div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-num">06</span>
+            <span class="card-num">09</span>
             <span class="card-tag">אזרחות</span>
           </div>
           <h2 class="card-name">Israelis Elect</h2>
-          <p class="card-desc">מידע על הבחירות הישראליות לגולים בהולנד. איך מצביעים מחו׳׳ל — פשוט ובמקום אחד.</p>
+          <p class="card-desc">מידע על הבחירות הישראליות לגולים. איך מצביעים מחו׳׳ל — פשוט ובמקום אחד.</p>
           <span class="card-cta" style="color:#5080e8">כניסה לאתר <span class="card-cta-arrow">→</span></span>
         </div>
       </a>
 
-      <!-- 07 Gildoni — WIDE -->
       <a class="card card-span-8 theme-gildoni" href="https://gildoni.com" target="_blank" rel="noopener">
-        <div class="card-visual" data-num="07">
+        <div class="card-visual" data-num="10">
           <div class="card-visual-bg"></div>
           <div class="card-glow"></div>
           <span class="card-domain">gildoni.com</span>
         </div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-num">07</span>
+            <span class="card-num">10</span>
             <span class="card-tag">מיתוג אישי</span>
           </div>
           <h2 class="card-name">Gildoni</h2>
@@ -566,7 +612,7 @@
   <!-- ── FOOTER ── -->
   <footer class="site-footer">
     <span style="font-size:12px;color:var(--muted)">© 2025 אלון</span>
-    <span class="footer-note">Built with care · Netherlands & Israel</span>
+    <span class="footer-note">Built with care</span>
   </footer>
 
 </body>
