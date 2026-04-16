@@ -147,6 +147,16 @@
     }
     .card:hover .card-visual-bg { transform: scale(1.08); }
 
+    .card-screenshot {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      opacity: 0.22;
+      transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+      pointer-events: none;
+    }
+    .card:hover .card-screenshot { transform: scale(1.08); opacity: 0.35; }
+
     .card-visual::after {
       content: attr(data-num);
       position: absolute; bottom: -16px; left: -8px;
@@ -434,6 +444,7 @@
       <a class="card card-span-12 theme-similarweb" href="https://similarweb.com" target="_blank" rel="noopener">
         <div class="card-visual" data-num="01">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://similarweb.com" alt="SimilarWeb screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">similarweb.com</span>
         </div>
@@ -452,6 +463,7 @@
       <a class="card card-span-7 theme-tech" href="https://www.techexpats.nl/" target="_blank" rel="noopener">
         <div class="card-visual" data-num="02">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://www.techexpats.nl/" alt="TechExpats screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">techexpats.nl</span>
         </div>
@@ -469,6 +481,7 @@
       <a class="card card-span-5 theme-hate" href="https://hatecheck.nl/en" target="_blank" rel="noopener">
         <div class="card-visual" data-num="03">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://hatecheck.nl/en" alt="HateCheck screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">hatecheck.nl</span>
         </div>
@@ -487,6 +500,7 @@
       <a class="card card-span-5 theme-mambu" href="https://mambu.com" target="_blank" rel="noopener">
         <div class="card-visual" data-num="04">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://mambu.com" alt="Mambu screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">mambu.com</span>
         </div>
@@ -504,6 +518,7 @@
       <a class="card card-span-7 theme-fun" href="https://fun.israelis.nl" target="_blank" rel="noopener">
         <div class="card-visual" data-num="05">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://fun.israelis.nl" alt="Fun Israelis screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">fun.israelis.nl</span>
         </div>
@@ -522,6 +537,7 @@
       <a class="card card-span-4 theme-catch" href="https://catchball.nl" target="_blank" rel="noopener">
         <div class="card-visual" data-num="06">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://catchball.nl" alt="Catchball screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">catchball.nl</span>
         </div>
@@ -539,6 +555,7 @@
       <a class="card card-span-8 theme-instruqt" href="https://instruqt.com" target="_blank" rel="noopener">
         <div class="card-visual" data-num="07">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://instruqt.com" alt="Instruqt screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">instruqt.com</span>
         </div>
@@ -557,6 +574,7 @@
       <a class="card card-span-12 theme-seder" href="https://sedermap.com" target="_blank" rel="noopener">
         <div class="card-visual" data-num="08">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://sedermap.com" alt="SederMap screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">sedermap.com</span>
         </div>
@@ -575,6 +593,7 @@
       <a class="card card-span-4 theme-elect" href="https://israelis.nl/elect" target="_blank" rel="noopener">
         <div class="card-visual" data-num="09">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://israelis.nl/elect" alt="Israelis Elect screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">israelis.nl/elect</span>
         </div>
@@ -592,6 +611,7 @@
       <a class="card card-span-8 theme-gildoni" href="https://gildoni.com" target="_blank" rel="noopener">
         <div class="card-visual" data-num="10">
           <div class="card-visual-bg"></div>
+          <img class="card-screenshot" src="https://image.thum.io/get/width/1200/cropH/720/https://gildoni.com" alt="Gildoni screenshot" loading="lazy">
           <div class="card-glow"></div>
           <span class="card-domain">gildoni.com</span>
         </div>
